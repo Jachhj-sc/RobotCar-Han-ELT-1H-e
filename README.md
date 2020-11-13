@@ -10,4 +10,4 @@ the library files should be in a Folder representing the name, then in that fold
 and in the main folder should be a main.c with an example that should show a working example of the library.
 
 --ONLY UPLOAD WORKING CODE IN THE MAIN  BRANCH--
-if you want to upload not working code upload it to the live branch. and only merge it when it works.
+if you want to upload not working code upload it to a new branch. and only merge it when it works.
