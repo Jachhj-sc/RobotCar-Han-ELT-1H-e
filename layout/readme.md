@@ -1,4 +1,4 @@
-##layout specificaions
+##layout specifications
 
 in this directory there will be information on how the code should be uploaded and organized
 this needs to be done uniformly to keep everything organized and clear. 
