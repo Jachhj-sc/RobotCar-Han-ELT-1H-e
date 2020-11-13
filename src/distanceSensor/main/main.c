@@ -7,7 +7,7 @@
 
 
 #include <avr/io.h>
-#include "SoundSensor/soundSensor.h"
+#include "distanceSensor/distanceSensor.h"
 
 
 void soundEchoCycle(void);
@@ -18,7 +18,7 @@ int main(void)
 	//initialize button
 	//DDRB &= ~(1<<PORTB7);
 
-	initSoundSensor();//the default pins are setup in soundsensor.h
+	initDistanceSensor();//the default pins are setup in soundsensor.h
 
 	while (1)
 	{

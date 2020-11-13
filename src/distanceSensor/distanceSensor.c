@@ -1,10 +1,10 @@
 /*
-* soundSensor.c
+* distanceSensor.c
 *
 * Created: 9-11-2020 17:36:26
 *  Author: William
 */
-#include "soundSensor.h"
+#include "distanceSensor.h"
 #include <avr/interrupt.h>
 
 int risingEdgeTimeC = 0;
@@ -15,7 +15,7 @@ unsigned int echoHighLevelTimeuS = 0;
 //double echoDistance[DevAmount];
 
 
-void initSoundSensor(void){
+void initDistanceSensor(void){
 	//initialize ultrasonic sensor
 	
 	//setup the DDR register and the pin change mask
@@ -45,8 +45,8 @@ void sendTriggPulse(int device){
 int runcount2 = 0;
 ISR(PCINT2_vect){//PD
 	//check which device it is and keep that device for the falling edge
-	int prevDevice;
-	int device;
+	static int prevDevice;
+	static int device;
 	if ((device = PIND) == 0)
 	{
 		device = prevDevice;//save the current device

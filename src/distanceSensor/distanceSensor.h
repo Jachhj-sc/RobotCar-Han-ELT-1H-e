@@ -6,10 +6,10 @@
  */ 
 
 
-#ifndef SOUNDSENSOR_H_
-#define SOUNDSENSOR_H_
+#ifndef DISTANCESENSOR_H_
+#define DISTANCESENSOR_H_
 
-void initSoundSensor(void);
+void initDistanceSensor(void);
 
 
 
@@ -35,4 +35,4 @@ void sendTriggPulse(int device);
 double echoDistance[distSensAmount];
 
 
-#endif /* SOUNDSENSOR_H_ */
+#endif /* DISTANCESENSOR_H_ */
