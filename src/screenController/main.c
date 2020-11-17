@@ -17,6 +17,7 @@
 
 #include <string.h>
 #include <util/delay.h>
+#include <stdlib.h>
 
 #define screenWidth 128
 #define screenHeight 64
@@ -155,7 +156,7 @@ void draw(void){
 		break;//end page 1
 		
 		case 2:
-		page_2(0);
+		page_2();
 		break;
 		
 		case 3:
@@ -238,7 +239,7 @@ void menuChoiceAd(int addValue){ //change the selection in the menu
 }
 
 void pageSel(void){
-	//code for managing the pages
+	//code for managing the page
 	if (currentPage == 1){
 		currentPage = currentChoice+2; //increment with two because the menu choice pages start at 2
 	}
@@ -354,33 +355,37 @@ void page_2(void){
 		"objectDistance:> "
 	};
 	int speed = 50;
-	char spd[diglength];
-	itoa(speed, spd, 10);
+	char Spd[diglength];
+	itoa(speed, Spd, 10);
 	
 	int direction = 180;
-	char dir[diglength];
-	itoa(direction, dir, 10);
+	char Dir[diglength];
+	itoa(direction, Dir, 10);
 	
-	int distance = 10;
-	char dist[diglength];
-	itoa(distance, dist, 10);
+	volatile char _void[] = "";//this is here to show the library that the previous array stops
 	
+	int distance = 25;
+	char Dist[diglength];
+	itoa(distance, Dist, 10);
+	
+	#define xDat 80
 	u8g_FirstPage(&u8g);
 	do{
+		//drawstring x strlen(text[1])*5
 		//title
 		u8g_DrawStr(&u8g, 0, textHeight, menustrings[currentChoice]);
 		//speed
 		u8g_DrawStr(&u8g, 0, textHeight*3, text[1]);
-		u8g_DrawStr(&u8g, strlen(text[1])*5, textHeight*3, spd);
-		u8g_DrawStr(&u8g, strlen(text[1])*5 + diglength*5 + 1, textHeight*3, "km/h");
+		u8g_DrawStr(&u8g, xDat, textHeight*3,Spd);
+		u8g_DrawStr(&u8g,xDat + diglength*5 + 1, textHeight*3, "km/h");
 		//direction
 		u8g_DrawStr(&u8g, 0, textHeight*4, text[2]);
-		u8g_DrawStr(&u8g, strlen(text[2])*5, textHeight*4, dir);
-		u8g_DrawStr(&u8g, strlen(text[2])*5 + diglength*5 + 10, textHeight*4, "deg");
+		u8g_DrawStr(&u8g, xDat, textHeight*4, Dir);
+		u8g_DrawStr(&u8g, xDat + diglength*5 + 1, textHeight*4, "deg");
 		//distance
 		u8g_DrawStr(&u8g, 0, textHeight*5, text[3]);
-		u8g_DrawStr(&u8g, strlen(text[3])*5, textHeight*5, dist);
-		u8g_DrawStr(&u8g, strlen(text[3])*5 + diglength*5 + 1, textHeight*5, "cm");
+		u8g_DrawStr(&u8g, xDat, textHeight*5, Dist);
+		u8g_DrawStr(&u8g, xDat + diglength*5 + 1, textHeight*5, "cm");
 	}while(u8g_NextPage(&u8g));
 	reDrawRequired = 0;
 }
