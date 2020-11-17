@@ -10,8 +10,8 @@
 #include <avr/io.h>
 #include <util/delay.h>
 #include <avr/interrupt.h>
-#define LED_ON PORTB |= (1<<PORTB5)
-#define LED_OFF PORTB &= ~(1<<PORTB5)
+#define _HIGH PORTB |= (1<<PORTB5)
+#define _LOW PORTB &= ~(1<<PORTB5)
 char TIME_1 = 0;
 char freq = 50;
 char devide = 0;
@@ -46,11 +46,11 @@ int main(void)
 	{
 		if (TIME_1 == (50 - freq))
 		{
-			LED_ON;
+			_HIGH;
 		}
 		if (TIME_1 == freq)
 		{
-			LED_OFF;
+			_LOW;
 			TIME_1 = 0;
 			devide++;
 		}
