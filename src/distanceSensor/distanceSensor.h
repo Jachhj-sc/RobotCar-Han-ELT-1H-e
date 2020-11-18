@@ -32,7 +32,7 @@ void sendTriggPulse(int device);
 #define distanceCal0 1.8; // distance calibration in cm for sensor 0
 
 //to make it global
-double echoDistance[distSensAmount];
+extern double echoDistance[distSensAmount];
 
 
 #endif /* DISTANCESENSOR_H_ */

@@ -14,6 +14,7 @@ unsigned long echoHighLevelTimeC = 0;
 unsigned int echoHighLevelTimeuS = 0;
 //double echoDistance[DevAmount];
 
+double echoDistance[distSensAmount];
 
 void initDistanceSensor(void){
 	//initialize ultrasonic sensor
