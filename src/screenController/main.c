@@ -3,7 +3,7 @@
 *
 * Created: 22-10-2020 14:31:57
 * Author: William
-*	this code is made for the Atmega328P
+* this code is made for the Atmega328P and 128 * 64 0,96 in. i2c screen.
 */
 
 #define F_CPU 16000000UL
@@ -35,13 +35,13 @@
 
 #define DebounceTime 50 //ms
 
-#define menuChoices 4
-char *menustrings[menuChoices] = {"Data", "Modes", "Something", "Settings"};
+#define menuChoices 5
+char *menustrings[menuChoices] = {"Data", "Modes", "Something", "Settings", "test"};
 
 #define MenuAnim 1 // select menu animation
 int framesNum = 2; // number of frames in the animation for selecting a new choice value higher than 0
 
-#define MenuRounding 2
+#define MenuBoxRounding 2
 
 u8g_t u8g;
 
@@ -66,6 +66,9 @@ int currentPage = 0;
 unsigned long prevTime;
 
 int textHeight;
+double screenDiv = screenHeight;
+double screenDivholder = menuChoices;
+
 
 void u8g_setup(void)
 {
@@ -85,6 +88,8 @@ void u8g_setup(void)
 	u8g_SetColorIndex(&u8g, 3);         /* max intensity */
 	else if ( u8g_GetMode(&u8g) == U8G_MODE_BW )
 	u8g_SetColorIndex(&u8g, 1);         /* pixel on */
+	
+	screenDiv = screenDiv / screenDivholder;//for better resolution 
 }
 
 void sys_init(void)
@@ -114,6 +119,8 @@ _Bool reDrawRequired = 1;
 int main()
 {
 	//screen
+	
+	
 	u8g_setup();
 	sys_init();
 	but_init();
@@ -133,7 +140,6 @@ int main()
 		update();
 	}
 }
-
 
 void draw(void){
 	switch(currentPage){
@@ -177,7 +183,6 @@ void draw(void){
 		
 	}
 }
-
 
 //the routine that gets run when the pin change interrupt gets triggered on portD for the enabled pins
 ISR (PCINT2_vect)
@@ -252,17 +257,17 @@ void MenuAnim0(void){
 	for (int currentFrame = 0; currentFrame <= framesNum; currentFrame++){
 		u8g_FirstPage(&u8g);
 		do{
-			for (int i = 0; i < menuChoices; i++){
-				if(currentChoice == i){
+			for (int i = 0; i < menuChoices+1; i++){
+				if(i == currentChoice){
 					//x and the y of the boxes
 					int width = (currentFrame *((widthCurChoice - widthChoice)/framesNum))+widthChoice;
-					int height = (screenHeight / menuChoices) - Margin;
+					int height = screenDiv - Margin;
 					
 					int x = (screenWidth/2) - width / 2;
-					int y = (i) * (screenHeight / menuChoices);
+					int y = i * screenDiv;
 					
 					u8g_SetDefaultForegroundColor(&u8g);
-					u8g_DrawRBox(&u8g, x, y, width, height, MenuRounding);
+					u8g_DrawRBox(&u8g, x, y, width, height, MenuBoxRounding);
 					
 					
 					u8g_SetDefaultBackgroundColor(&u8g);
@@ -271,12 +276,12 @@ void MenuAnim0(void){
 					}else{
 					//x and the y of the boxes
 					int x = (screenWidth/2)-widthChoice/2;
-					int y = (i) * (screenHeight / menuChoices);
+					int y = i * screenDiv;
 					int width = widthChoice;
-					int height = (screenHeight / menuChoices) - Margin;
+					int height = screenDiv - Margin;
 					
 					u8g_SetDefaultForegroundColor(&u8g);
-					u8g_DrawRFrame(&u8g, x, y, width, height, MenuRounding);
+					u8g_DrawRFrame(&u8g, x, y, width, height, MenuBoxRounding);
 					
 					u8g_DrawStr(&u8g, x + (width/2)-(5*(strlen(menustrings[i])/2)+1), y+(height/2)+3, menustrings[i]);
 				}
@@ -289,33 +294,30 @@ void MenuAnim0(void){
 void MenuAnim1(void){
 	u8g_FirstPage(&u8g);
 	do{
-		for (int i = 0; i < menuChoices; i++){
+		for (int i = 0; i < menuChoices+1; i++){//do one extra to dirty fix lib error.
 			if(currentChoice == i){
 				//x and the y of the boxes
 				int width = screenWidth;
-				int height = (screenHeight / menuChoices) - Margin;
+				int height = screenDiv - Margin;
 				
 				int x = (screenWidth/2) - width / 2;
-				int y = (i) * (screenHeight / menuChoices);
+				int y = i * screenDiv;
 				
 				u8g_SetDefaultForegroundColor(&u8g);
-				u8g_DrawRBox(&u8g, x, y, width, height, MenuRounding);
+				u8g_DrawRBox(&u8g, x, y, width, height, MenuBoxRounding);
 				
 				
 				u8g_SetDefaultBackgroundColor(&u8g);
 				u8g_DrawStr(&u8g, x + (width/2)-(5*(strlen(menustrings[i])/2)+1), y+(height/2)+3, menustrings[i]);
-				
 				}else{
-				//x and the y of the boxes
+
 				int width = screenWidth;
-				int height = (screenHeight / menuChoices) - Margin;
+				int height = screenDiv - Margin;
 				int x = (screenWidth/2) - width / 2;
-				int y = (i) * (screenHeight / menuChoices);
-				
+				int y = i * screenDiv;
 				
 				u8g_SetDefaultForegroundColor(&u8g);
-				u8g_DrawRFrame(&u8g, x, y, width, height, MenuRounding);
-				
+				u8g_DrawRFrame(&u8g, x, y, width, height, MenuBoxRounding);
 				u8g_DrawStr(&u8g, x + (width/2)-(5*(strlen(menustrings[i])/2)+1), y+(height/2)+3, menustrings[i]);
 			}
 		}
@@ -348,6 +350,7 @@ void nopage(void){
 void page_2(void){
 	#define textnum 4
 	#define diglength 3
+	#define xDat 85
 	char *text[textnum] = {
 		" ",
 		"Speed:>  ",
@@ -368,7 +371,7 @@ void page_2(void){
 	char Dist[diglength];
 	itoa(distance, Dist, 10);
 	
-	#define xDat 80
+	
 	u8g_FirstPage(&u8g);
 	do{
 		//drawstring x strlen(text[1])*5
@@ -414,3 +417,5 @@ void page_5(void){
 	}while(u8g_NextPage(&u8g));
 	reDrawRequired = 0;
 }
+
+//can i add two ISR for the same vector?
