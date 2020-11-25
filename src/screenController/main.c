@@ -85,7 +85,7 @@ typedef u8g2_uint_t u8g_uint_t;
 
 void u8g2_setup(void)
 {
-	u8g2_Setup_ssd1306_i2c_128x64_noname_1(&u8g2, U8G2_R0, u8x8_byte_avr_hw_i2c, u8x8_avr_delay);
+	u8g2_Setup_ssd1306_i2c_128x64_noname_2(&u8g2, U8G2_R0, u8x8_byte_avr_hw_i2c, u8x8_avr_delay);
 	u8g2_SetI2CAddress(&u8g2, SSD1306_ADDR);
 	u8g2_InitDisplay(&u8g2);
 	u8g2_SetPowerSave(&u8g2, 0);
