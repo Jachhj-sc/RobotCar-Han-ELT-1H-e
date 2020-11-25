@@ -5,10 +5,13 @@
 * Author: William
 * this code is made for the Atmega328P and 128 * 64 0,96 in. i2c screen.
 */
+//OLED u8g2 library
+#include "U8G2/u8g2.h"
+#include "U8G2/u8x8.h"
+#include "U8Gi2cLib/u8x8_avr.h"
 
-#define F_CPU 16000000UL
-#include "U8G/u8g.h"
 //#include "distanceSensor/distanceSensor"
+
 
 #if defined(__AVR__)
 #include <avr/interrupt.h>
@@ -19,13 +22,22 @@
 #include <util/delay.h>
 #include <stdlib.h>
 
+// #define F_CPU 16000000UL
+// #define AVR_USE_HW_I2C // this lets the OLED library know what type of functions to use.
+//please define them in project property objects
+
+#define SSD1306_ADDR  0x78
+
+#define LED_TOGGLE PORTB ^= (1<<PORTB5)
+
 #define screenWidth 128
 #define screenHeight 64
 #define widthCurChoice 128
 #define widthChoice 128/2
 #define Margin 2
 
-#define MENU 1
+#define MENUPAGE 1
+
 
 
 #define SELECT 7
@@ -35,15 +47,15 @@
 
 #define DebounceTime 50 //ms
 
-#define menuChoices 5
-char *menustrings[menuChoices] = {"Data", "Modes", "Something", "Settings", "test"};
+#define menuChoices 4
+char *menustrings[menuChoices] = {"Data", "Modes", "Compass", "Settings"};
 
-#define MenuAnim 1 // select menu animation
+short int MenuAnim = 1; // select menu animation
 int framesNum = 2; // number of frames in the animation for selecting a new choice value higher than 0
 
-#define MenuBoxRounding 2
+#define MenuBoxRounding 3
 
-u8g_t u8g;
+u8g2_t u8g2;
 
 void draw(void);
 void update(void);
@@ -69,27 +81,18 @@ int textHeight;
 double screenDiv = screenHeight;
 double screenDivholder = menuChoices;
 
+typedef u8g2_uint_t u8g_uint_t;
 
-void u8g_setup(void)
+void u8g2_setup(void)
 {
-	/*
-	SCL: Port C, Bit 5
-	SDA: Port C, Bit 4
-	*/
-	/* activate pull-up, set ports to output, init U8glib */
-	u8g_SetPinInput(PN(2,5)); u8g_SetPinLevel(PN(2,5), 1); u8g_SetPinOutput(PN(2,5));
-	u8g_SetPinInput(PN(2,4)); u8g_SetPinLevel(PN(2,4), 1); u8g_SetPinOutput(PN(2,4));
-	u8g_InitI2C(&u8g, &u8g_dev_ssd1306_128x64_i2c, U8G_I2C_OPT_NONE);
-
-	/* assign default color value */
-	if ( u8g_GetMode(&u8g) == U8G_MODE_R3G3B2 )
-	u8g_SetColorIndex(&u8g, 255);     /* white */
-	else if ( u8g_GetMode(&u8g) == U8G_MODE_GRAY2BIT )
-	u8g_SetColorIndex(&u8g, 3);         /* max intensity */
-	else if ( u8g_GetMode(&u8g) == U8G_MODE_BW )
-	u8g_SetColorIndex(&u8g, 1);         /* pixel on */
+	u8g2_Setup_ssd1306_i2c_128x64_noname_1(&u8g2, U8G2_R0, u8x8_byte_avr_hw_i2c, u8x8_avr_delay);
+	u8g2_SetI2CAddress(&u8g2, SSD1306_ADDR);
+	u8g2_InitDisplay(&u8g2);
+	u8g2_SetPowerSave(&u8g2, 0);
 	
-	screenDiv = screenDiv / screenDivholder;//for better resolution 
+	screenDiv = screenDiv / screenDivholder;//for better resolution
+
+	u8g2_SetFontDirection(&u8g2, 0);//0: 0deg 1:90deg 2: 180deg 3: 270deg
 }
 
 void sys_init(void)
@@ -112,21 +115,21 @@ void but_init(void){
 	PCICR |= (1<<PCIE2);
 	PCMSK2 |= (1 << DOWN)|(1 << UP)|(1 << SELECT)|(1 << BACK);//enable the pin change interrupts on pinD 4,5,6,7
 	_delay_ms(200);//to prevent accidental interrupt triggering
-	sei();//set enable interrupts
+	
 }
 
-_Bool reDrawRequired = 1;
+int reDrawRequired = 1;
 int main()
 {
 	//screen
-	
-	
-	u8g_setup();
+	u8g2_setup();
 	sys_init();
 	but_init();
-	u8g_Begin(&u8g);
+	//u8g2_Begin(&u8g2);
 	
-	u8g_SetFont(&u8g, u8g_font_5x7r);
+	sei();//set enable interrupts
+	
+	u8g2_SetFont(&u8g2, u8g2_font_5x7_tf);
 	//counter_init();
 	//StartAnim();
 
@@ -135,8 +138,6 @@ int main()
 		{
 			draw();
 		}
-
-		
 		update();
 	}
 }
@@ -145,7 +146,6 @@ void draw(void){
 	switch(currentPage){
 		case 0:// page 0 start
 		StartAnim();
-		currentPage = MENU;
 		break;//end page0
 		
 		case 1://page 1 menu
@@ -164,8 +164,8 @@ void draw(void){
 		case 2:
 		page_2();
 		break;
-		
-		case 3:
+
+	    case 3:
 		page_3();
 		break;
 		
@@ -200,11 +200,12 @@ ISR (PCINT2_vect)
 	keyPressed = 7;
 
 }
+
 void update(void){
 	switch (keyPressed)
 	{
 		case BACK:
-		currentPage = 1;
+		currentPage = MENUPAGE;
 		reDrawRequired = 1;
 		keyPressed = 0;
 		break;
@@ -230,7 +231,7 @@ void update(void){
 }
 
 void menuChoiceAd(int addValue){ //change the selection in the menu
-	if(currentPage == MENU){
+	if(currentPage == MENUPAGE){
 		currentChoice += addValue;
 		if (currentChoice > menuChoices-1)
 		{
@@ -247,174 +248,206 @@ void pageSel(void){
 	//code for managing the page
 	if (currentPage == 1){
 		currentPage = currentChoice+2; //increment with two because the menu choice pages start at 2
+		}else if(currentPage == 0){
+		currentPage = MENUPAGE;
 	}
 }
 
+// int width = screenWidth;
+// int height = screenDiv;
+// 
+// int x = ((screenWidth/2) - width / 2);
+// int y;
+// int yStat = (y+(height/2)+3);
+
 void MenuAnim0(void){
 	//add scroll instead off a proportional menu
-	
+	int width = screenWidth;
+	int height = screenDiv;
+
+	int x = ((screenWidth/2) - width / 2);
+	int y;
+	//int yStat = (y+(height/2)+3);
+	height = height - Margin;
 	// menu
 	for (int currentFrame = 0; currentFrame <= framesNum; currentFrame++){
-		u8g_FirstPage(&u8g);
+		u8g2_FirstPage(&u8g2);
 		do{
 			for (int i = 0; i < menuChoices+1; i++){
 				if(i == currentChoice){
 					//x and the y of the boxes
-					int width = (currentFrame *((widthCurChoice - widthChoice)/framesNum))+widthChoice;
-					int height = screenDiv - Margin;
+					width = (currentFrame *((widthCurChoice - widthChoice)/framesNum))+widthChoice;
+					height = screenDiv - Margin;
 					
-					int x = (screenWidth/2) - width / 2;
-					int y = i * screenDiv;
+					x = (screenWidth/2) - width / 2;
+					y = i * screenDiv;
 					
-					u8g_SetDefaultForegroundColor(&u8g);
-					u8g_DrawRBox(&u8g, x, y, width, height, MenuBoxRounding);
-					
-					
-					u8g_SetDefaultBackgroundColor(&u8g);
-					u8g_DrawStr(&u8g, x + (width/2)-(5*(strlen(menustrings[i])/2)+1), y+(height/2)+3, menustrings[i]);
-					
+					u8g2_SetDrawColor(&u8g2, 1);
+					u8g2_DrawRBox(&u8g2, x, y, width, height, MenuBoxRounding);
+
+					u8g2_SetDrawColor(&u8g2, 0);
+					u8g2_DrawStr(&u8g2, x + (width/2)-(5*(strlen(menustrings[i])/2)+1), y+(height/2)+3, menustrings[i]);
 					}else{
 					//x and the y of the boxes
-					int x = (screenWidth/2)-widthChoice/2;
-					int y = i * screenDiv;
-					int width = widthChoice;
-					int height = screenDiv - Margin;
+					x = (screenWidth/2)-widthChoice/2;
+					y = i * screenDiv;
+					width = widthChoice;
+					height = screenDiv - Margin;
 					
-					u8g_SetDefaultForegroundColor(&u8g);
-					u8g_DrawRFrame(&u8g, x, y, width, height, MenuBoxRounding);
-					
-					u8g_DrawStr(&u8g, x + (width/2)-(5*(strlen(menustrings[i])/2)+1), y+(height/2)+3, menustrings[i]);
+					//u8g2_SetDefaultForegroundColor(&u8g2);
+					u8g2_SetDrawColor(&u8g2, 1);
+					u8g2_DrawRFrame(&u8g2, x, y, width, height, MenuBoxRounding);
+					u8g2_DrawStr(&u8g2, x + (width/2)-(5*(strlen(menustrings[i])/2)+1), y+(height/2)+3, menustrings[i]);
 				}
 			}
-		}while(u8g_NextPage(&u8g));
+		}while(u8g2_NextPage(&u8g2));
 	}
 	reDrawRequired = 0;
 }
 
 void MenuAnim1(void){
-	u8g_FirstPage(&u8g);
+	int width = screenWidth;
+	int height = screenDiv;
+
+	int x = ((screenWidth/2) - width / 2);
+	int y;
+	int yStat = (height/2)+3;
+	height = height - Margin;
+	
+	u8g2_FirstPage(&u8g2);
 	do{
 		for (int i = 0; i < menuChoices+1; i++){//do one extra to dirty fix lib error.
 			if(currentChoice == i){
 				//x and the y of the boxes
-				int width = screenWidth;
-				int height = screenDiv - Margin;
+				//width = screenWidth;
+				//height = screenDiv - Margin;
 				
-				int x = (screenWidth/2) - width / 2;
-				int y = i * screenDiv;
-				
-				u8g_SetDefaultForegroundColor(&u8g);
-				u8g_DrawRBox(&u8g, x, y, width, height, MenuBoxRounding);
-				
-				
-				u8g_SetDefaultBackgroundColor(&u8g);
-				u8g_DrawStr(&u8g, x + (width/2)-(5*(strlen(menustrings[i])/2)+1), y+(height/2)+3, menustrings[i]);
+// 				x = (screenWidth/2) - width / 2;
+ 				y = i * screenDiv;
+
+				u8g2_SetDrawColor(&u8g2, 1);
+				u8g2_DrawRBox(&u8g2, x, y, width, height, MenuBoxRounding);
+
+				u8g2_SetDrawColor(&u8g2, 0);
+				u8g2_DrawStr(&u8g2, x + (width/2)-(5*(strlen(menustrings[i])/2)+1), y+yStat, menustrings[i]);
 				}else{
 
-				int width = screenWidth;
-				int height = screenDiv - Margin;
-				int x = (screenWidth/2) - width / 2;
-				int y = i * screenDiv;
-				
-				u8g_SetDefaultForegroundColor(&u8g);
-				u8g_DrawRFrame(&u8g, x, y, width, height, MenuBoxRounding);
-				u8g_DrawStr(&u8g, x + (width/2)-(5*(strlen(menustrings[i])/2)+1), y+(height/2)+3, menustrings[i]);
+// 				width = screenWidth;
+// 				height = screenDiv - Margin;
+// 				x = (screenWidth/2) - width / 2;
+ 				y = i * screenDiv;
+
+				u8g2_SetDrawColor(&u8g2, 1);
+				u8g2_DrawRFrame(&u8g2, x, y, width, height, MenuBoxRounding);
+				u8g2_DrawStr(&u8g2, x + (width/2)-(5*(strlen(menustrings[i])/2)+1), y+yStat, menustrings[i]);
 			}
 		}
-	}while(u8g_NextPage(&u8g));
+	}while(u8g2_NextPage(&u8g2));
 	reDrawRequired = 0;
 }
 
 void StartAnim(void){
-	textHeight = u8g_font_GetFontAscent(u8g_font_5x7r)+2;
-	u8g_FirstPage(&u8g);
+	
+	textHeight = 6+2;
+	
+	u8g2_FirstPage(&u8g2);
 	do{
-		u8g_DrawStr(&u8g, 0, textHeight, "SPECIAL THANKS TO :");
-		u8g_DrawStr(&u8g, 0, textHeight*2, "Bram , William, Antonis,");
-		u8g_DrawStr(&u8g, 0, textHeight*3, "Corne, Yasmine, Adil");
-		u8g_DrawStr(&u8g, screenWidth/4, screenHeight-textHeight*2, "Press \"Select\"");
-		u8g_DrawStr(&u8g, screenWidth/4, screenHeight-textHeight, " to continue!");
-	}while(u8g_NextPage(&u8g));
+		u8g2_DrawStr(&u8g2, 0, textHeight, "SPECIAL THANKS TO :");
+		u8g2_DrawStr(&u8g2, 0, textHeight*2, "Bram , William, Antonis,");
+		u8g2_DrawStr(&u8g2, 0, textHeight*3, "Corne, Yasmine, Adil");
+		u8g2_DrawStr(&u8g2, screenWidth/4, screenHeight-textHeight*2, "Press \"Select\"");
+		u8g2_DrawStr(&u8g2, screenWidth/4, screenHeight-textHeight, " to continue!");
+	}while(u8g2_NextPage(&u8g2));
 	reDrawRequired = 0;
 }
 
 void nopage(void){
-	u8g_FirstPage(&u8g);
+	u8g2_FirstPage(&u8g2);
 	do{
-		u8g_DrawStr(&u8g, 0, textHeight, "This Page has no content!");
+		u8g2_DrawStr(&u8g2, 0, textHeight, "This Page has no content!");
 		
-	}while(u8g_NextPage(&u8g));
+	}while(u8g2_NextPage(&u8g2));
 	reDrawRequired = 0;
 }
 
 void page_2(void){
-	#define textnum 4
-	#define diglength 3
-	#define xDat 85
-	char *text[textnum] = {
-		" ",
+	#define Lines 4
+	#define digAmount 4
+	#define xDat (12 * 5)
+	#define yDat 3
+	
+	static char *text2[Lines] = {
 		"Speed:>  ",
 		"Direction:> ",
-		"objectDistance:> "
+		"Distance:> ",
+		"runTime:> "
 	};
-	int speed = 50;
-	char Spd[diglength];
-	itoa(speed, Spd, 10);
 	
-	int direction = 180;
-	char Dir[diglength];
-	itoa(direction, Dir, 10);
+	static char *postFixes[Lines] = {
+		"km/h",
+		"deg",
+		"cm",
+		"s"
+	};
 	
-	volatile char _void[] = "";//this is here to show the library that the previous array stops
+	//placeholders
+	static char d1[digAmount];
+	static char d2[digAmount];
+	static char d3[digAmount];
+	static char d4[digAmount];
+	static char *Data[Lines] = { d1, d2, d3, d4};
 	
-	int distance = 25;
-	char Dist[diglength];
-	itoa(distance, Dist, 10);
+	static int speed = 50;
+	itoa(speed, Data[0], 10);
 	
+	static int direction = 180;
+	itoa(direction, Data[1], 10);
 	
-	u8g_FirstPage(&u8g);
+	static int distance = 25;
+	itoa(distance, Data[2], 10);
+	
+	int runTime = 250;
+	itoa(runTime, Data[3], 10);
+	
+	u8g2_FirstPage(&u8g2);
 	do{
-		//drawstring x strlen(text[1])*5
 		//title
-		u8g_DrawStr(&u8g, 0, textHeight, menustrings[currentChoice]);
-		//speed
-		u8g_DrawStr(&u8g, 0, textHeight*3, text[1]);
-		u8g_DrawStr(&u8g, xDat, textHeight*3,Spd);
-		u8g_DrawStr(&u8g,xDat + diglength*5 + 1, textHeight*3, "km/h");
-		//direction
-		u8g_DrawStr(&u8g, 0, textHeight*4, text[2]);
-		u8g_DrawStr(&u8g, xDat, textHeight*4, Dir);
-		u8g_DrawStr(&u8g, xDat + diglength*5 + 1, textHeight*4, "deg");
-		//distance
-		u8g_DrawStr(&u8g, 0, textHeight*5, text[3]);
-		u8g_DrawStr(&u8g, xDat, textHeight*5, Dist);
-		u8g_DrawStr(&u8g, xDat + diglength*5 + 1, textHeight*5, "cm");
-	}while(u8g_NextPage(&u8g));
+		u8g2_DrawStr(&u8g2, 0, textHeight, menustrings[currentChoice]);
+
+		for (int i = 0; i < Lines; i++)
+		{
+			u8g2_DrawStr(&u8g2, 0,                      textHeight*(i+yDat), text2[i]);
+			u8g2_DrawStr(&u8g2, xDat,                   textHeight*(i+yDat), Data[i]);
+			u8g2_DrawStr(&u8g2, xDat + digAmount*5 + 1, textHeight*(i+yDat), postFixes[i]);
+		}
+		
+	}while(u8g2_NextPage(&u8g2));
+	
 	reDrawRequired = 0;
 }
 
 void page_3(void){
-	u8g_FirstPage(&u8g);
+	u8g2_FirstPage(&u8g2);
 	do{
-		u8g_DrawStr(&u8g, 0, textHeight, menustrings[currentChoice]);
-	}while(u8g_NextPage(&u8g));
+		u8g2_DrawStr(&u8g2, 0, textHeight, menustrings[currentChoice]);
+	}while(u8g2_NextPage(&u8g2));
 	reDrawRequired = 0;
 }
 
 void page_4(void){
-	u8g_FirstPage(&u8g);
+	u8g2_FirstPage(&u8g2);
 	do{
-		u8g_DrawStr(&u8g, 0, textHeight, menustrings[currentChoice]);
-	}while(u8g_NextPage(&u8g));
+		u8g2_DrawStr(&u8g2, 0, textHeight, menustrings[currentChoice]);
+	}while(u8g2_NextPage(&u8g2));
 	reDrawRequired = 0;
 }
 
 void page_5(void){
-	u8g_FirstPage(&u8g);
+	u8g2_FirstPage(&u8g2);
 	do{
-		u8g_DrawStr(&u8g, 0, textHeight, menustrings[currentChoice]);
-		u8g_DrawStr(&u8g, 0, textHeight*2, "test");
-	}while(u8g_NextPage(&u8g));
+		u8g2_DrawStr(&u8g2, 0, textHeight, menustrings[currentChoice]);
+		u8g2_DrawStr(&u8g2, 0, textHeight*2, "test");
+	}while(u8g2_NextPage(&u8g2));
 	reDrawRequired = 0;
 }
 
