@@ -21,6 +21,7 @@
 #include <string.h>
 #include <util/delay.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 // #define F_CPU 16000000UL
 // #define AVR_USE_HW_I2C // this lets the OLED library know what type of functions to use.
@@ -49,12 +50,14 @@
 
 #define DebounceTime 50 //ms
 
-#define menuChoices 4
-char *menustrings[menuChoices] = {"Data", "Modes", "Compass", "Settings"};
+#define menuChoicesVis 3
+#define menuChoices 5
+char *menustrings[menuChoices] = {"Data", "Modes", "Compass", "Settings", "yeahh test"};
 
 short int MenuAnim = 1; // select menu animation
 #define framesNum 3 -1 // number of frames in the animation for selecting a new choice value higher than 0
 #define MenuBoxRounding 3
+int menuScroll = 0;
 
 short Mode = 0;//setting for the mode of the car.
 
@@ -85,12 +88,12 @@ unsigned int currentFrame = 0;
 int keyPressed;
 int currentPage = 0;
 
-int reDrawRequired = 1;
+
 
 unsigned short textHeight;
 unsigned short maxCharWidth;
 double screenDiv = screenHeight;
-double screenDivholder = menuChoices;
+double screenDivholder = menuChoicesVis;
 
 typedef u8g2_uint_t u8g_uint_t;
 
@@ -133,7 +136,7 @@ void but_init(void){
 	
 }
 
-
+_Bool reDrawRequiredExt = 0;
 ISR(TIMER0_COMPB_vect){
 	static int rCount = 0;
 	
@@ -141,7 +144,7 @@ ISR(TIMER0_COMPB_vect){
 		Time_ms = Time_cal-117;//Formula for the minute CAl (Time_cal-c): c = 0.615384615*Time_cal
 		Time_min++;
 		rCount = 0;
-		reDrawRequired = 1; //update the screen so the overlay shows the right minutes.
+		reDrawRequiredExt = 1; //update the screen so the overlay shows the right minutes.
 	}else if (rCount++ >= 13000)
 	{
 		Time_ms = Time_ms + Time_cal;
@@ -159,6 +162,7 @@ void timerInit(void){
 	OCR0B = 250;//to attain 1 ms for every overflow.
 }
 
+_Bool reDrawRequired = 1;
 int main()
 {
 	//screen
@@ -175,12 +179,13 @@ int main()
 	//StartAnim();
 
 	while(1){
-		if (reDrawRequired)
+		if (reDrawRequired || reDrawRequiredExt)
 		{
+			reDrawRequired = 1;
 			u8g2_ClearBuffer(&u8g2);
 			draw();
 			u8g2_SendBuffer(&u8g2);
-			
+			reDrawRequiredExt = 0;
 		}
 		update();
 	}
@@ -283,25 +288,38 @@ void update(void){
 void menuChoiceAd(int addValue){ //change the selection in the menu
 	if(currentPage == MENUPAGE){
 		currentChoice += addValue;
+		
 		if (currentChoice > menuChoices-1)
 		{
 			currentChoice = 0;
+			menuScroll = 0;
 		}
 		if (currentChoice < 0)
 		{
 			currentChoice = menuChoices-1;
+			menuScroll = menuChoicesVis - menuChoices;
+		}
+
+
+		if(currentChoice >= menuChoicesVis - menuScroll){
+			menuScroll += -addValue;
+		}
+		if (currentChoice < -menuScroll){
+			menuScroll += -addValue;
 		}
 	}
 }
 
 void pageSel(void){
+	#define firstPage 2
 	//code for managing the page
 	if (currentPage == 1){
-		currentPage = currentChoice+2; //increment with two because the menu choice pages start at 2
+		currentPage = currentChoice+firstPage; //increment with two because the menu choice pages start at 2
 		}else if(currentPage == 0){
 		currentPage = MENUPAGE;
 	}
 }
+
 
 void MenuAnim0(void){
 	//int yStat = (y+(height/2)+3);
@@ -318,26 +336,30 @@ void MenuAnim0(void){
 			height = screenDiv - Margin;
 			
 			x = (screenWidth/2) - width / 2;
-			y = i * screenDiv + TopMargin;
-			
-			u8g2_SetDrawColor(&u8g2, 1);
-			u8g2_DrawRBox(&u8g2, x, y, width, height, MenuBoxRounding);
+			y = i * screenDiv + TopMargin + (menuScroll * screenDiv);
+			if (y >= TopMargin)
+			{
+				u8g2_SetDrawColor(&u8g2, 1);
+				u8g2_DrawRBox(&u8g2, x, y, width, height, MenuBoxRounding);
 
-			u8g2_SetDrawColor(&u8g2, 0);
-			u8g2_DrawStr(&u8g2, x + (width/2)-(5*(strlen(menustrings[i])/2)+1), y+(height/2)+3, menustrings[i]);
+				u8g2_SetDrawColor(&u8g2, 0);
+				u8g2_DrawStr(&u8g2, x + (width/2) - u8g2_GetStrWidth(&u8g2, menustrings[i]) / 2 , y+(height/2)+3, menustrings[i]);
+			}
 			
 			}else{
 			//x and the y of the boxes
-			x = (screenWidth/2)-widthChoice/2;
-			y = i * screenDiv + TopMargin;
 			
 			width = widthChoice;
 			height = screenDiv - Margin;
-			
-			//u8g2_SetDefaultForegroundColor(&u8g2);
-			u8g2_SetDrawColor(&u8g2, 1);
-			u8g2_DrawRFrame(&u8g2, x, y, width, height, MenuBoxRounding);
-			u8g2_DrawStr(&u8g2, x + (width/2)-(5*(strlen(menustrings[i])/2)+1), y+(height/2)+3, menustrings[i]);
+			x = (screenWidth/2)-widthChoice/2;
+			y = i * screenDiv + TopMargin + (menuScroll * screenDiv);
+			if (y >= TopMargin)
+			{
+				//u8g2_SetDefaultForegroundColor(&u8g2);
+				u8g2_SetDrawColor(&u8g2, 1);
+				u8g2_DrawRFrame(&u8g2, x, y, width, height, MenuBoxRounding);
+				u8g2_DrawStr(&u8g2, x + (width/2) - u8g2_GetStrWidth(&u8g2, menustrings[i]) / 2, y+(height/2)+3, menustrings[i]);
+			}
 		}
 	}
 	
@@ -354,7 +376,7 @@ void MenuAnim0(void){
 void MenuAnim1(void){
 	int width = screenWidth;
 	int height = screenDiv;
-
+	
 	int x = ((screenWidth/2) - width / 2);
 	int y;
 	int yStat = (height/2)+3;
@@ -367,36 +389,58 @@ void MenuAnim1(void){
 			//height = screenDiv - Margin;
 			
 			// 				x = (screenWidth/2) - width / 2;
-			y = i * screenDiv + TopMargin;
+			y = i * screenDiv + TopMargin + (menuScroll * screenDiv);
+		/*	if (menuScroll == -1){
+				y -= 2;
+			}*/
+			
+			if (y >= TopMargin)
+			{
+				u8g2_SetDrawColor(&u8g2, 1);
+				u8g2_DrawRBox(&u8g2, x, y, width, height, MenuBoxRounding);
 
-			u8g2_SetDrawColor(&u8g2, 1);
-			u8g2_DrawRBox(&u8g2, x, y, width, height, MenuBoxRounding);
-
-			u8g2_SetDrawColor(&u8g2, 0);
-			u8g2_DrawStr(&u8g2, x + (width/2)-(5*(strlen(menustrings[i])/2)+1), y+yStat, menustrings[i]);
+				u8g2_SetDrawColor(&u8g2, 0);
+				u8g2_DrawStr(&u8g2, x + (width/2) - u8g2_GetStrWidth(&u8g2, menustrings[i]) / 2, y+yStat, menustrings[i]);
+			}
 			}else{
 
-			y = i * screenDiv + TopMargin;
-
-			u8g2_SetDrawColor(&u8g2, 1);
-			u8g2_DrawRFrame(&u8g2, x, y, width, height, MenuBoxRounding);
-			u8g2_DrawStr(&u8g2, x + (width/2)-(5*(strlen(menustrings[i])/2)+1), y+yStat, menustrings[i]);
+			y = i * screenDiv + TopMargin + (menuScroll * screenDiv);
+/*
+			if (menuScroll == -1){
+				y -= 2;
+			}*/
+			if (y >= TopMargin)
+			{
+				u8g2_SetDrawColor(&u8g2, 1);
+				u8g2_DrawRFrame(&u8g2, x, y, width, height, MenuBoxRounding);
+				u8g2_DrawStr(&u8g2, x + (width/2) - u8g2_GetStrWidth(&u8g2, menustrings[i]) / 2, y+yStat, menustrings[i]);
+			}
 		}
 	}
 	reDrawRequired = 0;
 }
 
 void StartAnim(void){
-	u8g2_DrawStr(&u8g2, 0, textHeight, "SPECIAL THANKS TO :");
-	u8g2_DrawStr(&u8g2, 0, textHeight*2, "Bram , William, Antonis,");
-	u8g2_DrawStr(&u8g2, 0, textHeight*3, "Corne, Yasmine, Adil");
-	u8g2_DrawStr(&u8g2, screenWidth/4, realScreenHeight-textHeight*2, "Press \"Select\"");
-	u8g2_DrawStr(&u8g2, screenWidth/4, realScreenHeight-textHeight, " to continue!");
+	#define lineNum 4
+	char *text[lineNum] = {"SPECIAL THANKS TO :", "Bram , William, ", "Antonis, Corne, ", "Yasmine, Adil"};
+	
+	for (int i = 0; i < lineNum; i++)
+	{
+		u8g2_DrawStr(&u8g2, 0, textHeight * (i + 1), text[i]);
+	}
+	
+	char *text2[2] = {
+		"Press \"Select\"",
+		" to continue!"
+	};
+	
+	u8g2_DrawStr(&u8g2, screenWidth/2 - u8g2_GetStrWidth(&u8g2, text2[0]) / 2, realScreenHeight-textHeight, text2[0]);
+	u8g2_DrawStr(&u8g2, screenWidth/2 - u8g2_GetStrWidth(&u8g2, text2[1]) / 2, realScreenHeight, text2[1]);
 	reDrawRequired = 0;
 }
 
 void nopage(void){
-	u8g2_DrawStr(&u8g2, 0, textHeight + TopMargin, "This Page has no content!");
+	u8g2_DrawStr(&u8g2, 0, textHeight + TopMargin, "No content yet!");
 	
 	reDrawRequired = 0;
 }
@@ -447,7 +491,6 @@ void ScreenOverlay(void){
 	u8g2_DrawStr(&u8g2, 0, textHeight-3, timeTxt);
 	
 	
-	
 	u8g2_SetFont(&u8g2, u8g2_font_6x10_tf);//reset font to the main font.
 }
 
@@ -457,7 +500,7 @@ void page_2(void){
 	
 	#define startLine_Data 3
 
-	static char *text2[Lines] = {
+	char *text2[Lines] = {
 		"Speed:>  ",
 		"Direction:> ",
 		"Distance:> ",
@@ -466,7 +509,7 @@ void page_2(void){
 	
 	int maxPrefixWidth = u8g2_GetStrWidth(&u8g2, text2[1]);
 	
-	static char *postFixes[Lines] = {
+	char *postFixes[Lines] = {
 		"km/h",
 		"deg",
 		"cm",
@@ -474,19 +517,19 @@ void page_2(void){
 	};
 	
 	//placeholders
-	static char d1[digAmount];
-	static char d2[digAmount];
-	static char d3[digAmount];
-	static char d4[digAmount];
-	static char *Data[Lines] = { d1, d2, d3, d4};
+	char d1[digAmount];
+	char d2[digAmount];
+	char d3[digAmount];
+	char d4[digAmount];
+	char *Data[Lines] = { d1, d2, d3, d4};
 	
-	static int speed = 50;
+	int speed = 50;
 	itoa(speed, Data[0], 10);
 	
-	static int direction = 180;
+	int direction = 180;
 	itoa(direction, Data[1], 10);
 	
-	static int distance = 25;
+	int distance = 25;
 	itoa(distance, Data[2], 10);
 	
 	//little bit of code to make a typical digital watch look in the time String
