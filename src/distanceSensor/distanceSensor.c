@@ -6,12 +6,22 @@
 */
 #include "distanceSensor.h"
 #include <avr/interrupt.h>
+#include <math.h>
 
 int risingEdgeTimeC = 0;
 int fallingEdgeTimeC = 0;
 
+
 unsigned long echoHighLevelTimeC = 0;
 unsigned int echoHighLevelTimeuS = 0;
+
+#define sensorseperate 6.6
+
+double length;
+double differenceLength;
+float angleradian;
+float angledegree;
+
 //double echoDistance[DevAmount];
 
 double echoDistance[distSensAmount];
@@ -23,9 +33,14 @@ void initDistanceSensor(void){
 	
 	DDRD |= (1<<TRIGG0);
 	DDRD &= ~(1<<ECHO0);
+	DDRD |= (1<<TRIGG1);
+	DDRD &= ~(1<<ECHO1);
 
-	PCMSK2 |= (1<<ECHO0);
+	PCMSK2 |= (1<<ECHO0) | (1<<ECHO1);;
+	
 	PCICR |= (1<<PCIE2);
+
+	
 
 	sei();//opposite of cli();
 
@@ -43,7 +58,33 @@ void sendTriggPulse(int device){
 	PORTD &= ~(1<<device);
 }
 
+void angleCalculator(void){
+	if (echoDistance[0] <= 20 && echoDistance[1] >= echoDistance[0])
+		{
+			DDRB |= (1<<PORTB5);
+			PORTB = (1<<PORTB5);
+			length = (echoDistance[1] - echoDistance[0]);
+			differenceLength = length / sensorseperate; //calculate the number that needs to be put in the arctan.
+			angleradian = atan(differenceLength); //calculate the angle from the wall in radian.
+			angledegree = angleradian * 180 / 3.14; //calculate the angle from the wall in degrees.
+		}
+		else if (echoDistance[1] <= 20 && echoDistance[0] >= echoDistance[1])
+		{
+			DDRB |= (1<<PORTB4);
+			PORTB = (1<<PORTB4);
+			length = (echoDistance[0] - echoDistance[1]);
+			differenceLength = length / sensorseperate; //calculate the number that needs to be put in the arctan.
+			angleradian = atan(differenceLength); //calculate the angle from the wall in radian.
+			angledegree = angleradian * 180 / 3.14; //calculate the angle from the wall in degrees.
+		}
+		else{
+			PORTB &= ~(1<<PORTB5);
+			PORTB &= ~(1<<PORTB4);
+		}
+}
+
 int runcount2 = 0;
+int runcount1 = 0;
 ISR(PCINT2_vect){//PD
 	//check which device it is and keep that device for the falling edge
 	static int prevDevice;
@@ -78,28 +119,28 @@ ISR(PCINT2_vect){//PD
 		}
 		break;
 		
-		//use for multiple sound sensors
-// 		case (1 << ECHO1):
-// 		case 1:
-// 		if (runcount2 == 0)
-// 		{
-// 			prevDevice = 0;
-// 			TCNT1 = 0;
-// 			risingEdgeTimeC = TCNT1;
-// 			
-// 			runcount2++;
-// 		}
-// 		else
-// 		{
-// 			prevDevice = -1;
-// 			fallingEdgeTimeC = TCNT1;
-// 			
-// 			echoHighLevelTimeC = fallingEdgeTimeC - risingEdgeTimeC;
-// 			echoHighLevelTimeuS = echoHighLevelTimeC * prescaleDiv;
-// 			echoDistance[device] = echoHighLevelTimeuS/58.0 + distanceCal1;// in cm
-// 			
-// 			runcount2 = 0;
-// 		}	
-// 		break;		
+//use for multiple sound sensors
+		case (1 << ECHO1):
+		case 1:
+		if (runcount1 == 0)
+		{
+			prevDevice = 1;
+			TCNT1 = 0;
+			risingEdgeTimeC = TCNT1;
+
+			runcount1++;
+		}
+		else
+		{
+			prevDevice = -2;
+			fallingEdgeTimeC = TCNT1;
+
+			echoHighLevelTimeC = fallingEdgeTimeC - risingEdgeTimeC;
+			echoHighLevelTimeuS = echoHighLevelTimeC * prescaleDiv;
+			echoDistance[device] = echoHighLevelTimeuS/58.0 + distanceCal1;// in cm
+
+			runcount1 = 0;
+		}
+		break;
 	}
 }
