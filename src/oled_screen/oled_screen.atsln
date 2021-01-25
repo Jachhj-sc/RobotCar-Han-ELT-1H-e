@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Atmel Studio Solution File, Format Version 11.00
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "oled_screen", "oled_screen\oled_screen.cproj", "{DCE6C7E3-EE26-4D79-826B-08594B9AD897}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{AB0A694C-CEC6-4BF0-A14E-1543BBB7952A}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\Files\MIC1\u8glib\examples\graphics_test\graphics_test.c = ..\..\..\Files\MIC1\u8glib\examples\graphics_test\graphics_test.c
+		oled_screen\main_menu.c = oled_screen\main_menu.c
+		..\..\..\..\..\AppData\Local\Temp\Rar$DRa27400.48149\u8glib\examples\u8g_logo\u8g_logo.c = ..\..\..\..\..\AppData\Local\Temp\Rar$DRa27400.48149\u8glib\examples\u8g_logo\u8g_logo.c
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DCE6C7E3-EE26-4D79-826B-08594B9AD897}.Debug|AVR.ActiveCfg = Debug|AVR
+		{DCE6C7E3-EE26-4D79-826B-08594B9AD897}.Debug|AVR.Build.0 = Debug|AVR
+		{DCE6C7E3-EE26-4D79-826B-08594B9AD897}.Release|AVR.ActiveCfg = Release|AVR
+		{DCE6C7E3-EE26-4D79-826B-08594B9AD897}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
