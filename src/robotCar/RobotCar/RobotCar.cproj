@@ -145,6 +145,12 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="distanceSensor.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="distanceSensor.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>

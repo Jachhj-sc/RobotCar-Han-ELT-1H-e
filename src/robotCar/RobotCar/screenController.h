@@ -27,14 +27,15 @@ void draw(void);
 //Buttons-----------------------------------------------------------------
 void but_init(void);
 void updateButtons(void);
+#define BUTTON_PC_VECT PCINT0_vect
+#define BUTTON_PIN	PINB
+#define BUTTON_PORT PORTB
+#define BUTTON_REG	DDRB
 
-#define BUTTON_PIN	PIND
-#define BUTTON_PORT PORTD
-#define BUTTON_REG	DDRD
-#define SELECT PIND7
-#define BACK PIND6
-#define UP PIND5
-#define DOWN PIND4
+#define SELECT PINB3
+#define BACK PINB2
+#define UP PINB1
+#define DOWN PINB0
 
 #define DebounceTime 50 //ms
 
