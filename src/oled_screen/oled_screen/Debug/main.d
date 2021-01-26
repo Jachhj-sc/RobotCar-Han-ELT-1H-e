@@ -16,7 +16,7 @@ main.d main.o: .././main.c \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include-fixed\limits.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\pgmspace.h \
- .././U8G2/u8x8.h .././U8Gi2cLib/u8x8_avr.h ../U8G2/u8g2.h
+ .././U8G2/u8x8.h .././U8G2/u8x8_avr.h ../U8G2/u8g2.h
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h:
 
@@ -58,6 +58,6 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 
 .././U8G2/u8x8.h:
 
-.././U8Gi2cLib/u8x8_avr.h:
+.././U8G2/u8x8_avr.h:
 
 ../U8G2/u8g2.h:

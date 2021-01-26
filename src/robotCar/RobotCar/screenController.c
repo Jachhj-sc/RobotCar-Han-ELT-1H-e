@@ -4,6 +4,8 @@
 * Created: 16-12-2020 14:28:37
 *  Author: william
 */
+#define F_CPU 16000000UL
+
 #include "screenController.h"
 
 #include <avr/interrupt.h>

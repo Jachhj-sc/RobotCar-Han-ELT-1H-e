@@ -16,7 +16,7 @@
 
 #include "U8G2/u8g2.h"
 #include "U8G2/u8x8.h"
-#include "U8Gi2cLib/u8x8_avr.h"
+#include "U8G2/u8x8_avr.h"
 
 void sys_init(void);
 int8_t * u8g2_setup(int *pSettings, int *pSpeed, int *pDirection, int *pDistance);

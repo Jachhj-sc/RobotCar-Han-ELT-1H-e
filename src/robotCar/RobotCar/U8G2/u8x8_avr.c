@@ -1,3 +1,5 @@
+#define AVR_USE_HW_I2C //remove if your using other display.
+
 #include <util/delay.h>
 #include "u8x8_avr.h"
 

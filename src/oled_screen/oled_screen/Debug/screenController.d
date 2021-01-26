@@ -15,7 +15,7 @@ screenController.d screenController.o: .././screenController.c \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\version.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\fuse.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\lock.h \
- .././U8G2/u8x8.h .././U8Gi2cLib/u8x8_avr.h ../U8G2/u8g2.h \
+ .././U8G2/u8x8.h .././U8G2/u8x8_avr.h ../U8G2/u8g2.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\interrupt.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
@@ -62,7 +62,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 
 .././U8G2/u8x8.h:
 
-.././U8Gi2cLib/u8x8_avr.h:
+.././U8G2/u8x8_avr.h:
 
 ../U8G2/u8g2.h:
 

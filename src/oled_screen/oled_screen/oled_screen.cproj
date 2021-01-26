@@ -476,13 +476,9 @@
     <Compile Include="U8G2\u8x8_u8toa.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="U8Gi2cLib\u8x8_avr.h">
-      <SubType>compile</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="U8G2\avr-hw-i2c\" />
-    <Folder Include="U8Gi2cLib" />
     <Folder Include="U8G2" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />

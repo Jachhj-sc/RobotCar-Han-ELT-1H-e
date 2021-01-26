@@ -34,7 +34,6 @@ LINKER_SCRIPT_DEP:=
 # Every subdirectory with source files must be described here
 SUBDIRS :=  \
 ../U8G2/avr-hw-i2c/ \
-../U8Gi2cLib \
 ../U8G2
 
 
