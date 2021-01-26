@@ -71,8 +71,6 @@ void sendTriggPulse(int device){
 float angleCalculator(void){
 	if (echoDistance[0] <= 20 && echoDistance[1] >= echoDistance[0])
 		{
-			DDRB |= (1<<PORTB5);
-			PORTB = (1<<PORTB5);
 			length = (echoDistance[1] - echoDistance[0]);
 			differenceLength = length / sensorseperate; //calculate the number that needs to be put in the arctan.
 			angleradian = atan(differenceLength); //calculate the angle from the wall in radian.
@@ -80,16 +78,13 @@ float angleCalculator(void){
 		}
 		else if (echoDistance[1] <= 20 && echoDistance[0] >= echoDistance[1])
 		{
-			DDRB |= (1<<PORTB4);
-			PORTB = (1<<PORTB4);
+
 			length = (echoDistance[0] - echoDistance[1]);
 			differenceLength = length / sensorseperate; //calculate the number that needs to be put in the arctan.
 			angleradian = atan(differenceLength); //calculate the angle from the wall in radian.
 			angledegree = angleradian * 180 / 3.14; //calculate the angle from the wall in degrees.
 		}
 		else{
-			PORTB &= ~(1<<PORTB5);
-			PORTB &= ~(1<<PORTB4);
 		}
 		
 		return angledegree; 
