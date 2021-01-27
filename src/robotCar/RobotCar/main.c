@@ -20,6 +20,7 @@ void angleCalculator(void);
 int speed = 5;
 int direction = 22;
 int distance = 10;
+int angle_deg = 0;
 
 //default settings
 int Settings[5] = {
@@ -37,7 +38,7 @@ unsigned int Time_min = 0;//accurate
 
 void setup_display(void){
 	//screen initialization
-	main_currentPage = u8g2_setup(Settings, &speed, &direction, &distance); //save the address of the currentPage
+	main_currentPage = u8g2_setup(Settings, &speed, &direction, &distance, &angle_deg); //save the address of the currentPage
 	sys_init();
 	but_init();
 	timeInit(&Time_min, &Time_ms);
@@ -48,7 +49,7 @@ int main()
 {
 	setup_display();
 	
-	initDistanceSensor(&distance);//the default pins are setup in soundsensor.h
+	initDistanceSensor(&distance, &angle_deg);//the default pins are setup in soundsensor.h
 	
 	sei();
 
@@ -64,7 +65,6 @@ int main()
 	}
 }
 
-//put this cycle in an ISR
 
 void soundEchoCycle(void){
 	

@@ -41,6 +41,7 @@ int8_t selectionsVis[PAGES];
 int *speedHold;
 int *directionHold;
 int *distanceHold;
+int *angleHold;
 
 //defined in the init
 int8_t pageHistory(_Bool GetPrevpage, int pageNum);
@@ -51,7 +52,7 @@ _Bool selectEnable;
 
 char *menuStrings[menuChoices] = {
 	"Data",
-	"Modes",
+	"Angle",
 	"Compass",
 	"Settings"
 };
@@ -101,10 +102,10 @@ unsigned int *pTime_min;
 
 #define Time_cal 305 //ms calibration
 
-int8_t * u8g2_setup(int pSettings[settings], int *pSpeed, int *pDirection, int *pDistance)
+int8_t * u8g2_setup(int pSettings[settings], int *pSpeed, int *pDirection, int *pDistance, int *pangdeg)
 {
 	settingVal = &pSettings[0];
-	
+	angleHold = pangdeg;
 	speedHold = pSpeed;
 	directionHold = pDirection;
 	distanceHold = pDistance;
@@ -659,8 +660,13 @@ void Page_2(void){
 
 void Page_3(void){
 	selectEnable = 0;
+	
+	char angleHolder[8];
+	
+	itoa(*angleHold, angleHolder, 10);
 	u8g2_DrawStr(&u8g2, 0, textHeight+ TopMargin, menuStrings[currentChoice[MENUPAGE]]);//the titles needs to be the same as the titles of the choices in the menu
-	reDrawRequired = 0;
+	u8g2_DrawStr(&u8g2, 0, textHeight*2 + TopMargin, angleHolder);
+	reDrawRequired = 1;
 }
 
 void Page_4(void){

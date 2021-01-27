@@ -26,14 +26,15 @@ float angledegree;
 
 double echoDistance[distSensAmount];
 
-int *Dist;
+int *pDistance;
+int *pAngle_tmp;
 
-void initDistanceSensor(int *pDist){
+void initDistanceSensor(int *pDist, int *pAngle){
 	//initialize ultrasonic sensor
+	pDistance = pDist;
+	pAngle_tmp = pAngle;
+	//setup the DDR register and the pin change mask
 	
-	Dist = pDist;
-	
-	//setup the DDR register and the pin change mask	
 	DDRB |= (1<<TRIGG0);
 	DDRB &= ~(1<<ECHO0);
 	DDRB |= (1<<TRIGG1);
@@ -42,10 +43,6 @@ void initDistanceSensor(int *pDist){
 	PCMSK0 |= (1<<ECHO0) | (1<<ECHO1);;
 	
 	PCICR |= (1<<PCIE0);
-
-	
-
-	sei();//opposite of cli();
 
 	//Timer
 	TCCR1B |= (1<<CS11)|(1<<CS10);//counter 1 in register TCNT1  - 4 uS/c clk/64 prescaler
@@ -63,33 +60,39 @@ void sendTriggPulse(int device){
 
 void angleCalculator(void){
 	if (echoDistance[0] <= 20 && echoDistance[1] >= echoDistance[0])
-		{
+	{
 
-			length = (echoDistance[1] - echoDistance[0]);
-			differenceLength = length / sensorseperate; //calculate the number that needs to be put in the arc tan.
-			angleradian = atan(differenceLength); //calculate the angle from the wall in radian.
-			angledegree = angleradian * 180 / 3.14; //calculate the angle from the wall in degrees.
-		}
-		else if (echoDistance[1] <= 20 && echoDistance[0] >= echoDistance[1])
-		{
-			length = (echoDistance[0] - echoDistance[1]);
-			differenceLength = length / sensorseperate; //calculate the number that needs to be put in the arc tan.
-			angleradian = atan(differenceLength); //calculate the angle from the wall in radian.
-			angledegree = angleradian * 180 / 3.14; //calculate the angle from the wall in degrees.
-		}
-		else{
+		length = (echoDistance[1] - echoDistance[0]);
+		differenceLength = length / sensorseperate; //calculate the number that needs to be put in the arctan.
+		angleradian = atan(differenceLength); //calculate the angle from the wall in radian.
+		angledegree = angleradian * 180 / 3.14; //calculate the angle from the wall in degrees.
+	}
+	else if (echoDistance[1] <= 20 && echoDistance[0] >= echoDistance[1])
+	{
 
-		}
+		length = (echoDistance[0] - echoDistance[1]);
+		differenceLength = length / sensorseperate; //calculate the number that needs to be put in the arctan.
+		angleradian = atan(differenceLength); //calculate the angle from the wall in radian.
+		angledegree = angleradian * 180 / 3.14; //calculate the angle from the wall in degrees.
+	}
+	else{
+
+	}
+	*pAngle_tmp = (int) angledegree;
 }
 
 
 ISR(PCINT0_vect){//PD
+	
 	static int runcount2 = 0;
 	static int runcount1 = 0;
 	//check which device it is and keep that device for the falling edge
 	static int prevDevice;
 	static int device;
-	if ((device = PINB) == 0)
+	device = PINB;
+	device &= ~(1<<PORTB7);
+	
+	if (device == 0)
 	{
 		device = prevDevice;//save the current device
 	}
@@ -113,13 +116,13 @@ ISR(PCINT0_vect){//PD
 			
 			echoHighLevelTimeC = fallingEdgeTimeC - risingEdgeTimeC;
 			echoHighLevelTimeuS = echoHighLevelTimeC * prescaleDiv;
-			echoDistance[0] = echoHighLevelTimeuS/58.0 + distanceCal0;// in cm
+			echoDistance[device] = echoHighLevelTimeuS/58.0 + distanceCal0;// in cm
 			
 			runcount2 = 0;
 		}
 		break;
 		
-//use for multiple sound sensors
+		//use for multiple sound sensors
 		case (1 << ECHO1):
 		case 1:
 		if (runcount1 == 0)
@@ -137,11 +140,13 @@ ISR(PCINT0_vect){//PD
 
 			echoHighLevelTimeC = fallingEdgeTimeC - risingEdgeTimeC;
 			echoHighLevelTimeuS = echoHighLevelTimeC * prescaleDiv;
-			echoDistance[1] = echoHighLevelTimeuS/58.0 + distanceCal1;// in cm
+			echoDistance[device] = echoHighLevelTimeuS/58.0 + distanceCal1;// in cm
 
 			runcount1 = 0;
 		}
 		break;
 	}
-	*Dist = echoDistance[0];
+	*pDistance = (int) echoDistance[0];
+	*pDistance += (int) echoDistance[1];
+	*pDistance /= 2;
 }

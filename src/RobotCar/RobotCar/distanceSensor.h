@@ -9,20 +9,18 @@
 #ifndef DISTANCESENSOR_H_
 #define DISTANCESENSOR_H_
 
-void initDistanceSensor(int *pDist);
+void initDistanceSensor(int *pDist, int *pAngle);
 void angleCalculator(void);
-
-
 
 void sendTriggPulse(int device);
 //void soundEchoCycle(void);
 
 //pins for the sensor
-#define TRIGG0 PORTB0
-#define ECHO0 PORTB1
+#define TRIGG0 PORTB2
+#define ECHO0 PORTB3
 //if you use multiple sensors..
-#define TRIGG1 PORTB2
-#define ECHO1 PORTB3
+#define TRIGG1 PORTB4
+#define ECHO1 PORTB5
 #define distSensAmount 2 //the amount of distanceSensor devices
 
 #define prescaleDiv 4 // number to divide by to get from uS to timer counts
@@ -32,5 +30,8 @@ void sendTriggPulse(int device);
 
 #define distanceCal0 1.8; // distance calibration in cm for sensor 0
 #define distanceCal1 1.8;
+//to make it global
+extern double echoDistance[distSensAmount];
+
 
 #endif /* DISTANCESENSOR_H_ */

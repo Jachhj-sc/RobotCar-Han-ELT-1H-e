@@ -90,12 +90,13 @@ pTime_min           0x2               screenController.o
 Scroll              0xa               screenController.o
 pTime_ms            0x2               screenController.o
 u8g2                0x65              screenController.o
+pDistance           0x2               distanceSensor.o
 u8g2_pg             0x42              U8G2/u8g2_polygon.o
 textHeight          0x1               screenController.o
 angledegree         0x4               distanceSensor.o
+pAngle_tmp          0x2               distanceSensor.o
 bitmap              0x80              U8G2/u8x8_d_stdio.o
 selectionsVis       0xa               screenController.o
-Dist                0x2               distanceSensor.o
 distanceHold        0x2               screenController.o
 _Time_min           0x2               screenController.o
 length              0x4               distanceSensor.o
@@ -107,6 +108,7 @@ directionHold       0x2               screenController.o
 _Time_ms            0x2               screenController.o
 selections          0xf               screenController.o
 keyPressed          0x2               main.o
+angleHold           0x2               screenController.o
 selectEnable        0x1               screenController.o
 
 Discarded input sections
@@ -157,7 +159,7 @@ Discarded input sections
                 0x00000000       0x50 U8G2/u8g2_bitmap.o
  .debug_ranges  0x00000000       0x40 U8G2/u8g2_bitmap.o
  .debug_line    0x00000000      0x334 U8G2/u8g2_bitmap.o
- .debug_str     0x00000000      0x916 U8G2/u8g2_bitmap.o
+ .debug_str     0x00000000      0x90a U8G2/u8g2_bitmap.o
  .comment       0x00000000       0x31 U8G2/u8g2_bitmap.o
  .debug_frame   0x00000000      0x21c U8G2/u8g2_bitmap.o
  .text          0x00000000        0x0 U8G2/u8g2_box.o
@@ -207,7 +209,7 @@ Discarded input sections
                 0x00000000       0x20 U8G2/u8g2_cleardisplay.o
  .debug_ranges  0x00000000       0x10 U8G2/u8g2_cleardisplay.o
  .debug_line    0x00000000       0xdb U8G2/u8g2_cleardisplay.o
- .debug_str     0x00000000      0x89c U8G2/u8g2_cleardisplay.o
+ .debug_str     0x00000000      0x890 U8G2/u8g2_cleardisplay.o
  .comment       0x00000000       0x31 U8G2/u8g2_cleardisplay.o
  .debug_frame   0x00000000       0x30 U8G2/u8g2_cleardisplay.o
  .text          0x00000000        0x0 U8G2/u8g2_d_memory.o
@@ -5244,7 +5246,7 @@ Discarded input sections
                 0x00000000       0x20 U8G2/u8g2_input_value.o
  .debug_ranges  0x00000000       0x10 U8G2/u8g2_input_value.o
  .debug_line    0x00000000      0x1c2 U8G2/u8g2_input_value.o
- .debug_str     0x00000000      0x95b U8G2/u8g2_input_value.o
+ .debug_str     0x00000000      0x94f U8G2/u8g2_input_value.o
  .comment       0x00000000       0x31 U8G2/u8g2_input_value.o
  .debug_frame   0x00000000       0x84 U8G2/u8g2_input_value.o
  .text          0x00000000        0x0 U8G2/u8g2_intersection.o
@@ -5264,7 +5266,7 @@ Discarded input sections
                 0x00000000       0x28 U8G2/u8g2_kerning.o
  .debug_ranges  0x00000000       0x18 U8G2/u8g2_kerning.o
  .debug_line    0x00000000      0x187 U8G2/u8g2_kerning.o
- .debug_str     0x00000000      0x90d U8G2/u8g2_kerning.o
+ .debug_str     0x00000000      0x901 U8G2/u8g2_kerning.o
  .comment       0x00000000       0x31 U8G2/u8g2_kerning.o
  .debug_frame   0x00000000       0x48 U8G2/u8g2_kerning.o
  .text          0x00000000        0x0 U8G2/u8g2_line.o
@@ -5279,7 +5281,7 @@ Discarded input sections
                 0x00000000       0x20 U8G2/u8g2_line.o
  .debug_ranges  0x00000000       0x10 U8G2/u8g2_line.o
  .debug_line    0x00000000      0x1f9 U8G2/u8g2_line.o
- .debug_str     0x00000000      0x880 U8G2/u8g2_line.o
+ .debug_str     0x00000000      0x874 U8G2/u8g2_line.o
  .comment       0x00000000       0x31 U8G2/u8g2_line.o
  .debug_frame   0x00000000       0x58 U8G2/u8g2_line.o
  .text          0x00000000        0x0 U8G2/u8g2_ll_hvline.o
@@ -5301,7 +5303,7 @@ Discarded input sections
                 0x00000000       0x28 U8G2/u8g2_message.o
  .debug_ranges  0x00000000       0x18 U8G2/u8g2_message.o
  .debug_line    0x00000000      0x229 U8G2/u8g2_message.o
- .debug_str     0x00000000      0x9a2 U8G2/u8g2_message.o
+ .debug_str     0x00000000      0x996 U8G2/u8g2_message.o
  .comment       0x00000000       0x31 U8G2/u8g2_message.o
  .debug_frame   0x00000000       0xdc U8G2/u8g2_message.o
  .text          0x00000000        0x0 U8G2/u8g2_polygon.o
@@ -5330,7 +5332,7 @@ Discarded input sections
                 0x00000000       0x60 U8G2/u8g2_polygon.o
  .debug_ranges  0x00000000       0x68 U8G2/u8g2_polygon.o
  .debug_line    0x00000000      0x3ef U8G2/u8g2_polygon.o
- .debug_str     0x00000000      0xa29 U8G2/u8g2_polygon.o
+ .debug_str     0x00000000      0xa1d U8G2/u8g2_polygon.o
  .comment       0x00000000       0x31 U8G2/u8g2_polygon.o
  .debug_frame   0x00000000      0x13c U8G2/u8g2_polygon.o
  COMMON         0x00000000       0x42 U8G2/u8g2_polygon.o
@@ -5356,7 +5358,7 @@ Discarded input sections
                 0x00000000       0x40 U8G2/u8g2_selection_list.o
  .debug_ranges  0x00000000       0x30 U8G2/u8g2_selection_list.o
  .debug_line    0x00000000      0x305 U8G2/u8g2_selection_list.o
- .debug_str     0x00000000      0xa69 U8G2/u8g2_selection_list.o
+ .debug_str     0x00000000      0xa5d U8G2/u8g2_selection_list.o
  .comment       0x00000000       0x31 U8G2/u8g2_selection_list.o
  .debug_frame   0x00000000      0x1b0 U8G2/u8g2_selection_list.o
  .text          0x00000000        0x0 U8G2/u8g2_setup.o
@@ -5435,7 +5437,7 @@ Discarded input sections
                 0x00000000       0x80 U8G2/u8log.o
  .debug_ranges  0x00000000       0x70 U8G2/u8log.o
  .debug_line    0x00000000      0x391 U8G2/u8log.o
- .debug_str     0x00000000      0x3c2 U8G2/u8log.o
+ .debug_str     0x00000000      0x3b6 U8G2/u8log.o
  .comment       0x00000000       0x31 U8G2/u8log.o
  .debug_frame   0x00000000      0x17c U8G2/u8log.o
  .text          0x00000000        0x0 U8G2/u8log_u8g2.o
@@ -5452,7 +5454,7 @@ Discarded input sections
                 0x00000000       0x28 U8G2/u8log_u8g2.o
  .debug_ranges  0x00000000       0x18 U8G2/u8log_u8g2.o
  .debug_line    0x00000000      0x173 U8G2/u8log_u8g2.o
- .debug_str     0x00000000      0x98c U8G2/u8log_u8g2.o
+ .debug_str     0x00000000      0x980 U8G2/u8log_u8g2.o
  .comment       0x00000000       0x31 U8G2/u8log_u8g2.o
  .debug_frame   0x00000000       0xa0 U8G2/u8log_u8g2.o
  .text          0x00000000        0x0 U8G2/u8log_u8x8.o
@@ -5471,7 +5473,7 @@ Discarded input sections
                 0x00000000       0x30 U8G2/u8log_u8x8.o
  .debug_ranges  0x00000000       0x20 U8G2/u8log_u8x8.o
  .debug_line    0x00000000      0x144 U8G2/u8log_u8x8.o
- .debug_str     0x00000000      0x567 U8G2/u8log_u8x8.o
+ .debug_str     0x00000000      0x55b U8G2/u8log_u8x8.o
  .comment       0x00000000       0x31 U8G2/u8log_u8x8.o
  .debug_frame   0x00000000       0xb0 U8G2/u8log_u8x8.o
  .text          0x00000000        0x0 U8G2/u8x8_8x8.o
@@ -5611,7 +5613,7 @@ Discarded input sections
                 0x00000000       0x48 U8G2/u8x8_capture.o
  .debug_ranges  0x00000000       0x38 U8G2/u8x8_capture.o
  .debug_line    0x00000000      0x2a6 U8G2/u8x8_capture.o
- .debug_str     0x00000000      0x277 U8G2/u8x8_capture.o
+ .debug_str     0x00000000      0x26b U8G2/u8x8_capture.o
  .comment       0x00000000       0x31 U8G2/u8x8_capture.o
  .debug_frame   0x00000000      0x148 U8G2/u8x8_capture.o
  .text          0x00000000        0x0 U8G2/u8x8_debounce.o
@@ -5626,7 +5628,7 @@ Discarded input sections
                 0x00000000       0x20 U8G2/u8x8_debounce.o
  .debug_ranges  0x00000000       0x10 U8G2/u8x8_debounce.o
  .debug_line    0x00000000      0x19a U8G2/u8x8_debounce.o
- .debug_str     0x00000000      0x49c U8G2/u8x8_debounce.o
+ .debug_str     0x00000000      0x490 U8G2/u8x8_debounce.o
  .comment       0x00000000       0x31 U8G2/u8x8_debounce.o
  .debug_frame   0x00000000       0x40 U8G2/u8x8_debounce.o
  .text          0x00000000        0x0 U8G2/u8x8_display.o
@@ -5663,7 +5665,7 @@ Discarded input sections
                 0x00000000       0x30 U8G2/u8x8_d_a2printer.o
  .debug_ranges  0x00000000       0x20 U8G2/u8x8_d_a2printer.o
  .debug_line    0x00000000      0x203 U8G2/u8x8_d_a2printer.o
- .debug_str     0x00000000      0x599 U8G2/u8x8_d_a2printer.o
+ .debug_str     0x00000000      0x58d U8G2/u8x8_d_a2printer.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_a2printer.o
  .debug_frame   0x00000000       0x78 U8G2/u8x8_d_a2printer.o
  .text          0x00000000        0x0 U8G2/u8x8_d_il3820_296x128.o
@@ -5701,7 +5703,7 @@ Discarded input sections
                 0x00000000       0x38 U8G2/u8x8_d_il3820_296x128.o
  .debug_ranges  0x00000000       0x28 U8G2/u8x8_d_il3820_296x128.o
  .debug_line    0x00000000      0x2c7 U8G2/u8x8_d_il3820_296x128.o
- .debug_str     0x00000000      0x6f9 U8G2/u8x8_d_il3820_296x128.o
+ .debug_str     0x00000000      0x6ed U8G2/u8x8_d_il3820_296x128.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_il3820_296x128.o
  .debug_frame   0x00000000       0xac U8G2/u8x8_d_il3820_296x128.o
  .text          0x00000000        0x0 U8G2/u8x8_d_ist3020.o
@@ -5728,7 +5730,7 @@ Discarded input sections
                 0x00000000       0x20 U8G2/u8x8_d_ist3020.o
  .debug_ranges  0x00000000       0x10 U8G2/u8x8_d_ist3020.o
  .debug_line    0x00000000      0x1c7 U8G2/u8x8_d_ist3020.o
- .debug_str     0x00000000      0x626 U8G2/u8x8_d_ist3020.o
+ .debug_str     0x00000000      0x61a U8G2/u8x8_d_ist3020.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_ist3020.o
  .debug_frame   0x00000000       0x44 U8G2/u8x8_d_ist3020.o
  .text          0x00000000        0x0 U8G2/u8x8_d_ist7920.o
@@ -5755,7 +5757,7 @@ Discarded input sections
                 0x00000000       0x20 U8G2/u8x8_d_ist7920.o
  .debug_ranges  0x00000000       0x10 U8G2/u8x8_d_ist7920.o
  .debug_line    0x00000000      0x1cd U8G2/u8x8_d_ist7920.o
- .debug_str     0x00000000      0x61f U8G2/u8x8_d_ist7920.o
+ .debug_str     0x00000000      0x613 U8G2/u8x8_d_ist7920.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_ist7920.o
  .debug_frame   0x00000000       0x44 U8G2/u8x8_d_ist7920.o
  .text          0x00000000        0x0 U8G2/u8x8_d_ks0108.o
@@ -5784,7 +5786,7 @@ Discarded input sections
                 0x00000000       0x30 U8G2/u8x8_d_ks0108.o
  .debug_ranges  0x00000000       0x20 U8G2/u8x8_d_ks0108.o
  .debug_line    0x00000000      0x3ab U8G2/u8x8_d_ks0108.o
- .debug_str     0x00000000      0x5d8 U8G2/u8x8_d_ks0108.o
+ .debug_str     0x00000000      0x5cc U8G2/u8x8_d_ks0108.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_ks0108.o
  .debug_frame   0x00000000       0xb0 U8G2/u8x8_d_ks0108.o
  .text          0x00000000        0x0 U8G2/u8x8_d_lc7981.o
@@ -5823,7 +5825,7 @@ Discarded input sections
                 0x00000000       0x40 U8G2/u8x8_d_lc7981.o
  .debug_ranges  0x00000000       0x30 U8G2/u8x8_d_lc7981.o
  .debug_line    0x00000000      0x2a8 U8G2/u8x8_d_lc7981.o
- .debug_str     0x00000000      0x699 U8G2/u8x8_d_lc7981.o
+ .debug_str     0x00000000      0x68d U8G2/u8x8_d_lc7981.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_lc7981.o
  .debug_frame   0x00000000       0xec U8G2/u8x8_d_lc7981.o
  .text          0x00000000        0x0 U8G2/u8x8_d_ld7032_60x32.o
@@ -5850,7 +5852,7 @@ Discarded input sections
                 0x00000000       0x20 U8G2/u8x8_d_ld7032_60x32.o
  .debug_ranges  0x00000000       0x10 U8G2/u8x8_d_ld7032_60x32.o
  .debug_line    0x00000000      0x1c7 U8G2/u8x8_d_ld7032_60x32.o
- .debug_str     0x00000000      0x625 U8G2/u8x8_d_ld7032_60x32.o
+ .debug_str     0x00000000      0x619 U8G2/u8x8_d_ld7032_60x32.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_ld7032_60x32.o
  .debug_frame   0x00000000       0x44 U8G2/u8x8_d_ld7032_60x32.o
  .text          0x00000000        0x0 U8G2/u8x8_d_ls013b7dh03.o
@@ -5875,7 +5877,7 @@ Discarded input sections
                 0x00000000       0x30 U8G2/u8x8_d_ls013b7dh03.o
  .debug_ranges  0x00000000       0x20 U8G2/u8x8_d_ls013b7dh03.o
  .debug_line    0x00000000      0x1c7 U8G2/u8x8_d_ls013b7dh03.o
- .debug_str     0x00000000      0x5cf U8G2/u8x8_d_ls013b7dh03.o
+ .debug_str     0x00000000      0x5c3 U8G2/u8x8_d_ls013b7dh03.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_ls013b7dh03.o
  .debug_frame   0x00000000       0x7c U8G2/u8x8_d_ls013b7dh03.o
  .text          0x00000000        0x0 U8G2/u8x8_d_max7219.o
@@ -5918,7 +5920,7 @@ Discarded input sections
                 0x00000000       0x40 U8G2/u8x8_d_max7219.o
  .debug_ranges  0x00000000       0x30 U8G2/u8x8_d_max7219.o
  .debug_line    0x00000000      0x2d9 U8G2/u8x8_d_max7219.o
- .debug_str     0x00000000      0x6b7 U8G2/u8x8_d_max7219.o
+ .debug_str     0x00000000      0x6ab U8G2/u8x8_d_max7219.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_max7219.o
  .debug_frame   0x00000000       0xc8 U8G2/u8x8_d_max7219.o
  .text          0x00000000        0x0 U8G2/u8x8_d_pcd8544_84x48.o
@@ -5941,7 +5943,7 @@ Discarded input sections
                 0x00000000       0x20 U8G2/u8x8_d_pcd8544_84x48.o
  .debug_ranges  0x00000000       0x10 U8G2/u8x8_d_pcd8544_84x48.o
  .debug_line    0x00000000      0x1b5 U8G2/u8x8_d_pcd8544_84x48.o
- .debug_str     0x00000000      0x5c8 U8G2/u8x8_d_pcd8544_84x48.o
+ .debug_str     0x00000000      0x5bc U8G2/u8x8_d_pcd8544_84x48.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_pcd8544_84x48.o
  .debug_frame   0x00000000       0x58 U8G2/u8x8_d_pcd8544_84x48.o
  .text          0x00000000        0x0 U8G2/u8x8_d_pcf8812.o
@@ -5964,7 +5966,7 @@ Discarded input sections
                 0x00000000       0x20 U8G2/u8x8_d_pcf8812.o
  .debug_ranges  0x00000000       0x10 U8G2/u8x8_d_pcf8812.o
  .debug_line    0x00000000      0x16e U8G2/u8x8_d_pcf8812.o
- .debug_str     0x00000000      0x5f0 U8G2/u8x8_d_pcf8812.o
+ .debug_str     0x00000000      0x5e4 U8G2/u8x8_d_pcf8812.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_pcf8812.o
  .debug_frame   0x00000000       0x44 U8G2/u8x8_d_pcf8812.o
  .text          0x00000000        0x0 U8G2/u8x8_d_pcf8814_hx1230.o
@@ -5991,7 +5993,7 @@ Discarded input sections
                 0x00000000       0x20 U8G2/u8x8_d_pcf8814_hx1230.o
  .debug_ranges  0x00000000       0x10 U8G2/u8x8_d_pcf8814_hx1230.o
  .debug_line    0x00000000      0x199 U8G2/u8x8_d_pcf8814_hx1230.o
- .debug_str     0x00000000      0x61c U8G2/u8x8_d_pcf8814_hx1230.o
+ .debug_str     0x00000000      0x610 U8G2/u8x8_d_pcf8814_hx1230.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_pcf8814_hx1230.o
  .debug_frame   0x00000000       0x44 U8G2/u8x8_d_pcf8814_hx1230.o
  .text          0x00000000        0x0 U8G2/u8x8_d_sbn1661.o
@@ -6016,7 +6018,7 @@ Discarded input sections
                 0x00000000       0x28 U8G2/u8x8_d_sbn1661.o
  .debug_ranges  0x00000000       0x18 U8G2/u8x8_d_sbn1661.o
  .debug_line    0x00000000      0x1d2 U8G2/u8x8_d_sbn1661.o
- .debug_str     0x00000000      0x59c U8G2/u8x8_d_sbn1661.o
+ .debug_str     0x00000000      0x590 U8G2/u8x8_d_sbn1661.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_sbn1661.o
  .debug_frame   0x00000000       0x54 U8G2/u8x8_d_sbn1661.o
  .text          0x00000000        0x0 U8G2/u8x8_d_sed1330.o
@@ -6051,7 +6053,7 @@ Discarded input sections
                 0x00000000       0x38 U8G2/u8x8_d_sed1330.o
  .debug_ranges  0x00000000       0x28 U8G2/u8x8_d_sed1330.o
  .debug_line    0x00000000      0x250 U8G2/u8x8_d_sed1330.o
- .debug_str     0x00000000      0x677 U8G2/u8x8_d_sed1330.o
+ .debug_str     0x00000000      0x66b U8G2/u8x8_d_sed1330.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_sed1330.o
  .debug_frame   0x00000000       0xa0 U8G2/u8x8_d_sed1330.o
  .text          0x00000000        0x0 U8G2/u8x8_d_sh1106_64x32.o
@@ -6078,7 +6080,7 @@ Discarded input sections
                 0x00000000       0x20 U8G2/u8x8_d_sh1106_64x32.o
  .debug_ranges  0x00000000       0x10 U8G2/u8x8_d_sh1106_64x32.o
  .debug_line    0x00000000      0x1a3 U8G2/u8x8_d_sh1106_64x32.o
- .debug_str     0x00000000      0x62b U8G2/u8x8_d_sh1106_64x32.o
+ .debug_str     0x00000000      0x61f U8G2/u8x8_d_sh1106_64x32.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_sh1106_64x32.o
  .debug_frame   0x00000000       0x44 U8G2/u8x8_d_sh1106_64x32.o
  .text          0x00000000        0x0 U8G2/u8x8_d_sh1106_72x40.o
@@ -6105,7 +6107,7 @@ Discarded input sections
                 0x00000000       0x20 U8G2/u8x8_d_sh1106_72x40.o
  .debug_ranges  0x00000000       0x10 U8G2/u8x8_d_sh1106_72x40.o
  .debug_line    0x00000000      0x1a3 U8G2/u8x8_d_sh1106_72x40.o
- .debug_str     0x00000000      0x630 U8G2/u8x8_d_sh1106_72x40.o
+ .debug_str     0x00000000      0x624 U8G2/u8x8_d_sh1106_72x40.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_sh1106_72x40.o
  .debug_frame   0x00000000       0x44 U8G2/u8x8_d_sh1106_72x40.o
  .text          0x00000000        0x0 U8G2/u8x8_d_sh1107.o
@@ -6154,7 +6156,7 @@ Discarded input sections
                 0x00000000       0x48 U8G2/u8x8_d_sh1107.o
  .debug_ranges  0x00000000       0x38 U8G2/u8x8_d_sh1107.o
  .debug_line    0x00000000      0x329 U8G2/u8x8_d_sh1107.o
- .debug_str     0x00000000      0x78d U8G2/u8x8_d_sh1107.o
+ .debug_str     0x00000000      0x781 U8G2/u8x8_d_sh1107.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_sh1107.o
  .debug_frame   0x00000000       0xe4 U8G2/u8x8_d_sh1107.o
  .text          0x00000000        0x0 U8G2/u8x8_d_sh1108.o
@@ -6181,7 +6183,7 @@ Discarded input sections
                 0x00000000       0x20 U8G2/u8x8_d_sh1108.o
  .debug_ranges  0x00000000       0x10 U8G2/u8x8_d_sh1108.o
  .debug_line    0x00000000      0x18c U8G2/u8x8_d_sh1108.o
- .debug_str     0x00000000      0x651 U8G2/u8x8_d_sh1108.o
+ .debug_str     0x00000000      0x645 U8G2/u8x8_d_sh1108.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_sh1108.o
  .debug_frame   0x00000000       0x44 U8G2/u8x8_d_sh1108.o
  .text          0x00000000        0x0 U8G2/u8x8_d_sh1122.o
@@ -6213,7 +6215,7 @@ Discarded input sections
                 0x00000000       0x28 U8G2/u8x8_d_sh1122.o
  .debug_ranges  0x00000000       0x30 U8G2/u8x8_d_sh1122.o
  .debug_line    0x00000000      0x23f U8G2/u8x8_d_sh1122.o
- .debug_str     0x00000000      0x636 U8G2/u8x8_d_sh1122.o
+ .debug_str     0x00000000      0x62a U8G2/u8x8_d_sh1122.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_sh1122.o
  .debug_frame   0x00000000       0x90 U8G2/u8x8_d_sh1122.o
  .text          0x00000000        0x0 U8G2/u8x8_d_ssd1305.o
@@ -6256,7 +6258,7 @@ Discarded input sections
                 0x00000000       0x40 U8G2/u8x8_d_ssd1305.o
  .debug_ranges  0x00000000       0x30 U8G2/u8x8_d_ssd1305.o
  .debug_line    0x00000000      0x35b U8G2/u8x8_d_ssd1305.o
- .debug_str     0x00000000      0x737 U8G2/u8x8_d_ssd1305.o
+ .debug_str     0x00000000      0x72b U8G2/u8x8_d_ssd1305.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_ssd1305.o
  .debug_frame   0x00000000       0xd4 U8G2/u8x8_d_ssd1305.o
  .text          0x00000000        0x0 U8G2/u8x8_d_ssd1306_128x32.o
@@ -6289,7 +6291,7 @@ Discarded input sections
                 0x00000000       0x30 U8G2/u8x8_d_ssd1306_128x32.o
  .debug_ranges  0x00000000       0x20 U8G2/u8x8_d_ssd1306_128x32.o
  .debug_line    0x00000000      0x208 U8G2/u8x8_d_ssd1306_128x32.o
- .debug_str     0x00000000      0x6ca U8G2/u8x8_d_ssd1306_128x32.o
+ .debug_str     0x00000000      0x6be U8G2/u8x8_d_ssd1306_128x32.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_ssd1306_128x32.o
  .debug_frame   0x00000000       0x64 U8G2/u8x8_d_ssd1306_128x32.o
  .text          0x00000000        0x0 U8G2/u8x8_d_ssd1306_128x64_noname.o
@@ -6337,7 +6339,7 @@ Discarded input sections
                 0x00000000       0x20 U8G2/u8x8_d_ssd1306_2040x16.o
  .debug_ranges  0x00000000       0x10 U8G2/u8x8_d_ssd1306_2040x16.o
  .debug_line    0x00000000      0x1a6 U8G2/u8x8_d_ssd1306_2040x16.o
- .debug_str     0x00000000      0x646 U8G2/u8x8_d_ssd1306_2040x16.o
+ .debug_str     0x00000000      0x63a U8G2/u8x8_d_ssd1306_2040x16.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_ssd1306_2040x16.o
  .debug_frame   0x00000000       0x44 U8G2/u8x8_d_ssd1306_2040x16.o
  .text          0x00000000        0x0 U8G2/u8x8_d_ssd1306_48x64.o
@@ -6364,7 +6366,7 @@ Discarded input sections
                 0x00000000       0x20 U8G2/u8x8_d_ssd1306_48x64.o
  .debug_ranges  0x00000000       0x10 U8G2/u8x8_d_ssd1306_48x64.o
  .debug_line    0x00000000      0x1a4 U8G2/u8x8_d_ssd1306_48x64.o
- .debug_str     0x00000000      0x644 U8G2/u8x8_d_ssd1306_48x64.o
+ .debug_str     0x00000000      0x638 U8G2/u8x8_d_ssd1306_48x64.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_ssd1306_48x64.o
  .debug_frame   0x00000000       0x44 U8G2/u8x8_d_ssd1306_48x64.o
  .text          0x00000000        0x0 U8G2/u8x8_d_ssd1306_64x32.o
@@ -6397,7 +6399,7 @@ Discarded input sections
                 0x00000000       0x30 U8G2/u8x8_d_ssd1306_64x32.o
  .debug_ranges  0x00000000       0x20 U8G2/u8x8_d_ssd1306_64x32.o
  .debug_line    0x00000000      0x21f U8G2/u8x8_d_ssd1306_64x32.o
- .debug_str     0x00000000      0x67b U8G2/u8x8_d_ssd1306_64x32.o
+ .debug_str     0x00000000      0x66f U8G2/u8x8_d_ssd1306_64x32.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_ssd1306_64x32.o
  .debug_frame   0x00000000       0x7c U8G2/u8x8_d_ssd1306_64x32.o
  .text          0x00000000        0x0 U8G2/u8x8_d_ssd1306_64x48.o
@@ -6424,7 +6426,7 @@ Discarded input sections
                 0x00000000       0x20 U8G2/u8x8_d_ssd1306_64x48.o
  .debug_ranges  0x00000000       0x10 U8G2/u8x8_d_ssd1306_64x48.o
  .debug_line    0x00000000      0x1a4 U8G2/u8x8_d_ssd1306_64x48.o
- .debug_str     0x00000000      0x63a U8G2/u8x8_d_ssd1306_64x48.o
+ .debug_str     0x00000000      0x62e U8G2/u8x8_d_ssd1306_64x48.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_ssd1306_64x48.o
  .debug_frame   0x00000000       0x44 U8G2/u8x8_d_ssd1306_64x48.o
  .text          0x00000000        0x0 U8G2/u8x8_d_ssd1306_72x40.o
@@ -6451,7 +6453,7 @@ Discarded input sections
                 0x00000000       0x20 U8G2/u8x8_d_ssd1306_72x40.o
  .debug_ranges  0x00000000       0x10 U8G2/u8x8_d_ssd1306_72x40.o
  .debug_line    0x00000000      0x1a4 U8G2/u8x8_d_ssd1306_72x40.o
- .debug_str     0x00000000      0x63a U8G2/u8x8_d_ssd1306_72x40.o
+ .debug_str     0x00000000      0x62e U8G2/u8x8_d_ssd1306_72x40.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_ssd1306_72x40.o
  .debug_frame   0x00000000       0x44 U8G2/u8x8_d_ssd1306_72x40.o
  .text          0x00000000        0x0 U8G2/u8x8_d_ssd1306_96x16.o
@@ -6478,7 +6480,7 @@ Discarded input sections
                 0x00000000       0x20 U8G2/u8x8_d_ssd1306_96x16.o
  .debug_ranges  0x00000000       0x10 U8G2/u8x8_d_ssd1306_96x16.o
  .debug_line    0x00000000      0x1a4 U8G2/u8x8_d_ssd1306_96x16.o
- .debug_str     0x00000000      0x63a U8G2/u8x8_d_ssd1306_96x16.o
+ .debug_str     0x00000000      0x62e U8G2/u8x8_d_ssd1306_96x16.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_ssd1306_96x16.o
  .debug_frame   0x00000000       0x44 U8G2/u8x8_d_ssd1306_96x16.o
  .text          0x00000000        0x0 U8G2/u8x8_d_ssd1309.o
@@ -6511,7 +6513,7 @@ Discarded input sections
                 0x00000000       0x30 U8G2/u8x8_d_ssd1309.o
  .debug_ranges  0x00000000       0x20 U8G2/u8x8_d_ssd1309.o
  .debug_line    0x00000000      0x25b U8G2/u8x8_d_ssd1309.o
- .debug_str     0x00000000      0x67f U8G2/u8x8_d_ssd1309.o
+ .debug_str     0x00000000      0x673 U8G2/u8x8_d_ssd1309.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_ssd1309.o
  .debug_frame   0x00000000       0x8c U8G2/u8x8_d_ssd1309.o
  .text          0x00000000        0x0 U8G2/u8x8_d_ssd1316.o
@@ -6538,7 +6540,7 @@ Discarded input sections
                 0x00000000       0x20 U8G2/u8x8_d_ssd1316.o
  .debug_ranges  0x00000000       0x10 U8G2/u8x8_d_ssd1316.o
  .debug_line    0x00000000      0x187 U8G2/u8x8_d_ssd1316.o
- .debug_str     0x00000000      0x62f U8G2/u8x8_d_ssd1316.o
+ .debug_str     0x00000000      0x623 U8G2/u8x8_d_ssd1316.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_ssd1316.o
  .debug_frame   0x00000000       0x44 U8G2/u8x8_d_ssd1316.o
  .text          0x00000000        0x0 U8G2/u8x8_d_ssd1317.o
@@ -6565,7 +6567,7 @@ Discarded input sections
                 0x00000000       0x20 U8G2/u8x8_d_ssd1317.o
  .debug_ranges  0x00000000       0x10 U8G2/u8x8_d_ssd1317.o
  .debug_line    0x00000000      0x18c U8G2/u8x8_d_ssd1317.o
- .debug_str     0x00000000      0x628 U8G2/u8x8_d_ssd1317.o
+ .debug_str     0x00000000      0x61c U8G2/u8x8_d_ssd1317.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_ssd1317.o
  .debug_frame   0x00000000       0x44 U8G2/u8x8_d_ssd1317.o
  .text          0x00000000        0x0 U8G2/u8x8_d_ssd1318.o
@@ -6598,7 +6600,7 @@ Discarded input sections
                 0x00000000       0x30 U8G2/u8x8_d_ssd1318.o
  .debug_ranges  0x00000000       0x20 U8G2/u8x8_d_ssd1318.o
  .debug_line    0x00000000      0x237 U8G2/u8x8_d_ssd1318.o
- .debug_str     0x00000000      0x670 U8G2/u8x8_d_ssd1318.o
+ .debug_str     0x00000000      0x664 U8G2/u8x8_d_ssd1318.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_ssd1318.o
  .debug_frame   0x00000000       0x84 U8G2/u8x8_d_ssd1318.o
  .text          0x00000000        0x0 U8G2/u8x8_d_ssd1322.o
@@ -6643,7 +6645,7 @@ Discarded input sections
                 0x00000000       0x40 U8G2/u8x8_d_ssd1322.o
  .debug_ranges  0x00000000       0x30 U8G2/u8x8_d_ssd1322.o
  .debug_line    0x00000000      0x489 U8G2/u8x8_d_ssd1322.o
- .debug_str     0x00000000      0x71b U8G2/u8x8_d_ssd1322.o
+ .debug_str     0x00000000      0x70f U8G2/u8x8_d_ssd1322.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_ssd1322.o
  .debug_frame   0x00000000       0xf8 U8G2/u8x8_d_ssd1322.o
  .text          0x00000000        0x0 U8G2/u8x8_d_ssd1325.o
@@ -6684,7 +6686,7 @@ Discarded input sections
                 0x00000000       0x30 U8G2/u8x8_d_ssd1325.o
  .debug_ranges  0x00000000       0x20 U8G2/u8x8_d_ssd1325.o
  .debug_line    0x00000000      0x302 U8G2/u8x8_d_ssd1325.o
- .debug_str     0x00000000      0x726 U8G2/u8x8_d_ssd1325.o
+ .debug_str     0x00000000      0x71a U8G2/u8x8_d_ssd1325.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_ssd1325.o
  .debug_frame   0x00000000       0xac U8G2/u8x8_d_ssd1325.o
  .text          0x00000000        0x0 U8G2/u8x8_d_ssd1326.o
@@ -6713,7 +6715,7 @@ Discarded input sections
                 0x00000000       0x20 U8G2/u8x8_d_ssd1326.o
  .debug_ranges  0x00000000       0x10 U8G2/u8x8_d_ssd1326.o
  .debug_line    0x00000000      0x23a U8G2/u8x8_d_ssd1326.o
- .debug_str     0x00000000      0x680 U8G2/u8x8_d_ssd1326.o
+ .debug_str     0x00000000      0x674 U8G2/u8x8_d_ssd1326.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_ssd1326.o
  .debug_frame   0x00000000       0x70 U8G2/u8x8_d_ssd1326.o
  .text          0x00000000        0x0 U8G2/u8x8_d_ssd1327.o
@@ -6788,7 +6790,7 @@ Discarded input sections
                 0x00000000       0x50 U8G2/u8x8_d_ssd1327.o
  .debug_ranges  0x00000000       0x40 U8G2/u8x8_d_ssd1327.o
  .debug_line    0x00000000      0x4e7 U8G2/u8x8_d_ssd1327.o
- .debug_str     0x00000000      0x94f U8G2/u8x8_d_ssd1327.o
+ .debug_str     0x00000000      0x943 U8G2/u8x8_d_ssd1327.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_ssd1327.o
  .debug_frame   0x00000000      0x140 U8G2/u8x8_d_ssd1327.o
  .text          0x00000000        0x0 U8G2/u8x8_d_ssd1329.o
@@ -6817,7 +6819,7 @@ Discarded input sections
                 0x00000000       0x20 U8G2/u8x8_d_ssd1329.o
  .debug_ranges  0x00000000       0x10 U8G2/u8x8_d_ssd1329.o
  .debug_line    0x00000000      0x25d U8G2/u8x8_d_ssd1329.o
- .debug_str     0x00000000      0x688 U8G2/u8x8_d_ssd1329.o
+ .debug_str     0x00000000      0x67c U8G2/u8x8_d_ssd1329.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_ssd1329.o
  .debug_frame   0x00000000       0x74 U8G2/u8x8_d_ssd1329.o
  .text          0x00000000        0x0 U8G2/u8x8_d_ssd1606_172x72.o
@@ -6841,7 +6843,7 @@ Discarded input sections
                 0x00000000       0x28 U8G2/u8x8_d_ssd1606_172x72.o
  .debug_ranges  0x00000000       0x18 U8G2/u8x8_d_ssd1606_172x72.o
  .debug_line    0x00000000      0x22f U8G2/u8x8_d_ssd1606_172x72.o
- .debug_str     0x00000000      0x664 U8G2/u8x8_d_ssd1606_172x72.o
+ .debug_str     0x00000000      0x658 U8G2/u8x8_d_ssd1606_172x72.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_ssd1606_172x72.o
  .debug_frame   0x00000000       0x88 U8G2/u8x8_d_ssd1606_172x72.o
  .text          0x00000000        0x0 U8G2/u8x8_d_ssd1607_200x200.o
@@ -6889,7 +6891,7 @@ Discarded input sections
                 0x00000000       0x48 U8G2/u8x8_d_ssd1607_200x200.o
  .debug_ranges  0x00000000       0x38 U8G2/u8x8_d_ssd1607_200x200.o
  .debug_line    0x00000000      0x44c U8G2/u8x8_d_ssd1607_200x200.o
- .debug_str     0x00000000      0x7ae U8G2/u8x8_d_ssd1607_200x200.o
+ .debug_str     0x00000000      0x7a2 U8G2/u8x8_d_ssd1607_200x200.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_ssd1607_200x200.o
  .debug_frame   0x00000000       0xe4 U8G2/u8x8_d_ssd1607_200x200.o
  .text          0x00000000        0x0 U8G2/u8x8_d_st7511.o
@@ -6916,7 +6918,7 @@ Discarded input sections
                 0x00000000       0x20 U8G2/u8x8_d_st7511.o
  .debug_ranges  0x00000000       0x10 U8G2/u8x8_d_st7511.o
  .debug_line    0x00000000      0x1f9 U8G2/u8x8_d_st7511.o
- .debug_str     0x00000000      0x61b U8G2/u8x8_d_st7511.o
+ .debug_str     0x00000000      0x60f U8G2/u8x8_d_st7511.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_st7511.o
  .debug_frame   0x00000000       0x68 U8G2/u8x8_d_st7511.o
  .text          0x00000000        0x0 U8G2/u8x8_d_st75256.o
@@ -6999,7 +7001,7 @@ Discarded input sections
                 0x00000000       0x68 U8G2/u8x8_d_st75256.o
  .debug_ranges  0x00000000       0x58 U8G2/u8x8_d_st75256.o
  .debug_line    0x00000000      0xab2 U8G2/u8x8_d_st75256.o
- .debug_str     0x00000000      0x996 U8G2/u8x8_d_st75256.o
+ .debug_str     0x00000000      0x98a U8G2/u8x8_d_st75256.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_st75256.o
  .debug_frame   0x00000000      0x208 U8G2/u8x8_d_st75256.o
  .text          0x00000000        0x0 U8G2/u8x8_d_st7528.o
@@ -7038,7 +7040,7 @@ Discarded input sections
                 0x00000000       0x38 U8G2/u8x8_d_st7528.o
  .debug_ranges  0x00000000       0x28 U8G2/u8x8_d_st7528.o
  .debug_line    0x00000000      0x2d9 U8G2/u8x8_d_st7528.o
- .debug_str     0x00000000      0x6c3 U8G2/u8x8_d_st7528.o
+ .debug_str     0x00000000      0x6b7 U8G2/u8x8_d_st7528.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_st7528.o
  .debug_frame   0x00000000       0xc8 U8G2/u8x8_d_st7528.o
  .text          0x00000000        0x0 U8G2/u8x8_d_st75320.o
@@ -7065,7 +7067,7 @@ Discarded input sections
                 0x00000000       0x20 U8G2/u8x8_d_st75320.o
  .debug_ranges  0x00000000       0x10 U8G2/u8x8_d_st75320.o
  .debug_line    0x00000000      0x1c3 U8G2/u8x8_d_st75320.o
- .debug_str     0x00000000      0x644 U8G2/u8x8_d_st75320.o
+ .debug_str     0x00000000      0x638 U8G2/u8x8_d_st75320.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_st75320.o
  .debug_frame   0x00000000       0x4c U8G2/u8x8_d_st75320.o
  .text          0x00000000        0x0 U8G2/u8x8_d_st7565.o
@@ -7162,7 +7164,7 @@ Discarded input sections
                 0x00000000       0x90 U8G2/u8x8_d_st7565.o
  .debug_ranges  0x00000000       0x80 U8G2/u8x8_d_st7565.o
  .debug_line    0x00000000      0x7a6 U8G2/u8x8_d_st7565.o
- .debug_str     0x00000000      0x9da U8G2/u8x8_d_st7565.o
+ .debug_str     0x00000000      0x9ce U8G2/u8x8_d_st7565.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_st7565.o
  .debug_frame   0x00000000      0x22c U8G2/u8x8_d_st7565.o
  .text          0x00000000        0x0 U8G2/u8x8_d_st7567.o
@@ -7229,7 +7231,7 @@ Discarded input sections
                 0x00000000       0x58 U8G2/u8x8_d_st7567.o
  .debug_ranges  0x00000000       0x48 U8G2/u8x8_d_st7567.o
  .debug_line    0x00000000      0x86b U8G2/u8x8_d_st7567.o
- .debug_str     0x00000000      0x85d U8G2/u8x8_d_st7567.o
+ .debug_str     0x00000000      0x851 U8G2/u8x8_d_st7567.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_st7567.o
  .debug_frame   0x00000000      0x184 U8G2/u8x8_d_st7567.o
  .text          0x00000000        0x0 U8G2/u8x8_d_st7586s_erc240160.o
@@ -7256,7 +7258,7 @@ Discarded input sections
                 0x00000000       0x20 U8G2/u8x8_d_st7586s_erc240160.o
  .debug_ranges  0x00000000       0x10 U8G2/u8x8_d_st7586s_erc240160.o
  .debug_line    0x00000000      0x23d U8G2/u8x8_d_st7586s_erc240160.o
- .debug_str     0x00000000      0x62a U8G2/u8x8_d_st7586s_erc240160.o
+ .debug_str     0x00000000      0x61e U8G2/u8x8_d_st7586s_erc240160.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_st7586s_erc240160.o
  .debug_frame   0x00000000       0x5c U8G2/u8x8_d_st7586s_erc240160.o
  .text          0x00000000        0x0 U8G2/u8x8_d_st7586s_s028hn118a.o
@@ -7283,7 +7285,7 @@ Discarded input sections
                 0x00000000       0x20 U8G2/u8x8_d_st7586s_s028hn118a.o
  .debug_ranges  0x00000000       0x10 U8G2/u8x8_d_st7586s_s028hn118a.o
  .debug_line    0x00000000      0x204 U8G2/u8x8_d_st7586s_s028hn118a.o
- .debug_str     0x00000000      0x646 U8G2/u8x8_d_st7586s_s028hn118a.o
+ .debug_str     0x00000000      0x63a U8G2/u8x8_d_st7586s_s028hn118a.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_st7586s_s028hn118a.o
  .debug_frame   0x00000000       0x58 U8G2/u8x8_d_st7586s_s028hn118a.o
  .text          0x00000000        0x0 U8G2/u8x8_d_st7588.o
@@ -7310,7 +7312,7 @@ Discarded input sections
                 0x00000000       0x20 U8G2/u8x8_d_st7588.o
  .debug_ranges  0x00000000       0x10 U8G2/u8x8_d_st7588.o
  .debug_line    0x00000000      0x1da U8G2/u8x8_d_st7588.o
- .debug_str     0x00000000      0x633 U8G2/u8x8_d_st7588.o
+ .debug_str     0x00000000      0x627 U8G2/u8x8_d_st7588.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_st7588.o
  .debug_frame   0x00000000       0x44 U8G2/u8x8_d_st7588.o
  .text          0x00000000        0x0 U8G2/u8x8_d_st7920.o
@@ -7339,7 +7341,7 @@ Discarded input sections
                 0x00000000       0x30 U8G2/u8x8_d_st7920.o
  .debug_ranges  0x00000000       0x20 U8G2/u8x8_d_st7920.o
  .debug_line    0x00000000      0x1ee U8G2/u8x8_d_st7920.o
- .debug_str     0x00000000      0x5f6 U8G2/u8x8_d_st7920.o
+ .debug_str     0x00000000      0x5ea U8G2/u8x8_d_st7920.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_st7920.o
  .debug_frame   0x00000000       0x78 U8G2/u8x8_d_st7920.o
  .text          0x00000000        0x0 U8G2/u8x8_d_stdio.o
@@ -7360,7 +7362,7 @@ Discarded input sections
                 0x00000000       0x38 U8G2/u8x8_d_stdio.o
  .debug_ranges  0x00000000       0x28 U8G2/u8x8_d_stdio.o
  .debug_line    0x00000000      0x176 U8G2/u8x8_d_stdio.o
- .debug_str     0x00000000      0x4fb U8G2/u8x8_d_stdio.o
+ .debug_str     0x00000000      0x4ef U8G2/u8x8_d_stdio.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_stdio.o
  .debug_frame   0x00000000       0x94 U8G2/u8x8_d_stdio.o
  COMMON         0x00000000       0x80 U8G2/u8x8_d_stdio.o
@@ -7412,7 +7414,7 @@ Discarded input sections
                 0x00000000       0x50 U8G2/u8x8_d_t6963.o
  .debug_ranges  0x00000000       0x40 U8G2/u8x8_d_t6963.o
  .debug_line    0x00000000      0x332 U8G2/u8x8_d_t6963.o
- .debug_str     0x00000000      0x72d U8G2/u8x8_d_t6963.o
+ .debug_str     0x00000000      0x721 U8G2/u8x8_d_t6963.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_t6963.o
  .debug_frame   0x00000000       0xf4 U8G2/u8x8_d_t6963.o
  .text          0x00000000        0x0 U8G2/u8x8_d_uc1601.o
@@ -7439,7 +7441,7 @@ Discarded input sections
                 0x00000000       0x20 U8G2/u8x8_d_uc1601.o
  .debug_ranges  0x00000000       0x10 U8G2/u8x8_d_uc1601.o
  .debug_line    0x00000000      0x1c6 U8G2/u8x8_d_uc1601.o
- .debug_str     0x00000000      0x610 U8G2/u8x8_d_uc1601.o
+ .debug_str     0x00000000      0x604 U8G2/u8x8_d_uc1601.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_uc1601.o
  .debug_frame   0x00000000       0x44 U8G2/u8x8_d_uc1601.o
  .text          0x00000000        0x0 U8G2/u8x8_d_uc1604.o
@@ -7468,7 +7470,7 @@ Discarded input sections
                 0x00000000       0x28 U8G2/u8x8_d_uc1604.o
  .debug_ranges  0x00000000       0x18 U8G2/u8x8_d_uc1604.o
  .debug_line    0x00000000      0x1ef U8G2/u8x8_d_uc1604.o
- .debug_str     0x00000000      0x60d U8G2/u8x8_d_uc1604.o
+ .debug_str     0x00000000      0x601 U8G2/u8x8_d_uc1604.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_uc1604.o
  .debug_frame   0x00000000       0x64 U8G2/u8x8_d_uc1604.o
  .text          0x00000000        0x0 U8G2/u8x8_d_uc1608.o
@@ -7519,7 +7521,7 @@ Discarded input sections
                 0x00000000       0x40 U8G2/u8x8_d_uc1608.o
  .debug_ranges  0x00000000       0x30 U8G2/u8x8_d_uc1608.o
  .debug_line    0x00000000      0x318 U8G2/u8x8_d_uc1608.o
- .debug_str     0x00000000      0x75f U8G2/u8x8_d_uc1608.o
+ .debug_str     0x00000000      0x753 U8G2/u8x8_d_uc1608.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_uc1608.o
  .debug_frame   0x00000000       0xc4 U8G2/u8x8_d_uc1608.o
  .text          0x00000000        0x0 U8G2/u8x8_d_uc1610.o
@@ -7547,7 +7549,7 @@ Discarded input sections
                 0x00000000       0x20 U8G2/u8x8_d_uc1610.o
  .debug_ranges  0x00000000       0x10 U8G2/u8x8_d_uc1610.o
  .debug_line    0x00000000      0x21f U8G2/u8x8_d_uc1610.o
- .debug_str     0x00000000      0x651 U8G2/u8x8_d_uc1610.o
+ .debug_str     0x00000000      0x645 U8G2/u8x8_d_uc1610.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_uc1610.o
  .debug_frame   0x00000000       0x6c U8G2/u8x8_d_uc1610.o
  .text          0x00000000        0x0 U8G2/u8x8_d_uc1611.o
@@ -7602,7 +7604,7 @@ Discarded input sections
                 0x00000000       0x40 U8G2/u8x8_d_uc1611.o
  .debug_ranges  0x00000000       0x30 U8G2/u8x8_d_uc1611.o
  .debug_line    0x00000000      0x4c0 U8G2/u8x8_d_uc1611.o
- .debug_str     0x00000000      0x794 U8G2/u8x8_d_uc1611.o
+ .debug_str     0x00000000      0x788 U8G2/u8x8_d_uc1611.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_uc1611.o
  .debug_frame   0x00000000      0x120 U8G2/u8x8_d_uc1611.o
  .text          0x00000000        0x0 U8G2/u8x8_d_uc1617.o
@@ -7635,7 +7637,7 @@ Discarded input sections
                 0x00000000       0x30 U8G2/u8x8_d_uc1617.o
  .debug_ranges  0x00000000       0x20 U8G2/u8x8_d_uc1617.o
  .debug_line    0x00000000      0x2bf U8G2/u8x8_d_uc1617.o
- .debug_str     0x00000000      0x692 U8G2/u8x8_d_uc1617.o
+ .debug_str     0x00000000      0x686 U8G2/u8x8_d_uc1617.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_uc1617.o
  .debug_frame   0x00000000       0xb4 U8G2/u8x8_d_uc1617.o
  .text          0x00000000        0x0 U8G2/u8x8_d_uc1638.o
@@ -7664,7 +7666,7 @@ Discarded input sections
                 0x00000000       0x28 U8G2/u8x8_d_uc1638.o
  .debug_ranges  0x00000000       0x18 U8G2/u8x8_d_uc1638.o
  .debug_line    0x00000000      0x201 U8G2/u8x8_d_uc1638.o
- .debug_str     0x00000000      0x60c U8G2/u8x8_d_uc1638.o
+ .debug_str     0x00000000      0x600 U8G2/u8x8_d_uc1638.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_uc1638.o
  .debug_frame   0x00000000       0x64 U8G2/u8x8_d_uc1638.o
  .text          0x00000000        0x0 U8G2/u8x8_d_uc1701_dogs102.o
@@ -7691,7 +7693,7 @@ Discarded input sections
                 0x00000000       0x20 U8G2/u8x8_d_uc1701_dogs102.o
  .debug_ranges  0x00000000       0x10 U8G2/u8x8_d_uc1701_dogs102.o
  .debug_line    0x00000000      0x1dc U8G2/u8x8_d_uc1701_dogs102.o
- .debug_str     0x00000000      0x61a U8G2/u8x8_d_uc1701_dogs102.o
+ .debug_str     0x00000000      0x60e U8G2/u8x8_d_uc1701_dogs102.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_uc1701_dogs102.o
  .debug_frame   0x00000000       0x48 U8G2/u8x8_d_uc1701_dogs102.o
  .text          0x00000000        0x0 U8G2/u8x8_d_uc1701_mini12864.o
@@ -7718,7 +7720,7 @@ Discarded input sections
                 0x00000000       0x20 U8G2/u8x8_d_uc1701_mini12864.o
  .debug_ranges  0x00000000       0x10 U8G2/u8x8_d_uc1701_mini12864.o
  .debug_line    0x00000000      0x1df U8G2/u8x8_d_uc1701_mini12864.o
- .debug_str     0x00000000      0x625 U8G2/u8x8_d_uc1701_mini12864.o
+ .debug_str     0x00000000      0x619 U8G2/u8x8_d_uc1701_mini12864.o
  .comment       0x00000000       0x31 U8G2/u8x8_d_uc1701_mini12864.o
  .debug_frame   0x00000000       0x48 U8G2/u8x8_d_uc1701_mini12864.o
  .text          0x00000000        0x0 U8G2/u8x8_fonts.o
@@ -7987,7 +7989,7 @@ Discarded input sections
  .debug_aranges
                 0x00000000       0x18 U8G2/u8x8_fonts.o
  .debug_line    0x00000000       0x94 U8G2/u8x8_fonts.o
- .debug_str     0x00000000      0xf12 U8G2/u8x8_fonts.o
+ .debug_str     0x00000000      0xf06 U8G2/u8x8_fonts.o
  .comment       0x00000000       0x31 U8G2/u8x8_fonts.o
  .text          0x00000000        0x0 U8G2/u8x8_gpio.o
  .data          0x00000000        0x0 U8G2/u8x8_gpio.o
@@ -8004,7 +8006,7 @@ Discarded input sections
                 0x00000000       0x20 U8G2/u8x8_input_value.o
  .debug_ranges  0x00000000       0x10 U8G2/u8x8_input_value.o
  .debug_line    0x00000000      0x1b0 U8G2/u8x8_input_value.o
- .debug_str     0x00000000      0x50a U8G2/u8x8_input_value.o
+ .debug_str     0x00000000      0x4fe U8G2/u8x8_input_value.o
  .comment       0x00000000       0x31 U8G2/u8x8_input_value.o
  .debug_frame   0x00000000       0x80 U8G2/u8x8_input_value.o
  .text          0x00000000        0x0 U8G2/u8x8_message.o
@@ -8023,7 +8025,7 @@ Discarded input sections
                 0x00000000       0x28 U8G2/u8x8_message.o
  .debug_ranges  0x00000000       0x18 U8G2/u8x8_message.o
  .debug_line    0x00000000      0x26b U8G2/u8x8_message.o
- .debug_str     0x00000000      0x543 U8G2/u8x8_message.o
+ .debug_str     0x00000000      0x537 U8G2/u8x8_message.o
  .comment       0x00000000       0x31 U8G2/u8x8_message.o
  .debug_frame   0x00000000       0xb0 U8G2/u8x8_message.o
  .text          0x00000000        0x0 U8G2/u8x8_selection_list.o
@@ -8048,7 +8050,7 @@ Discarded input sections
                 0x00000000       0x40 U8G2/u8x8_selection_list.o
  .debug_ranges  0x00000000       0x30 U8G2/u8x8_selection_list.o
  .debug_line    0x00000000      0x25e U8G2/u8x8_selection_list.o
- .debug_str     0x00000000      0x57a U8G2/u8x8_selection_list.o
+ .debug_str     0x00000000      0x56e U8G2/u8x8_selection_list.o
  .comment       0x00000000       0x31 U8G2/u8x8_selection_list.o
  .debug_frame   0x00000000       0xf0 U8G2/u8x8_selection_list.o
  .text          0x00000000        0x0 U8G2/u8x8_setup.o
@@ -8080,7 +8082,7 @@ Discarded input sections
                 0x00000000       0x40 U8G2/u8x8_string.o
  .debug_ranges  0x00000000       0x30 U8G2/u8x8_string.o
  .debug_line    0x00000000      0x227 U8G2/u8x8_string.o
- .debug_str     0x00000000      0x4d7 U8G2/u8x8_string.o
+ .debug_str     0x00000000      0x4cb U8G2/u8x8_string.o
  .comment       0x00000000       0x31 U8G2/u8x8_string.o
  .debug_frame   0x00000000       0xdc U8G2/u8x8_string.o
  .text          0x00000000        0x0 U8G2/u8x8_u16toa.o
@@ -8100,7 +8102,7 @@ Discarded input sections
                 0x00000000       0x30 U8G2/u8x8_u16toa.o
  .debug_ranges  0x00000000       0x20 U8G2/u8x8_u16toa.o
  .debug_line    0x00000000      0x14a U8G2/u8x8_u16toa.o
- .debug_str     0x00000000      0x1bf U8G2/u8x8_u16toa.o
+ .debug_str     0x00000000      0x1b3 U8G2/u8x8_u16toa.o
  .comment       0x00000000       0x31 U8G2/u8x8_u16toa.o
  .debug_frame   0x00000000       0x60 U8G2/u8x8_u16toa.o
  .text          0x00000000        0x0 U8G2/u8x8_u8toa.o
@@ -8120,7 +8122,7 @@ Discarded input sections
                 0x00000000       0x28 U8G2/u8x8_u8toa.o
  .debug_ranges  0x00000000       0x18 U8G2/u8x8_u8toa.o
  .debug_line    0x00000000      0x104 U8G2/u8x8_u8toa.o
- .debug_str     0x00000000      0x1b8 U8G2/u8x8_u8toa.o
+ .debug_str     0x00000000      0x1ac U8G2/u8x8_u8toa.o
  .comment       0x00000000       0x31 U8G2/u8x8_u8toa.o
  .debug_frame   0x00000000       0x48 U8G2/u8x8_u8toa.o
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3.o)
@@ -8576,7 +8578,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x47a4
+.text           0x00000000     0x489a
  *(.vectors)
  .vectors       0x00000000       0x68 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega328p/avr5/crtatmega328p.o
                 0x00000000                __vectors
@@ -8670,434 +8672,434 @@ END GROUP
                 0x00000f42                . = ALIGN (0x2)
  *(.text.*)
  .text.initDistanceSensor
-                0x00000f42       0x32 distanceSensor.o
+                0x00000f42       0x38 distanceSensor.o
                 0x00000f42                initDistanceSensor
  .text.sendTriggPulse
-                0x00000f74       0x38 distanceSensor.o
-                0x00000f74                sendTriggPulse
+                0x00000f7a       0x38 distanceSensor.o
+                0x00000f7a                sendTriggPulse
  .text.angleCalculator
-                0x00000fac      0x188 distanceSensor.o
-                0x00000fac                angleCalculator
+                0x00000fb2      0x1b0 distanceSensor.o
+                0x00000fb2                angleCalculator
  .text.__vector_3
-                0x00001134      0x244 distanceSensor.o
-                0x00001134                __vector_3
+                0x00001162      0x296 distanceSensor.o
+                0x00001162                __vector_3
  .text.setup_display
-                0x00001378       0x36 main.o
-                0x00001378                setup_display
+                0x000013f8       0x42 main.o
+                0x000013f8                setup_display
  .text.soundEchoCycle
-                0x000013ae       0x60 main.o
-                0x000013ae                soundEchoCycle
- .text.main     0x0000140e       0x18 main.o
-                0x0000140e                main
+                0x0000143a       0x60 main.o
+                0x0000143a                soundEchoCycle
+ .text.main     0x0000149a       0x1c main.o
+                0x0000149a                main
  .text.u8g2_setup
-                0x00001426       0xc2 screenController.o
-                0x00001426                u8g2_setup
+                0x000014b6       0xd2 screenController.o
+                0x000014b6                u8g2_setup
  .text.sys_init
-                0x000014e8        0xc screenController.o
-                0x000014e8                sys_init
+                0x00001588        0xc screenController.o
+                0x00001588                sys_init
  .text.timeInit
-                0x000014f4       0x26 screenController.o
-                0x000014f4                timeInit
+                0x00001594       0x26 screenController.o
+                0x00001594                timeInit
  .text.__vector_15
-                0x0000151a       0xd4 screenController.o
-                0x0000151a                __vector_15
+                0x000015ba       0xd4 screenController.o
+                0x000015ba                __vector_15
  .text.getTimeToChar
-                0x000015ee       0xec screenController.o
-                0x000015ee                getTimeToChar
- .text.ADCinit  0x000016da       0x16 screenController.o
-                0x000016da                ADCinit
+                0x0000168e       0xec screenController.o
+                0x0000168e                getTimeToChar
+ .text.ADCinit  0x0000177a       0x16 screenController.o
+                0x0000177a                ADCinit
  .text.updateBatterySens
-                0x000016f0        0xa screenController.o
-                0x000016f0                updateBatterySens
+                0x00001790        0xa screenController.o
+                0x00001790                updateBatterySens
  .text.choiceAdder
-                0x000016fa       0xde screenController.o
-                0x000016fa                choiceAdder
+                0x0000179a       0xde screenController.o
+                0x0000179a                choiceAdder
  .text.pageHistory
-                0x000017d8       0x66 screenController.o
-                0x000017d8                pageHistory
- .text.pageSel  0x0000183e       0x48 screenController.o
-                0x0000183e                pageSel
+                0x00001878       0x66 screenController.o
+                0x00001878                pageHistory
+ .text.pageSel  0x000018de       0x48 screenController.o
+                0x000018de                pageSel
  .text.__vector_5
-                0x00001886       0x62 screenController.o
-                0x00001886                __vector_5
+                0x00001926       0x62 screenController.o
+                0x00001926                __vector_5
  .text.but_init
-                0x000018e8       0x78 screenController.o
-                0x000018e8                but_init
+                0x00001988       0x78 screenController.o
+                0x00001988                but_init
  .text.updateButtons
-                0x00001960       0x80 screenController.o
-                0x00001960                updateButtons
+                0x00001a00       0x80 screenController.o
+                0x00001a00                updateButtons
  .text.MenuStyle0
-                0x000019e0      0x2e2 screenController.o
-                0x000019e0                MenuStyle0
+                0x00001a80      0x2e2 screenController.o
+                0x00001a80                MenuStyle0
  .text.MenuStyle1
-                0x00001cc2      0x272 screenController.o
-                0x00001cc2                MenuStyle1
+                0x00001d62      0x272 screenController.o
+                0x00001d62                MenuStyle1
  .text.StartPage
-                0x00001f34       0xc2 screenController.o
-                0x00001f34                StartPage
- .text.nopage   0x00001ff6       0x1e screenController.o
-                0x00001ff6                nopage
+                0x00001fd4       0xc2 screenController.o
+                0x00001fd4                StartPage
+ .text.nopage   0x00002096       0x1e screenController.o
+                0x00002096                nopage
  .text.ScreenOverlay
-                0x00002014      0x18a screenController.o
-                0x00002014                ScreenOverlay
- .text.Page_2   0x0000219e      0x18c screenController.o
-                0x0000219e                Page_2
- .text.Page_3   0x0000232a       0x2a screenController.o
-                0x0000232a                Page_3
- .text.Page_4   0x00002354       0x2a screenController.o
-                0x00002354                Page_4
- .text.Page_5   0x0000237e      0x29a screenController.o
-                0x0000237e                Page_5
- .text.draw     0x00002618       0x76 screenController.o
-                0x00002618                draw
+                0x000020b4      0x18a screenController.o
+                0x000020b4                ScreenOverlay
+ .text.Page_2   0x0000223e      0x18c screenController.o
+                0x0000223e                Page_2
+ .text.Page_3   0x000023ca       0x80 screenController.o
+                0x000023ca                Page_3
+ .text.Page_4   0x0000244a       0x2a screenController.o
+                0x0000244a                Page_4
+ .text.Page_5   0x00002474      0x29a screenController.o
+                0x00002474                Page_5
+ .text.draw     0x0000270e       0x76 screenController.o
+                0x0000270e                draw
  .text.screenRoutine
-                0x0000268e       0x38 screenController.o
-                0x0000268e                screenRoutine
+                0x00002784       0x38 screenController.o
+                0x00002784                screenRoutine
  .text.i2c_init
-                0x000026c6        0xc U8G2/avr-hw-i2c/twimastertimeout.o
-                0x000026c6                i2c_init
+                0x000027bc        0xc U8G2/avr-hw-i2c/twimastertimeout.o
+                0x000027bc                i2c_init
  .text.i2c_start_wait
-                0x000026d2       0x80 U8G2/avr-hw-i2c/twimastertimeout.o
-                0x000026d2                i2c_start_wait
+                0x000027c8       0x80 U8G2/avr-hw-i2c/twimastertimeout.o
+                0x000027c8                i2c_start_wait
  .text.i2c_stop
-                0x00002752       0x20 U8G2/avr-hw-i2c/twimastertimeout.o
-                0x00002752                i2c_stop
+                0x00002848       0x20 U8G2/avr-hw-i2c/twimastertimeout.o
+                0x00002848                i2c_stop
  .text.i2c_write
-                0x00002772       0x42 U8G2/avr-hw-i2c/twimastertimeout.o
-                0x00002772                i2c_write
+                0x00002868       0x42 U8G2/avr-hw-i2c/twimastertimeout.o
+                0x00002868                i2c_write
  .text.u8g2_DrawBox
-                0x000027b4       0x50 U8G2/u8g2_box.o
-                0x000027b4                u8g2_DrawBox
+                0x000028aa       0x50 U8G2/u8g2_box.o
+                0x000028aa                u8g2_DrawBox
  .text.u8g2_DrawFrame
-                0x00002804       0x84 U8G2/u8g2_box.o
-                0x00002804                u8g2_DrawFrame
+                0x000028fa       0x84 U8G2/u8g2_box.o
+                0x000028fa                u8g2_DrawFrame
  .text.u8g2_DrawRBox
-                0x00002888       0xe8 U8G2/u8g2_box.o
-                0x00002888                u8g2_DrawRBox
+                0x0000297e       0xe8 U8G2/u8g2_box.o
+                0x0000297e                u8g2_DrawRBox
  .text.u8g2_DrawRFrame
-                0x00002970       0xf6 U8G2/u8g2_box.o
-                0x00002970                u8g2_DrawRFrame
+                0x00002a66       0xf6 U8G2/u8g2_box.o
+                0x00002a66                u8g2_DrawRFrame
  .text.u8g2_send_buffer
-                0x00002a66       0x98 U8G2/u8g2_buffer.o
+                0x00002b5c       0x98 U8G2/u8g2_buffer.o
  .text.u8g2_ClearBuffer
-                0x00002afe       0x2c U8G2/u8g2_buffer.o
-                0x00002afe                u8g2_ClearBuffer
+                0x00002bf4       0x2c U8G2/u8g2_buffer.o
+                0x00002bf4                u8g2_ClearBuffer
  .text.u8g2_SendBuffer
-                0x00002b2a       0x16 U8G2/u8g2_buffer.o
-                0x00002b2a                u8g2_SendBuffer
+                0x00002c20       0x16 U8G2/u8g2_buffer.o
+                0x00002c20                u8g2_SendBuffer
  .text.u8g2_draw_circle_section
-                0x00002b40       0xa4 U8G2/u8g2_circle.o
+                0x00002c36       0xa4 U8G2/u8g2_circle.o
  .text.u8g2_draw_disc_section
-                0x00002be4       0xbc U8G2/u8g2_circle.o
+                0x00002cda       0xbc U8G2/u8g2_circle.o
  .text.u8g2_DrawCircle
-                0x00002ca0       0xa4 U8G2/u8g2_circle.o
-                0x00002ca0                u8g2_DrawCircle
+                0x00002d96       0xa4 U8G2/u8g2_circle.o
+                0x00002d96                u8g2_DrawCircle
  .text.u8g2_DrawDisc
-                0x00002d44       0xa4 U8G2/u8g2_circle.o
-                0x00002d44                u8g2_DrawDisc
+                0x00002e3a       0xa4 U8G2/u8g2_circle.o
+                0x00002e3a                u8g2_DrawDisc
  .text.u8g2_m_16_8_f
-                0x00002de8        0xc U8G2/u8g2_d_memory.o
-                0x00002de8                u8g2_m_16_8_f
+                0x00002ede        0xc U8G2/u8g2_d_memory.o
+                0x00002ede                u8g2_m_16_8_f
  .text.u8g2_Setup_ssd1306_i2c_128x64_noname_f
-                0x00002df4       0x56 U8G2/u8g2_d_setup.o
-                0x00002df4                u8g2_Setup_ssd1306_i2c_128x64_noname_f
+                0x00002eea       0x56 U8G2/u8g2_d_setup.o
+                0x00002eea                u8g2_Setup_ssd1306_i2c_128x64_noname_f
  .text.u8g2_font_get_word
-                0x00002e4a       0x18 U8G2/u8g2_font.o
+                0x00002f40       0x18 U8G2/u8g2_font.o
  .text.u8g2_font_calc_vref_font
-                0x00002e62        0x4 U8G2/u8g2_font.o
-                0x00002e62                u8g2_font_calc_vref_font
+                0x00002f58        0x4 U8G2/u8g2_font.o
+                0x00002f58                u8g2_font_calc_vref_font
  .text.u8g2_read_font_info
-                0x00002e66       0xbe U8G2/u8g2_font.o
-                0x00002e66                u8g2_read_font_info
+                0x00002f5c       0xbe U8G2/u8g2_font.o
+                0x00002f5c                u8g2_read_font_info
  .text.u8g2_font_decode_get_unsigned_bits
-                0x00002f24       0x60 U8G2/u8g2_font.o
-                0x00002f24                u8g2_font_decode_get_unsigned_bits
+                0x0000301a       0x60 U8G2/u8g2_font.o
+                0x0000301a                u8g2_font_decode_get_unsigned_bits
  .text.u8g2_font_setup_decode
-                0x00002f84       0x5c U8G2/u8g2_font.o
+                0x0000307a       0x5c U8G2/u8g2_font.o
  .text.u8g2_font_decode_get_signed_bits
-                0x00002fe0       0x1e U8G2/u8g2_font.o
-                0x00002fe0                u8g2_font_decode_get_signed_bits
+                0x000030d6       0x1e U8G2/u8g2_font.o
+                0x000030d6                u8g2_font_decode_get_signed_bits
  .text.u8g2_add_vector_y
-                0x00002ffe       0x1c U8G2/u8g2_font.o
-                0x00002ffe                u8g2_add_vector_y
+                0x000030f4       0x1c U8G2/u8g2_font.o
+                0x000030f4                u8g2_add_vector_y
  .text.u8g2_add_vector_x
-                0x0000301a       0x1c U8G2/u8g2_font.o
-                0x0000301a                u8g2_add_vector_x
+                0x00003110       0x1c U8G2/u8g2_font.o
+                0x00003110                u8g2_add_vector_x
  .text.u8g2_font_decode_len
-                0x00003036      0x124 U8G2/u8g2_font.o
-                0x00003036                u8g2_font_decode_len
+                0x0000312c      0x124 U8G2/u8g2_font.o
+                0x0000312c                u8g2_font_decode_len
  .text.u8g2_font_decode_glyph
-                0x0000315a      0x172 U8G2/u8g2_font.o
-                0x0000315a                u8g2_font_decode_glyph
+                0x00003250      0x172 U8G2/u8g2_font.o
+                0x00003250                u8g2_font_decode_glyph
  .text.u8g2_font_get_glyph_data
-                0x000032cc      0x126 U8G2/u8g2_font.o
-                0x000032cc                u8g2_font_get_glyph_data
+                0x000033c2      0x126 U8G2/u8g2_font.o
+                0x000033c2                u8g2_font_get_glyph_data
  .text.u8g2_GetGlyphWidth
-                0x000033f2       0x5a U8G2/u8g2_font.o
-                0x000033f2                u8g2_GetGlyphWidth
+                0x000034e8       0x5a U8G2/u8g2_font.o
+                0x000034e8                u8g2_GetGlyphWidth
  .text.u8g2_string_width
-                0x0000344c       0x6e U8G2/u8g2_font.o
+                0x00003542       0x6e U8G2/u8g2_font.o
  .text.u8g2_DrawGlyph
-                0x000034ba       0x84 U8G2/u8g2_font.o
-                0x000034ba                u8g2_DrawGlyph
+                0x000035b0       0x84 U8G2/u8g2_font.o
+                0x000035b0                u8g2_DrawGlyph
  .text.u8g2_draw_string
-                0x0000353e       0x94 U8G2/u8g2_font.o
+                0x00003634       0x94 U8G2/u8g2_font.o
  .text.u8g2_DrawStr
-                0x000035d2       0x14 U8G2/u8g2_font.o
-                0x000035d2                u8g2_DrawStr
+                0x000036c8       0x14 U8G2/u8g2_font.o
+                0x000036c8                u8g2_DrawStr
  .text.u8g2_UpdateRefHeight
-                0x000035e6       0x86 U8G2/u8g2_font.o
-                0x000035e6                u8g2_UpdateRefHeight
+                0x000036dc       0x86 U8G2/u8g2_font.o
+                0x000036dc                u8g2_UpdateRefHeight
  .text.u8g2_SetFontPosBaseline
-                0x0000366c        0xc U8G2/u8g2_font.o
-                0x0000366c                u8g2_SetFontPosBaseline
+                0x00003762        0xc U8G2/u8g2_font.o
+                0x00003762                u8g2_SetFontPosBaseline
  .text.u8g2_SetFont
-                0x00003678       0x2a U8G2/u8g2_font.o
-                0x00003678                u8g2_SetFont
+                0x0000376e       0x2a U8G2/u8g2_font.o
+                0x0000376e                u8g2_SetFont
  .text.u8g2_GetStrWidth
-                0x000036a2       0x10 U8G2/u8g2_font.o
-                0x000036a2                u8g2_GetStrWidth
+                0x00003798       0x10 U8G2/u8g2_font.o
+                0x00003798                u8g2_GetStrWidth
  .text.u8g2_SetFontDirection
-                0x000036b2        0xa U8G2/u8g2_font.o
-                0x000036b2                u8g2_SetFontDirection
+                0x000037a8        0xa U8G2/u8g2_font.o
+                0x000037a8                u8g2_SetFontDirection
  .text.u8g2_draw_hv_line_2dir
-                0x000036bc       0x1a U8G2/u8g2_hvline.o
-                0x000036bc                u8g2_draw_hv_line_2dir
+                0x000037b2       0x1a U8G2/u8g2_hvline.o
+                0x000037b2                u8g2_draw_hv_line_2dir
  .text.u8g2_DrawHVLine
-                0x000036d6       0xde U8G2/u8g2_hvline.o
-                0x000036d6                u8g2_DrawHVLine
+                0x000037cc       0xde U8G2/u8g2_hvline.o
+                0x000037cc                u8g2_DrawHVLine
  .text.u8g2_DrawHLine
-                0x000037b4        0xc U8G2/u8g2_hvline.o
-                0x000037b4                u8g2_DrawHLine
+                0x000038aa        0xc U8G2/u8g2_hvline.o
+                0x000038aa                u8g2_DrawHLine
  .text.u8g2_DrawVLine
-                0x000037c0        0xc U8G2/u8g2_hvline.o
-                0x000037c0                u8g2_DrawVLine
+                0x000038b6        0xc U8G2/u8g2_hvline.o
+                0x000038b6                u8g2_DrawVLine
  .text.u8g2_DrawPixel
-                0x000037cc       0x2a U8G2/u8g2_hvline.o
-                0x000037cc                u8g2_DrawPixel
+                0x000038c2       0x2a U8G2/u8g2_hvline.o
+                0x000038c2                u8g2_DrawPixel
  .text.u8g2_SetDrawColor
-                0x000037f6       0x1a U8G2/u8g2_hvline.o
-                0x000037f6                u8g2_SetDrawColor
+                0x000038ec       0x1a U8G2/u8g2_hvline.o
+                0x000038ec                u8g2_SetDrawColor
  .text.u8g2_is_intersection_decision_tree
-                0x00003810       0x28 U8G2/u8g2_intersection.o
-                0x00003810                u8g2_is_intersection_decision_tree
+                0x00003906       0x28 U8G2/u8g2_intersection.o
+                0x00003906                u8g2_is_intersection_decision_tree
  .text.u8g2_IsIntersection
-                0x00003838       0x36 U8G2/u8g2_intersection.o
-                0x00003838                u8g2_IsIntersection
+                0x0000392e       0x36 U8G2/u8g2_intersection.o
+                0x0000392e                u8g2_IsIntersection
  .text.u8g2_ll_hvline_vertical_top_lsb
-                0x0000386e       0xc6 U8G2/u8g2_ll_hvline.o
-                0x0000386e                u8g2_ll_hvline_vertical_top_lsb
+                0x00003964       0xc6 U8G2/u8g2_ll_hvline.o
+                0x00003964                u8g2_ll_hvline_vertical_top_lsb
  .text.u8g2_update_dimension_common
-                0x00003934       0x76 U8G2/u8g2_setup.o
+                0x00003a2a       0x76 U8G2/u8g2_setup.o
  .text.u8g2_update_dimension_r0
-                0x000039aa        0x6 U8G2/u8g2_setup.o
-                0x000039aa                u8g2_update_dimension_r0
+                0x00003aa0        0x6 U8G2/u8g2_setup.o
+                0x00003aa0                u8g2_update_dimension_r0
  .text.u8g2_apply_clip_window
-                0x000039b0       0x5a U8G2/u8g2_setup.o
+                0x00003aa6       0x5a U8G2/u8g2_setup.o
  .text.u8g2_update_page_win_r0
-                0x00003a0a       0x18 U8G2/u8g2_setup.o
-                0x00003a0a                u8g2_update_page_win_r0
+                0x00003b00       0x18 U8G2/u8g2_setup.o
+                0x00003b00                u8g2_update_page_win_r0
  .text.u8g2_draw_l90_r0
-                0x00003a22        0xa U8G2/u8g2_setup.o
-                0x00003a22                u8g2_draw_l90_r0
+                0x00003b18        0xa U8G2/u8g2_setup.o
+                0x00003b18                u8g2_draw_l90_r0
  .text.u8g2_SetMaxClipWindow
-                0x00003a2c       0x30 U8G2/u8g2_setup.o
-                0x00003a2c                u8g2_SetMaxClipWindow
+                0x00003b22       0x30 U8G2/u8g2_setup.o
+                0x00003b22                u8g2_SetMaxClipWindow
  .text.u8g2_SetupBuffer
-                0x00003a5c       0x5a U8G2/u8g2_setup.o
-                0x00003a5c                u8g2_SetupBuffer
+                0x00003b52       0x5a U8G2/u8g2_setup.o
+                0x00003b52                u8g2_SetupBuffer
  .text.u8x8_ascii_next
-                0x00003ab6       0x1a U8G2/u8x8_8x8.o
-                0x00003ab6                u8x8_ascii_next
+                0x00003bac       0x1a U8G2/u8x8_8x8.o
+                0x00003bac                u8x8_ascii_next
  .text.u8x8_utf8_init
-                0x00003ad0        0x6 U8G2/u8x8_8x8.o
-                0x00003ad0                u8x8_utf8_init
+                0x00003bc6        0x6 U8G2/u8x8_8x8.o
+                0x00003bc6                u8x8_utf8_init
  .text.u8x8_byte_avr_hw_i2c
-                0x00003ad6       0x76 U8G2/u8x8_avr.o
-                0x00003ad6                u8x8_byte_avr_hw_i2c
+                0x00003bcc       0x76 U8G2/u8x8_avr.o
+                0x00003bcc                u8x8_byte_avr_hw_i2c
  .text.u8x8_avr_delay
-                0x00003b4c       0x7a U8G2/u8x8_avr.o
-                0x00003b4c                u8x8_avr_delay
+                0x00003c42       0x7a U8G2/u8x8_avr.o
+                0x00003c42                u8x8_avr_delay
  .text.u8x8_byte_SendBytes
-                0x00003bc6       0x14 U8G2/u8x8_byte.o
-                0x00003bc6                u8x8_byte_SendBytes
+                0x00003cbc       0x14 U8G2/u8x8_byte.o
+                0x00003cbc                u8x8_byte_SendBytes
  .text.u8x8_byte_SendByte
-                0x00003bda       0x20 U8G2/u8x8_byte.o
-                0x00003bda                u8x8_byte_SendByte
+                0x00003cd0       0x20 U8G2/u8x8_byte.o
+                0x00003cd0                u8x8_byte_SendByte
  .text.u8x8_byte_StartTransfer
-                0x00003bfa       0x16 U8G2/u8x8_byte.o
-                0x00003bfa                u8x8_byte_StartTransfer
+                0x00003cf0       0x16 U8G2/u8x8_byte.o
+                0x00003cf0                u8x8_byte_StartTransfer
  .text.u8x8_byte_EndTransfer
-                0x00003c10       0x16 U8G2/u8x8_byte.o
-                0x00003c10                u8x8_byte_EndTransfer
+                0x00003d06       0x16 U8G2/u8x8_byte.o
+                0x00003d06                u8x8_byte_EndTransfer
  .text.u8x8_i2c_data_transfer
-                0x00003c26       0x3c U8G2/u8x8_cad.o
+                0x00003d1c       0x3c U8G2/u8x8_cad.o
  .text.u8x8_cad_SendCmd
-                0x00003c62       0x16 U8G2/u8x8_cad.o
-                0x00003c62                u8x8_cad_SendCmd
+                0x00003d58       0x16 U8G2/u8x8_cad.o
+                0x00003d58                u8x8_cad_SendCmd
  .text.u8x8_cad_SendArg
-                0x00003c78       0x16 U8G2/u8x8_cad.o
-                0x00003c78                u8x8_cad_SendArg
+                0x00003d6e       0x16 U8G2/u8x8_cad.o
+                0x00003d6e                u8x8_cad_SendArg
  .text.u8x8_cad_SendData
-                0x00003c8e       0x14 U8G2/u8x8_cad.o
-                0x00003c8e                u8x8_cad_SendData
+                0x00003d84       0x14 U8G2/u8x8_cad.o
+                0x00003d84                u8x8_cad_SendData
  .text.u8x8_cad_StartTransfer
-                0x00003ca2       0x16 U8G2/u8x8_cad.o
-                0x00003ca2                u8x8_cad_StartTransfer
+                0x00003d98       0x16 U8G2/u8x8_cad.o
+                0x00003d98                u8x8_cad_StartTransfer
  .text.u8x8_cad_EndTransfer
-                0x00003cb8       0x16 U8G2/u8x8_cad.o
-                0x00003cb8                u8x8_cad_EndTransfer
+                0x00003dae       0x16 U8G2/u8x8_cad.o
+                0x00003dae                u8x8_cad_EndTransfer
  .text.u8x8_cad_SendSequence
-                0x00003cce       0xa6 U8G2/u8x8_cad.o
-                0x00003cce                u8x8_cad_SendSequence
+                0x00003dc4       0xa6 U8G2/u8x8_cad.o
+                0x00003dc4                u8x8_cad_SendSequence
  .text.u8x8_cad_ssd13xx_fast_i2c
-                0x00003d74       0xf4 U8G2/u8x8_cad.o
-                0x00003d74                u8x8_cad_ssd13xx_fast_i2c
+                0x00003e6a       0xf4 U8G2/u8x8_cad.o
+                0x00003e6a                u8x8_cad_ssd13xx_fast_i2c
  .text.u8x8_d_helper_display_setup_memory
-                0x00003e68       0x10 U8G2/u8x8_display.o
-                0x00003e68                u8x8_d_helper_display_setup_memory
+                0x00003f5e       0x10 U8G2/u8x8_display.o
+                0x00003f5e                u8x8_d_helper_display_setup_memory
  .text.u8x8_d_helper_display_init
-                0x00003e78       0x72 U8G2/u8x8_display.o
-                0x00003e78                u8x8_d_helper_display_init
+                0x00003f6e       0x72 U8G2/u8x8_display.o
+                0x00003f6e                u8x8_d_helper_display_init
  .text.u8x8_DrawTile
-                0x00003eea       0x46 U8G2/u8x8_display.o
-                0x00003eea                u8x8_DrawTile
+                0x00003fe0       0x46 U8G2/u8x8_display.o
+                0x00003fe0                u8x8_DrawTile
  .text.u8x8_SetupMemory
-                0x00003f30       0x16 U8G2/u8x8_display.o
-                0x00003f30                u8x8_SetupMemory
+                0x00004026       0x16 U8G2/u8x8_display.o
+                0x00004026                u8x8_SetupMemory
  .text.u8x8_InitDisplay
-                0x00003f46       0x16 U8G2/u8x8_display.o
-                0x00003f46                u8x8_InitDisplay
+                0x0000403c       0x16 U8G2/u8x8_display.o
+                0x0000403c                u8x8_InitDisplay
  .text.u8x8_SetPowerSave
-                0x00003f5c       0x16 U8G2/u8x8_display.o
-                0x00003f5c                u8x8_SetPowerSave
+                0x00004052       0x16 U8G2/u8x8_display.o
+                0x00004052                u8x8_SetPowerSave
  .text.u8x8_RefreshDisplay
-                0x00003f72       0x16 U8G2/u8x8_display.o
-                0x00003f72                u8x8_RefreshDisplay
+                0x00004068       0x16 U8G2/u8x8_display.o
+                0x00004068                u8x8_RefreshDisplay
  .text.u8x8_d_ssd1306_sh1106_generic
-                0x00003f88      0x112 U8G2/u8x8_d_ssd1306_128x64_noname.o
+                0x0000407e      0x112 U8G2/u8x8_d_ssd1306_128x64_noname.o
  .text.u8x8_d_ssd1306_128x64_noname
-                0x0000409a       0x46 U8G2/u8x8_d_ssd1306_128x64_noname.o
-                0x0000409a                u8x8_d_ssd1306_128x64_noname
+                0x00004190       0x46 U8G2/u8x8_d_ssd1306_128x64_noname.o
+                0x00004190                u8x8_d_ssd1306_128x64_noname
  .text.u8x8_gpio_call
-                0x000040e0       0x12 U8G2/u8x8_gpio.o
-                0x000040e0                u8x8_gpio_call
+                0x000041d6       0x12 U8G2/u8x8_gpio.o
+                0x000041d6                u8x8_gpio_call
  .text.u8x8_dummy_cb
-                0x000040f2        0x4 U8G2/u8x8_setup.o
-                0x000040f2                u8x8_dummy_cb
+                0x000041e8        0x4 U8G2/u8x8_setup.o
+                0x000041e8                u8x8_dummy_cb
  .text.u8x8_SetupDefaults
-                0x000040f6       0x2e U8G2/u8x8_setup.o
-                0x000040f6                u8x8_SetupDefaults
+                0x000041ec       0x2e U8G2/u8x8_setup.o
+                0x000041ec                u8x8_SetupDefaults
  .text.u8x8_Setup
-                0x00004124       0x4c U8G2/u8x8_setup.o
-                0x00004124                u8x8_Setup
+                0x0000421a       0x4c U8G2/u8x8_setup.o
+                0x0000421a                u8x8_Setup
  .text.avr-libc.fplib
-                0x00004170        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3.o)
-                0x00004170                __subsf3
-                0x00004172                __addsf3
+                0x00004266        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3.o)
+                0x00004266                __subsf3
+                0x00004268                __addsf3
  .text.avr-libc.fplib
-                0x0000417e       0xcc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3x.o)
-                0x000041a0                __addsf3x
+                0x00004274       0xcc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3x.o)
+                0x00004296                __addsf3x
  .text.avr-libc.fplib
-                0x0000424a       0x5e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(atan.o)
-                0x0000424a                atan
+                0x00004340       0x5e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(atan.o)
+                0x00004340                atan
  .text.avr-libc.fplib
-                0x000042a8        0xa c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(cmpsf2.o)
-                0x000042a8                __eqsf2
-                0x000042a8                __lesf2
-                0x000042a8                __nesf2
-                0x000042a8                __cmpsf2
-                0x000042a8                __ltsf2
+                0x0000439e        0xa c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(cmpsf2.o)
+                0x0000439e                __eqsf2
+                0x0000439e                __lesf2
+                0x0000439e                __nesf2
+                0x0000439e                __cmpsf2
+                0x0000439e                __ltsf2
  .text.avr-libc.fplib
-                0x000042b2        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3.o)
-                0x000042b2                __divsf3
+                0x000043a8        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3.o)
+                0x000043a8                __divsf3
  .text.avr-libc.fplib
-                0x000042ba       0xdc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3x.o)
-                0x000042da                __divsf3x
-                0x000042e0                __divsf3_pse
+                0x000043b0       0xdc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3x.o)
+                0x000043d0                __divsf3x
+                0x000043d6                __divsf3_pse
  .text.avr-libc.fplib
-                0x00004396        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fixsfsi.o)
-                0x00004396                __fixsfsi
+                0x0000448c        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fixsfsi.o)
+                0x0000448c                __fixsfsi
  .text.avr-libc.fplib
-                0x000043a4       0x5e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fixunssfsi.o)
-                0x000043a4                __fixunssfsi
+                0x0000449a       0x5e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fixunssfsi.o)
+                0x0000449a                __fixunssfsi
  .text.avr-libc.fplib
-                0x00004402       0x7a c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(floatsisf.o)
-                0x00004402                __floatunsisf
-                0x00004406                __floatsisf
+                0x000044f8       0x7a c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(floatsisf.o)
+                0x000044f8                __floatunsisf
+                0x000044fc                __floatsisf
  .text.avr-libc.fplib
-                0x0000447c       0x48 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_cmp.o)
-                0x0000447c                __fp_cmp
+                0x00004572       0x48 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_cmp.o)
+                0x00004572                __fp_cmp
  .text.avr-libc.fplib
-                0x000044c4        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_inf.o)
-                0x000044c4                __fp_inf
+                0x000045ba        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_inf.o)
+                0x000045ba                __fp_inf
  .text.avr-libc.fplib
-                0x000044d0        0x6 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_nan.o)
-                0x000044d0                __fp_nan
+                0x000045c6        0x6 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_nan.o)
+                0x000045c6                __fp_nan
  .text.avr-libc.fplib
-                0x000044d6       0x4e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_powser.o)
-                0x000044d6                __fp_powser
+                0x000045cc       0x4e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_powser.o)
+                0x000045cc                __fp_powser
  .text.avr-libc.fplib
-                0x00004524        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscA.o)
-                0x00004524                __fp_pscA
+                0x0000461a        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscA.o)
+                0x0000461a                __fp_pscA
  .text.avr-libc.fplib
-                0x00004532        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscB.o)
-                0x00004532                __fp_pscB
+                0x00004628        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscB.o)
+                0x00004628                __fp_pscB
  .text.avr-libc.fplib
-                0x00004540       0x22 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_round.o)
-                0x00004540                __fp_round
+                0x00004636       0x22 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_round.o)
+                0x00004636                __fp_round
  .text.avr-libc.fplib
-                0x00004562       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_split3.o)
-                0x00004562                __fp_split3
-                0x00004572                __fp_splitA
+                0x00004658       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_split3.o)
+                0x00004658                __fp_split3
+                0x00004668                __fp_splitA
  .text.avr-libc.fplib
-                0x000045a6        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_zero.o)
-                0x000045a6                __fp_zero
-                0x000045a8                __fp_szero
+                0x0000469c        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_zero.o)
+                0x0000469c                __fp_zero
+                0x0000469e                __fp_szero
  .text.avr-libc.fplib
-                0x000045b4        0xa c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(gesf2.o)
-                0x000045b4                __gesf2
-                0x000045b4                __gtsf2
+                0x000046aa        0xa c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(gesf2.o)
+                0x000046aa                __gesf2
+                0x000046aa                __gtsf2
  .text.avr-libc.fplib
-                0x000045be       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(inverse.o)
-                0x000045be                inverse
+                0x000046b4       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(inverse.o)
+                0x000046b4                inverse
  .text.avr-libc.fplib
-                0x000045ce        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3.o)
-                0x000045ce                __mulsf3
+                0x000046c4        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3.o)
+                0x000046c4                __mulsf3
  .text.avr-libc.fplib
-                0x000045d6       0xd2 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3x.o)
-                0x000045f4                __mulsf3x
-                0x000045fa                __mulsf3_pse
+                0x000046cc       0xd2 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3x.o)
+                0x000046ea                __mulsf3x
+                0x000046f0                __mulsf3_pse
  .text.avr-libc.fplib
-                0x000046a8        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(square.o)
-                0x000046a8                square
+                0x0000479e        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(square.o)
+                0x0000479e                square
  .text.libgcc.div
-                0x000046b0       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
-                0x000046b0                __udivmodsi4
+                0x000047a6       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
+                0x000047a6                __udivmodsi4
  .text.libgcc.mul
-                0x000046f4       0x1e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
-                0x000046f4                __umulhisi3
+                0x000047ea       0x1e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
+                0x000047ea                __umulhisi3
  .text.avr-libc
-                0x00004712        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(memset.o)
-                0x00004712                memset
+                0x00004808        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(memset.o)
+                0x00004808                memset
  .text.avr-libc
-                0x00004720       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strcat.o)
-                0x00004720                strcat
+                0x00004816       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strcat.o)
+                0x00004816                strcat
  .text.avr-libc
-                0x00004736       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(itoa_ncheck.o)
-                0x00004736                __itoa_ncheck
+                0x0000482c       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(itoa_ncheck.o)
+                0x0000482c                __itoa_ncheck
  .text.avr-libc
-                0x0000474c       0x34 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(utoa_ncheck.o)
-                0x0000474c                __utoa_ncheck
-                0x0000474e                __utoa_common
+                0x00004842       0x34 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(utoa_ncheck.o)
+                0x00004842                __utoa_ncheck
+                0x00004844                __utoa_common
  .text.avr-libc
-                0x00004780       0x20 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strrev.o)
-                0x00004780                strrev
-                0x000047a0                . = ALIGN (0x2)
+                0x00004876       0x20 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strrev.o)
+                0x00004876                strrev
+                0x00004896                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x000047a0        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x000047a0                exit
-                0x000047a0                _exit
+ .fini9         0x00004896        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x00004896                exit
+                0x00004896                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -9116,11 +9118,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x000047a0        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x00004896        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x000047a4                _etext = .
+                0x0000489a                _etext = .
 
-.data           0x00800100      0x1c4 load address 0x000047a4
+.data           0x00800100      0x1c4 load address 0x0000489a
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -9135,7 +9137,7 @@ END GROUP
                 0x0080010c                direction
  .data.speed    0x0080010e        0x2 main.o
                 0x0080010e                speed
- .data.i.9264   0x00800110        0x2 screenController.o
+ .data.i.9267   0x00800110        0x2 screenController.o
  .data.screenDivholder
                 0x00800112        0x4 screenController.o
                 0x00800112                screenDivholder
@@ -9161,9 +9163,9 @@ END GROUP
  .rodata.str1.1
                 0x00800136      0x113 screenController.o
                                 0x114 (size before relaxing)
- .rodata.postFixes.9355
+ .rodata.postFixes.9358
                 0x00800249        0x8 screenController.o
- .rodata.text2.9353
+ .rodata.text2.9356
                 0x00800251        0x8 screenController.o
  .rodata.u8g2_cb_r0
                 0x00800259        0x6 U8G2/u8g2_setup.o
@@ -9185,17 +9187,17 @@ END GROUP
                 0x008002c4                _edata = .
                 0x008002c4                PROVIDE (__data_end, .)
 
-.bss            0x008002c4      0x4f8
+.bss            0x008002c4      0x4fe
                 0x008002c4                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
- .bss.runcount1.1733
+ .bss.runcount1.1737
                 0x008002c4        0x2 distanceSensor.o
- .bss.runcount2.1732
+ .bss.runcount2.1736
                 0x008002c6        0x2 distanceSensor.o
- .bss.prevDevice.1734
+ .bss.prevDevice.1738
                 0x008002c8        0x2 distanceSensor.o
- .bss.device.1735
+ .bss.device.1739
                 0x008002ca        0x2 distanceSensor.o
  .bss.echoHighLevelTimeuS
                 0x008002cc        0x2 distanceSensor.o
@@ -9209,7 +9211,7 @@ END GROUP
  .bss.risingEdgeTimeC
                 0x008002d4        0x2 distanceSensor.o
                 0x008002d4                risingEdgeTimeC
- .bss.count.8797
+ .bss.count.8801
                 0x008002d6        0x2 main.o
  .bss.Time_min  0x008002d8        0x2 main.o
                 0x008002d8                Time_min
@@ -9218,63 +9220,68 @@ END GROUP
  .bss.main_currentPage
                 0x008002dc        0x2 main.o
                 0x008002dc                main_currentPage
- .bss.timeTxt.9349
-                0x008002de        0x7 screenController.o
- .bss.history.9263
-                0x008002e5        0x8 screenController.o
- .bss.rCount.9235
-                0x008002ed        0x2 screenController.o
- .bss.batteryBars
+ .bss.angle_deg
+                0x008002de        0x2 main.o
+                0x008002de                angle_deg
+ .bss.timeTxt.9352
+                0x008002e0        0x7 screenController.o
+ .bss.history.9266
+                0x008002e7        0x8 screenController.o
+ .bss.rCount.9238
                 0x008002ef        0x2 screenController.o
-                0x008002ef                batteryBars
- .bss.currentFrame
+ .bss.batteryBars
                 0x008002f1        0x2 screenController.o
-                0x008002f1                currentFrame
+                0x008002f1                batteryBars
+ .bss.currentFrame
+                0x008002f3        0x2 screenController.o
+                0x008002f3                currentFrame
  .bss.currentPage
-                0x008002f3        0x1 screenController.o
-                0x008002f3                currentPage
+                0x008002f5        0x1 screenController.o
+                0x008002f5                currentPage
  .bss.reDrawRequiredTime
-                0x008002f4        0x1 screenController.o
-                0x008002f4                reDrawRequiredTime
- .bss.buf.8730  0x008002f5      0x400 U8G2/u8g2_d_memory.o
+                0x008002f6        0x1 screenController.o
+                0x008002f6                reDrawRequiredTime
+ .bss.buf.8730  0x008002f7      0x400 U8G2/u8g2_d_memory.o
  .bss.in_transfer.3298
-                0x008006f5        0x1 U8G2/u8x8_cad.o
+                0x008006f7        0x1 U8G2/u8x8_cad.o
  *(COMMON)
- COMMON         0x008006f6       0x1a distanceSensor.o
-                0x008006f6                angledegree
-                0x008006fa                Dist
-                0x008006fc                length
-                0x00800700                angleradian
-                0x00800704                differenceLength
-                0x00800708                echoDistance
- COMMON         0x00800710        0x2 main.o
-                0x00800710                keyPressed
- COMMON         0x00800712       0xaa screenController.o
-                0x00800712                maxCharWidth
-                0x00800713                currentChoice
-                0x00800722                settingVal
-                0x00800724                speedHold
-                0x00800726                pTime_min
-                0x00800728                Scroll
-                0x00800732                pTime_ms
-                0x00800734                u8g2
-                0x00800799                textHeight
-                0x0080079a                selectionsVis
-                0x008007a4                distanceHold
-                0x008007a6                _Time_min
-                0x008007a8                directionHold
-                0x008007aa                _Time_ms
-                0x008007ac                selections
-                0x008007bb                selectEnable
-                0x008007bc                PROVIDE (__bss_end, .)
-                0x000047a4                __data_load_start = LOADADDR (.data)
-                0x00004968                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x008006f8       0x1c distanceSensor.o
+                0x008006f8                pDistance
+                0x008006fa                angledegree
+                0x008006fe                pAngle_tmp
+                0x00800700                length
+                0x00800704                angleradian
+                0x00800708                differenceLength
+                0x0080070c                echoDistance
+ COMMON         0x00800714        0x2 main.o
+                0x00800714                keyPressed
+ COMMON         0x00800716       0xac screenController.o
+                0x00800716                maxCharWidth
+                0x00800717                currentChoice
+                0x00800726                settingVal
+                0x00800728                speedHold
+                0x0080072a                pTime_min
+                0x0080072c                Scroll
+                0x00800736                pTime_ms
+                0x00800738                u8g2
+                0x0080079d                textHeight
+                0x0080079e                selectionsVis
+                0x008007a8                distanceHold
+                0x008007aa                _Time_min
+                0x008007ac                directionHold
+                0x008007ae                _Time_ms
+                0x008007b0                selections
+                0x008007bf                angleHold
+                0x008007c1                selectEnable
+                0x008007c2                PROVIDE (__bss_end, .)
+                0x0000489a                __data_load_start = LOADADDR (.data)
+                0x00004a5e                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x008007bc        0x0
+.noinit         0x008007c2        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x008007bc                _end = .
+                0x008007c2                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -9413,185 +9420,186 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000    0x48c17
+.debug_info     0x00000000    0x48d16
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x5f4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_info    0x000005f4      0x254 distanceSensor.o
- .debug_info    0x00000848      0x2fb main.o
- .debug_info    0x00000b43     0x211a screenController.o
- .debug_info    0x00002c5d      0x22d U8G2/avr-hw-i2c/twimastertimeout.o
- .debug_info    0x00002e8a      0xf7e U8G2/u8g2_box.o
- .debug_info    0x00003e08      0xe94 U8G2/u8g2_buffer.o
- .debug_info    0x00004c9c     0x175e U8G2/u8g2_circle.o
- .debug_info    0x000063fa     0x2803 U8G2/u8g2_d_memory.o
- .debug_info    0x00008bfd    0x2403b U8G2/u8g2_d_setup.o
- .debug_info    0x0002cc38     0x29dc U8G2/u8g2_font.o
- .debug_info    0x0002f614     0xf937 U8G2/u8g2_fonts.o
- .debug_info    0x0003ef4b      0xbf2 U8G2/u8g2_hvline.o
- .debug_info    0x0003fb3d      0x92a U8G2/u8g2_intersection.o
- .debug_info    0x00040467      0x9a7 U8G2/u8g2_ll_hvline.o
- .debug_info    0x00040e0e     0x11bd U8G2/u8g2_setup.o
- .debug_info    0x00041fcb     0x13ef U8G2/u8x8_8x8.o
- .debug_info    0x000433ba      0x574 U8G2/u8x8_avr.o
- .debug_info    0x0004392e     0x1a49 U8G2/u8x8_byte.o
- .debug_info    0x00045377     0x18fa U8G2/u8x8_cad.o
- .debug_info    0x00046c71      0x9a6 U8G2/u8x8_display.o
- .debug_info    0x00047617      0xd0f U8G2/u8x8_d_ssd1306_128x64_noname.o
- .debug_info    0x00048326      0x3c6 U8G2/u8x8_gpio.o
- .debug_info    0x000486ec      0x52b U8G2/u8x8_setup.o
+ .debug_info    0x000005f4      0x278 distanceSensor.o
+ .debug_info    0x0000086c      0x326 main.o
+ .debug_info    0x00000b92     0x21ca screenController.o
+ .debug_info    0x00002d5c      0x22d U8G2/avr-hw-i2c/twimastertimeout.o
+ .debug_info    0x00002f89      0xf7e U8G2/u8g2_box.o
+ .debug_info    0x00003f07      0xe94 U8G2/u8g2_buffer.o
+ .debug_info    0x00004d9b     0x175e U8G2/u8g2_circle.o
+ .debug_info    0x000064f9     0x2803 U8G2/u8g2_d_memory.o
+ .debug_info    0x00008cfc    0x2403b U8G2/u8g2_d_setup.o
+ .debug_info    0x0002cd37     0x29dc U8G2/u8g2_font.o
+ .debug_info    0x0002f713     0xf937 U8G2/u8g2_fonts.o
+ .debug_info    0x0003f04a      0xbf2 U8G2/u8g2_hvline.o
+ .debug_info    0x0003fc3c      0x92a U8G2/u8g2_intersection.o
+ .debug_info    0x00040566      0x9a7 U8G2/u8g2_ll_hvline.o
+ .debug_info    0x00040f0d     0x11bd U8G2/u8g2_setup.o
+ .debug_info    0x000420ca     0x13ef U8G2/u8x8_8x8.o
+ .debug_info    0x000434b9      0x574 U8G2/u8x8_avr.o
+ .debug_info    0x00043a2d     0x1a49 U8G2/u8x8_byte.o
+ .debug_info    0x00045476     0x18fa U8G2/u8x8_cad.o
+ .debug_info    0x00046d70      0x9a6 U8G2/u8x8_display.o
+ .debug_info    0x00047716      0xd0f U8G2/u8x8_d_ssd1306_128x64_noname.o
+ .debug_info    0x00048425      0x3c6 U8G2/u8x8_gpio.o
+ .debug_info    0x000487eb      0x52b U8G2/u8x8_setup.o
 
-.debug_abbrev   0x00000000     0x2ff3
+.debug_abbrev   0x00000000     0x301c
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x5a2 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_abbrev  0x000005a2       0xe3 distanceSensor.o
- .debug_abbrev  0x00000685       0xe1 main.o
- .debug_abbrev  0x00000766      0x434 screenController.o
- .debug_abbrev  0x00000b9a       0xff U8G2/avr-hw-i2c/twimastertimeout.o
- .debug_abbrev  0x00000c99      0x169 U8G2/u8g2_box.o
- .debug_abbrev  0x00000e02      0x230 U8G2/u8g2_buffer.o
- .debug_abbrev  0x00001032      0x26f U8G2/u8g2_circle.o
- .debug_abbrev  0x000012a1       0xd8 U8G2/u8g2_d_memory.o
- .debug_abbrev  0x00001379      0x196 U8G2/u8g2_d_setup.o
- .debug_abbrev  0x0000150f      0x3e8 U8G2/u8g2_font.o
- .debug_abbrev  0x000018f7       0x88 U8G2/u8g2_fonts.o
- .debug_abbrev  0x0000197f      0x1aa U8G2/u8g2_hvline.o
- .debug_abbrev  0x00001b29      0x159 U8G2/u8g2_intersection.o
- .debug_abbrev  0x00001c82      0x14f U8G2/u8g2_ll_hvline.o
- .debug_abbrev  0x00001dd1      0x286 U8G2/u8g2_setup.o
- .debug_abbrev  0x00002057      0x367 U8G2/u8x8_8x8.o
- .debug_abbrev  0x000023be      0x1b5 U8G2/u8x8_avr.o
- .debug_abbrev  0x00002573      0x263 U8G2/u8x8_byte.o
- .debug_abbrev  0x000027d6      0x25c U8G2/u8x8_cad.o
- .debug_abbrev  0x00002a32      0x1bf U8G2/u8x8_display.o
- .debug_abbrev  0x00002bf1      0x19f U8G2/u8x8_d_ssd1306_128x64_noname.o
- .debug_abbrev  0x00002d90       0xe9 U8G2/u8x8_gpio.o
- .debug_abbrev  0x00002e79      0x17a U8G2/u8x8_setup.o
+ .debug_abbrev  0x000005a2       0xf2 distanceSensor.o
+ .debug_abbrev  0x00000694       0xfb main.o
+ .debug_abbrev  0x0000078f      0x434 screenController.o
+ .debug_abbrev  0x00000bc3       0xff U8G2/avr-hw-i2c/twimastertimeout.o
+ .debug_abbrev  0x00000cc2      0x169 U8G2/u8g2_box.o
+ .debug_abbrev  0x00000e2b      0x230 U8G2/u8g2_buffer.o
+ .debug_abbrev  0x0000105b      0x26f U8G2/u8g2_circle.o
+ .debug_abbrev  0x000012ca       0xd8 U8G2/u8g2_d_memory.o
+ .debug_abbrev  0x000013a2      0x196 U8G2/u8g2_d_setup.o
+ .debug_abbrev  0x00001538      0x3e8 U8G2/u8g2_font.o
+ .debug_abbrev  0x00001920       0x88 U8G2/u8g2_fonts.o
+ .debug_abbrev  0x000019a8      0x1aa U8G2/u8g2_hvline.o
+ .debug_abbrev  0x00001b52      0x159 U8G2/u8g2_intersection.o
+ .debug_abbrev  0x00001cab      0x14f U8G2/u8g2_ll_hvline.o
+ .debug_abbrev  0x00001dfa      0x286 U8G2/u8g2_setup.o
+ .debug_abbrev  0x00002080      0x367 U8G2/u8x8_8x8.o
+ .debug_abbrev  0x000023e7      0x1b5 U8G2/u8x8_avr.o
+ .debug_abbrev  0x0000259c      0x263 U8G2/u8x8_byte.o
+ .debug_abbrev  0x000027ff      0x25c U8G2/u8x8_cad.o
+ .debug_abbrev  0x00002a5b      0x1bf U8G2/u8x8_display.o
+ .debug_abbrev  0x00002c1a      0x19f U8G2/u8x8_d_ssd1306_128x64_noname.o
+ .debug_abbrev  0x00002db9       0xe9 U8G2/u8x8_gpio.o
+ .debug_abbrev  0x00002ea2      0x17a U8G2/u8x8_setup.o
 
-.debug_line     0x00000000     0xcf94
+.debug_line     0x00000000     0xcfdc
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x133 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_line    0x00000133      0x23c distanceSensor.o
- .debug_line    0x0000036f      0x16c main.o
- .debug_line    0x000004db      0xa36 screenController.o
- .debug_line    0x00000f11      0x39a U8G2/avr-hw-i2c/twimastertimeout.o
- .debug_line    0x000012ab      0x262 U8G2/u8g2_box.o
- .debug_line    0x0000150d      0x36c U8G2/u8g2_buffer.o
- .debug_line    0x00001879      0x4c2 U8G2/u8g2_circle.o
- .debug_line    0x00001d3b     0x1031 U8G2/u8g2_d_memory.o
- .debug_line    0x00002d6c     0x6587 U8G2/u8g2_d_setup.o
- .debug_line    0x000092f3      0xd7f U8G2/u8g2_font.o
- .debug_line    0x0000a072       0x94 U8G2/u8g2_fonts.o
- .debug_line    0x0000a106      0x233 U8G2/u8g2_hvline.o
- .debug_line    0x0000a339      0x10d U8G2/u8g2_intersection.o
- .debug_line    0x0000a446      0x236 U8G2/u8g2_ll_hvline.o
- .debug_line    0x0000a67c      0x59f U8G2/u8g2_setup.o
- .debug_line    0x0000ac1b      0x6ae U8G2/u8x8_8x8.o
- .debug_line    0x0000b2c9      0x23c U8G2/u8x8_avr.o
- .debug_line    0x0000b505      0x8bb U8G2/u8x8_byte.o
- .debug_line    0x0000bdc0      0x989 U8G2/u8x8_cad.o
- .debug_line    0x0000c749      0x29c U8G2/u8x8_display.o
- .debug_line    0x0000c9e5      0x391 U8G2/u8x8_d_ssd1306_128x64_noname.o
- .debug_line    0x0000cd76       0xb3 U8G2/u8x8_gpio.o
- .debug_line    0x0000ce29      0x16b U8G2/u8x8_setup.o
+ .debug_line    0x00000133      0x25a distanceSensor.o
+ .debug_line    0x0000038d      0x172 main.o
+ .debug_line    0x000004ff      0xa5a screenController.o
+ .debug_line    0x00000f59      0x39a U8G2/avr-hw-i2c/twimastertimeout.o
+ .debug_line    0x000012f3      0x262 U8G2/u8g2_box.o
+ .debug_line    0x00001555      0x36c U8G2/u8g2_buffer.o
+ .debug_line    0x000018c1      0x4c2 U8G2/u8g2_circle.o
+ .debug_line    0x00001d83     0x1031 U8G2/u8g2_d_memory.o
+ .debug_line    0x00002db4     0x6587 U8G2/u8g2_d_setup.o
+ .debug_line    0x0000933b      0xd7f U8G2/u8g2_font.o
+ .debug_line    0x0000a0ba       0x94 U8G2/u8g2_fonts.o
+ .debug_line    0x0000a14e      0x233 U8G2/u8g2_hvline.o
+ .debug_line    0x0000a381      0x10d U8G2/u8g2_intersection.o
+ .debug_line    0x0000a48e      0x236 U8G2/u8g2_ll_hvline.o
+ .debug_line    0x0000a6c4      0x59f U8G2/u8g2_setup.o
+ .debug_line    0x0000ac63      0x6ae U8G2/u8x8_8x8.o
+ .debug_line    0x0000b311      0x23c U8G2/u8x8_avr.o
+ .debug_line    0x0000b54d      0x8bb U8G2/u8x8_byte.o
+ .debug_line    0x0000be08      0x989 U8G2/u8x8_cad.o
+ .debug_line    0x0000c791      0x29c U8G2/u8x8_display.o
+ .debug_line    0x0000ca2d      0x391 U8G2/u8x8_d_ssd1306_128x64_noname.o
+ .debug_line    0x0000cdbe       0xb3 U8G2/u8x8_gpio.o
+ .debug_line    0x0000ce71      0x16b U8G2/u8x8_setup.o
 
-.debug_frame    0x00000000     0xc678
+.debug_frame    0x00000000     0xc6b8
  *(.debug_frame)
- .debug_frame   0x00000000       0xcc distanceSensor.o
- .debug_frame   0x000000cc       0x44 main.o
- .debug_frame   0x00000110      0x3ac screenController.o
- .debug_frame   0x000004bc       0xa0 U8G2/avr-hw-i2c/twimastertimeout.o
- .debug_frame   0x0000055c      0x120 U8G2/u8g2_box.o
- .debug_frame   0x0000067c      0x1c8 U8G2/u8g2_buffer.o
- .debug_frame   0x00000844      0x25c U8G2/u8g2_circle.o
- .debug_frame   0x00000aa0      0x8b4 U8G2/u8g2_d_memory.o
- .debug_frame   0x00001354     0x9d94 U8G2/u8g2_d_setup.o
- .debug_frame   0x0000b0e8      0x5c4 U8G2/u8g2_font.o
- .debug_frame   0x0000b6ac       0x9c U8G2/u8g2_hvline.o
- .debug_frame   0x0000b748       0x50 U8G2/u8g2_intersection.o
- .debug_frame   0x0000b798       0x60 U8G2/u8g2_ll_hvline.o
- .debug_frame   0x0000b7f8      0x20c U8G2/u8g2_setup.o
- .debug_frame   0x0000ba04      0x308 U8G2/u8x8_8x8.o
- .debug_frame   0x0000bd0c       0x48 U8G2/u8x8_avr.o
- .debug_frame   0x0000bd54      0x2c0 U8G2/u8x8_byte.o
- .debug_frame   0x0000c014      0x340 U8G2/u8x8_cad.o
- .debug_frame   0x0000c354      0x174 U8G2/u8x8_display.o
- .debug_frame   0x0000c4c8      0x104 U8G2/u8x8_d_ssd1306_128x64_noname.o
- .debug_frame   0x0000c5cc       0x24 U8G2/u8x8_gpio.o
- .debug_frame   0x0000c5f0       0x88 U8G2/u8x8_setup.o
+ .debug_frame   0x00000000       0xe4 distanceSensor.o
+ .debug_frame   0x000000e4       0x50 main.o
+ .debug_frame   0x00000134      0x3c8 screenController.o
+ .debug_frame   0x000004fc       0xa0 U8G2/avr-hw-i2c/twimastertimeout.o
+ .debug_frame   0x0000059c      0x120 U8G2/u8g2_box.o
+ .debug_frame   0x000006bc      0x1c8 U8G2/u8g2_buffer.o
+ .debug_frame   0x00000884      0x25c U8G2/u8g2_circle.o
+ .debug_frame   0x00000ae0      0x8b4 U8G2/u8g2_d_memory.o
+ .debug_frame   0x00001394     0x9d94 U8G2/u8g2_d_setup.o
+ .debug_frame   0x0000b128      0x5c4 U8G2/u8g2_font.o
+ .debug_frame   0x0000b6ec       0x9c U8G2/u8g2_hvline.o
+ .debug_frame   0x0000b788       0x50 U8G2/u8g2_intersection.o
+ .debug_frame   0x0000b7d8       0x60 U8G2/u8g2_ll_hvline.o
+ .debug_frame   0x0000b838      0x20c U8G2/u8g2_setup.o
+ .debug_frame   0x0000ba44      0x308 U8G2/u8x8_8x8.o
+ .debug_frame   0x0000bd4c       0x48 U8G2/u8x8_avr.o
+ .debug_frame   0x0000bd94      0x2c0 U8G2/u8x8_byte.o
+ .debug_frame   0x0000c054      0x340 U8G2/u8x8_cad.o
+ .debug_frame   0x0000c394      0x174 U8G2/u8x8_display.o
+ .debug_frame   0x0000c508      0x104 U8G2/u8x8_d_ssd1306_128x64_noname.o
+ .debug_frame   0x0000c60c       0x24 U8G2/u8x8_gpio.o
+ .debug_frame   0x0000c630       0x88 U8G2/u8x8_setup.o
 
-.debug_str      0x00000000    0x10f36
+.debug_str      0x00000000    0x10f20
  *(.debug_str)
  .debug_str     0x00000000      0x208 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega328p/avr5/crtatmega328p.o
- .debug_str     0x00000208      0x262 distanceSensor.o
-                                0x29b (size before relaxing)
- .debug_str     0x0000046a       0xa5 main.o
-                                0x260 (size before relaxing)
- .debug_str     0x0000050f      0xb52 screenController.o
-                                0xd53 (size before relaxing)
- .debug_str     0x00001061       0x90 U8G2/avr-hw-i2c/twimastertimeout.o
-                                0x210 (size before relaxing)
- .debug_str     0x000010f1       0x78 U8G2/u8g2_box.o
-                                0x8e9 (size before relaxing)
- .debug_str     0x00001169      0x1d6 U8G2/u8g2_buffer.o
-                                0xa3a (size before relaxing)
- .debug_str     0x0000133f      0x14f U8G2/u8g2_circle.o
-                                0x9cf (size before relaxing)
- .debug_str     0x0000148e      0x7da U8G2/u8g2_d_memory.o
-                                0x94d (size before relaxing)
- .debug_str     0x00001c68     0x4ef0 U8G2/u8g2_d_setup.o
-                               0x5f07 (size before relaxing)
- .debug_str     0x00006b58      0x551 U8G2/u8g2_font.o
-                                0xe29 (size before relaxing)
- .debug_str     0x000070a9     0x91e6 U8G2/u8g2_fonts.o
-                               0x937c (size before relaxing)
- .debug_str     0x0001028f       0x45 U8G2/u8g2_hvline.o
-                                0x8d1 (size before relaxing)
- .debug_str     0x000102d4       0x3f U8G2/u8g2_intersection.o
-                                0x88a (size before relaxing)
- .debug_str     0x00010313       0x66 U8G2/u8g2_ll_hvline.o
-                                0x8b9 (size before relaxing)
- .debug_str     0x00010379      0x22f U8G2/u8g2_setup.o
-                                0xafc (size before relaxing)
- .debug_str     0x000105a8      0x1c2 U8G2/u8x8_8x8.o
-                                0x626 (size before relaxing)
- .debug_str     0x0001076a       0x56 U8G2/u8x8_avr.o
-                                0x4ef (size before relaxing)
- .debug_str     0x000107c0      0x1db U8G2/u8x8_byte.o
-                                0x63f (size before relaxing)
- .debug_str     0x0001099b      0x19b U8G2/u8x8_cad.o
-                                0x68b (size before relaxing)
- .debug_str     0x00010b36      0x116 U8G2/u8x8_display.o
-                                0x5a2 (size before relaxing)
- .debug_str     0x00010c4c      0x27a U8G2/u8x8_d_ssd1306_128x64_noname.o
-                                0x799 (size before relaxing)
- .debug_str     0x00010ec6       0x14 U8G2/u8x8_gpio.o
-                                0x443 (size before relaxing)
- .debug_str     0x00010eda       0x5c U8G2/u8x8_setup.o
-                                0x4e6 (size before relaxing)
+ .debug_str     0x00000208      0x27e distanceSensor.o
+                                0x2b2 (size before relaxing)
+ .debug_str     0x00000486       0xaf main.o
+                                0x26a (size before relaxing)
+ .debug_str     0x00000535      0xb16 screenController.o
+                                0xd65 (size before relaxing)
+ .debug_str     0x0000104b       0x90 U8G2/avr-hw-i2c/twimastertimeout.o
+                                0x204 (size before relaxing)
+ .debug_str     0x000010db       0x78 U8G2/u8g2_box.o
+                                0x8dd (size before relaxing)
+ .debug_str     0x00001153      0x1d6 U8G2/u8g2_buffer.o
+                                0xa2e (size before relaxing)
+ .debug_str     0x00001329      0x14f U8G2/u8g2_circle.o
+                                0x9c3 (size before relaxing)
+ .debug_str     0x00001478      0x7da U8G2/u8g2_d_memory.o
+                                0x941 (size before relaxing)
+ .debug_str     0x00001c52     0x4ef0 U8G2/u8g2_d_setup.o
+                               0x5efb (size before relaxing)
+ .debug_str     0x00006b42      0x551 U8G2/u8g2_font.o
+                                0xe1d (size before relaxing)
+ .debug_str     0x00007093     0x91e6 U8G2/u8g2_fonts.o
+                               0x9370 (size before relaxing)
+ .debug_str     0x00010279       0x45 U8G2/u8g2_hvline.o
+                                0x8c5 (size before relaxing)
+ .debug_str     0x000102be       0x3f U8G2/u8g2_intersection.o
+                                0x87e (size before relaxing)
+ .debug_str     0x000102fd       0x66 U8G2/u8g2_ll_hvline.o
+                                0x8ad (size before relaxing)
+ .debug_str     0x00010363      0x22f U8G2/u8g2_setup.o
+                                0xaf0 (size before relaxing)
+ .debug_str     0x00010592      0x1c2 U8G2/u8x8_8x8.o
+                                0x61a (size before relaxing)
+ .debug_str     0x00010754       0x56 U8G2/u8x8_avr.o
+                                0x4e3 (size before relaxing)
+ .debug_str     0x000107aa      0x1db U8G2/u8x8_byte.o
+                                0x633 (size before relaxing)
+ .debug_str     0x00010985      0x19b U8G2/u8x8_cad.o
+                                0x67f (size before relaxing)
+ .debug_str     0x00010b20      0x116 U8G2/u8x8_display.o
+                                0x596 (size before relaxing)
+ .debug_str     0x00010c36      0x27a U8G2/u8x8_d_ssd1306_128x64_noname.o
+                                0x78d (size before relaxing)
+ .debug_str     0x00010eb0       0x14 U8G2/u8x8_gpio.o
+                                0x437 (size before relaxing)
+ .debug_str     0x00010ec4       0x5c U8G2/u8x8_setup.o
+                                0x4da (size before relaxing)
 
-.debug_loc      0x00000000    0x4e8b5
+.debug_loc      0x00000000    0x4e9f6
  *(.debug_loc)
- .debug_loc     0x00000000      0x1e2 distanceSensor.o
- .debug_loc     0x000001e2      0xeb0 screenController.o
- .debug_loc     0x00001092      0x31a U8G2/avr-hw-i2c/twimastertimeout.o
- .debug_loc     0x000013ac      0x8b2 U8G2/u8g2_box.o
- .debug_loc     0x00001c5e      0x910 U8G2/u8g2_buffer.o
- .debug_loc     0x0000256e     0x16a2 U8G2/u8g2_circle.o
- .debug_loc     0x00003c10     0x1590 U8G2/u8g2_d_memory.o
- .debug_loc     0x000051a0    0x3e724 U8G2/u8g2_d_setup.o
- .debug_loc     0x000438c4     0x2e92 U8G2/u8g2_font.o
- .debug_loc     0x00046756      0x69d U8G2/u8g2_hvline.o
- .debug_loc     0x00046df3      0x192 U8G2/u8g2_intersection.o
- .debug_loc     0x00046f85      0x4b3 U8G2/u8g2_ll_hvline.o
- .debug_loc     0x00047438      0xd38 U8G2/u8g2_setup.o
- .debug_loc     0x00048170     0x1922 U8G2/u8x8_8x8.o
- .debug_loc     0x00049a92      0x57e U8G2/u8x8_avr.o
- .debug_loc     0x0004a010     0x1b9a U8G2/u8x8_byte.o
- .debug_loc     0x0004bbaa     0x1c7b U8G2/u8x8_cad.o
- .debug_loc     0x0004d825      0x588 U8G2/u8x8_display.o
- .debug_loc     0x0004ddad      0x7c1 U8G2/u8x8_d_ssd1306_128x64_noname.o
- .debug_loc     0x0004e56e       0x68 U8G2/u8x8_gpio.o
- .debug_loc     0x0004e5d6      0x2df U8G2/u8x8_setup.o
+ .debug_loc     0x00000000      0x216 distanceSensor.o
+ .debug_loc     0x00000216       0x2f main.o
+ .debug_loc     0x00000245      0xf8e screenController.o
+ .debug_loc     0x000011d3      0x31a U8G2/avr-hw-i2c/twimastertimeout.o
+ .debug_loc     0x000014ed      0x8b2 U8G2/u8g2_box.o
+ .debug_loc     0x00001d9f      0x910 U8G2/u8g2_buffer.o
+ .debug_loc     0x000026af     0x16a2 U8G2/u8g2_circle.o
+ .debug_loc     0x00003d51     0x1590 U8G2/u8g2_d_memory.o
+ .debug_loc     0x000052e1    0x3e724 U8G2/u8g2_d_setup.o
+ .debug_loc     0x00043a05     0x2e92 U8G2/u8g2_font.o
+ .debug_loc     0x00046897      0x69d U8G2/u8g2_hvline.o
+ .debug_loc     0x00046f34      0x192 U8G2/u8g2_intersection.o
+ .debug_loc     0x000470c6      0x4b3 U8G2/u8g2_ll_hvline.o
+ .debug_loc     0x00047579      0xd38 U8G2/u8g2_setup.o
+ .debug_loc     0x000482b1     0x1922 U8G2/u8x8_8x8.o
+ .debug_loc     0x00049bd3      0x57e U8G2/u8x8_avr.o
+ .debug_loc     0x0004a151     0x1b9a U8G2/u8x8_byte.o
+ .debug_loc     0x0004bceb     0x1c7b U8G2/u8x8_cad.o
+ .debug_loc     0x0004d966      0x588 U8G2/u8x8_display.o
+ .debug_loc     0x0004deee      0x7c1 U8G2/u8x8_d_ssd1306_128x64_noname.o
+ .debug_loc     0x0004e6af       0x68 U8G2/u8x8_gpio.o
+ .debug_loc     0x0004e717      0x2df U8G2/u8x8_setup.o
 
 .debug_macinfo
  *(.debug_macinfo)

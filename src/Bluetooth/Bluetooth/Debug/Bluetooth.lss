@@ -1,0 +1,571 @@
+
+Bluetooth.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         0000001a  00800100  00000346  000003ba  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         00000346  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .comment      00000030  00000000  00000000  000003d4  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000404  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000078  00000000  00000000  00000444  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   000009cc  00000000  00000000  000004bc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 0000076d  00000000  00000000  00000e88  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   000003cb  00000000  00000000  000015f5  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  0000015c  00000000  00000000  000019c0  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    00000430  00000000  00000000  00001b1c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    00000352  00000000  00000000  00001f4c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000058  00000000  00000000  0000229e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+   8:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+   c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  10:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  14:	0c 94 32 01 	jmp	0x264	; 0x264 <__vector_5>
+  18:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  1c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  20:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  24:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  28:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  2c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  30:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  34:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  38:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  3c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  40:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  44:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  48:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  4c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  50:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  54:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  58:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  5c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  60:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  64:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_copy_data>:
+  74:	11 e0       	ldi	r17, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	e6 e4       	ldi	r30, 0x46	; 70
+  7c:	f3 e0       	ldi	r31, 0x03	; 3
+  7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
+  80:	05 90       	lpm	r0, Z+
+  82:	0d 92       	st	X+, r0
+  84:	aa 31       	cpi	r26, 0x1A	; 26
+  86:	b1 07       	cpc	r27, r17
+  88:	d9 f7       	brne	.-10     	; 0x80 <__do_copy_data+0xc>
+
+0000008a <__do_clear_bss>:
+  8a:	21 e0       	ldi	r18, 0x01	; 1
+  8c:	aa e1       	ldi	r26, 0x1A	; 26
+  8e:	b1 e0       	ldi	r27, 0x01	; 1
+  90:	01 c0       	rjmp	.+2      	; 0x94 <.do_clear_bss_start>
+
+00000092 <.do_clear_bss_loop>:
+  92:	1d 92       	st	X+, r1
+
+00000094 <.do_clear_bss_start>:
+  94:	aa 31       	cpi	r26, 0x1A	; 26
+  96:	b2 07       	cpc	r27, r18
+  98:	e1 f7       	brne	.-8      	; 0x92 <.do_clear_bss_loop>
+  9a:	0e 94 53 00 	call	0xa6	; 0xa6 <main>
+  9e:	0c 94 a1 01 	jmp	0x342	; 0x342 <_exit>
+
+000000a2 <__bad_interrupt>:
+  a2:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+000000a6 <main>:
+#define LED PORTB1
+
+
+int main(void)
+{
+	initBluetooth();
+  a6:	0e 94 8b 00 	call	0x116	; 0x116 <initBluetooth>
+	sei();
+  aa:	78 94       	sei
+  ac:	ff cf       	rjmp	.-2      	; 0xac <main+0x6>
+
+000000ae <USART_Init>:
+
+
+
+void USART_Init(unsigned long BAUDRATE)				/* USART initialize function */
+{
+	UCSR0B |= (1 << RXEN0) | (1 << TXEN0);				/* Enable USART transmitter and receiver */
+  ae:	e1 ec       	ldi	r30, 0xC1	; 193
+  b0:	f0 e0       	ldi	r31, 0x00	; 0
+  b2:	20 81       	ld	r18, Z
+  b4:	28 61       	ori	r18, 0x18	; 24
+  b6:	20 83       	st	Z, r18
+	UCSR0C |= (1 << UCPOL0)| (1 << UCSZ00) | (1 << UCSZ01);	/* Write USCRC for 8 bit data and 1 stop bit */
+  b8:	e2 ec       	ldi	r30, 0xC2	; 194
+  ba:	f0 e0       	ldi	r31, 0x00	; 0
+  bc:	20 81       	ld	r18, Z
+  be:	27 60       	ori	r18, 0x07	; 7
+  c0:	20 83       	st	Z, r18
+	UBRR0L = BAUD_PRESCALE;							/* Load UBRRL with lower 8 bit of prescale value */
+  c2:	dc 01       	movw	r26, r24
+  c4:	cb 01       	movw	r24, r22
+  c6:	88 0f       	add	r24, r24
+  c8:	99 1f       	adc	r25, r25
+  ca:	aa 1f       	adc	r26, r26
+  cc:	bb 1f       	adc	r27, r27
+  ce:	88 0f       	add	r24, r24
+  d0:	99 1f       	adc	r25, r25
+  d2:	aa 1f       	adc	r26, r26
+  d4:	bb 1f       	adc	r27, r27
+  d6:	9c 01       	movw	r18, r24
+  d8:	ad 01       	movw	r20, r26
+  da:	22 0f       	add	r18, r18
+  dc:	33 1f       	adc	r19, r19
+  de:	44 1f       	adc	r20, r20
+  e0:	55 1f       	adc	r21, r21
+  e2:	22 0f       	add	r18, r18
+  e4:	33 1f       	adc	r19, r19
+  e6:	44 1f       	adc	r20, r20
+  e8:	55 1f       	adc	r21, r21
+  ea:	60 e0       	ldi	r22, 0x00	; 0
+  ec:	74 e2       	ldi	r23, 0x24	; 36
+  ee:	84 ef       	ldi	r24, 0xF4	; 244
+  f0:	90 e0       	ldi	r25, 0x00	; 0
+  f2:	0e 94 6b 01 	call	0x2d6	; 0x2d6 <__udivmodsi4>
+  f6:	8f ef       	ldi	r24, 0xFF	; 255
+  f8:	82 0f       	add	r24, r18
+  fa:	80 93 c4 00 	sts	0x00C4, r24	; 0x8000c4 <__DATA_REGION_ORIGIN__+0x64>
+	UBRR0H = (BAUD_PRESCALE >> 8);					/* Load UBRRH with upper 8 bit of prescale value */
+  fe:	da 01       	movw	r26, r20
+ 100:	c9 01       	movw	r24, r18
+ 102:	01 97       	sbiw	r24, 0x01	; 1
+ 104:	a1 09       	sbc	r26, r1
+ 106:	b1 09       	sbc	r27, r1
+ 108:	89 2f       	mov	r24, r25
+ 10a:	9a 2f       	mov	r25, r26
+ 10c:	ab 2f       	mov	r26, r27
+ 10e:	bb 27       	eor	r27, r27
+ 110:	80 93 c5 00 	sts	0x00C5, r24	; 0x8000c5 <__DATA_REGION_ORIGIN__+0x65>
+ 114:	08 95       	ret
+
+00000116 <initBluetooth>:
+
+#define BL_LED_ON "on"
+#define BL_LED_OFF "off"
+int result;
+void initBluetooth(){
+	PCICR |= (1<<PCIE2);
+ 116:	e8 e6       	ldi	r30, 0x68	; 104
+ 118:	f0 e0       	ldi	r31, 0x00	; 0
+ 11a:	80 81       	ld	r24, Z
+ 11c:	84 60       	ori	r24, 0x04	; 4
+ 11e:	80 83       	st	Z, r24
+	PCMSK2 |= (1<<PCINT16);
+ 120:	ed e6       	ldi	r30, 0x6D	; 109
+ 122:	f0 e0       	ldi	r31, 0x00	; 0
+ 124:	80 81       	ld	r24, Z
+ 126:	81 60       	ori	r24, 0x01	; 1
+ 128:	80 83       	st	Z, r24
+	
+	DDRB = 0xff;							/* make PORT as output port */
+ 12a:	8f ef       	ldi	r24, 0xFF	; 255
+ 12c:	84 b9       	out	0x04, r24	; 4
+	USART_Init(9600);						/* initialize USART with 9600 baud rate */
+ 12e:	60 e8       	ldi	r22, 0x80	; 128
+ 130:	75 e2       	ldi	r23, 0x25	; 37
+ 132:	80 e0       	ldi	r24, 0x00	; 0
+ 134:	90 e0       	ldi	r25, 0x00	; 0
+ 136:	0e 94 57 00 	call	0xae	; 0xae <USART_Init>
+	LEDPORT = 0;
+ 13a:	15 b8       	out	0x05, r1	; 5
+ 13c:	08 95       	ret
+
+0000013e <USART_RxChar>:
+	UBRR0H = (BAUD_PRESCALE >> 8);					/* Load UBRRH with upper 8 bit of prescale value */
+}
+
+char USART_RxChar()									/* Data receiving function */
+{
+	while (!(UCSR0A & (1 << RXC0)));					/* Wait until new data receive */
+ 13e:	e0 ec       	ldi	r30, 0xC0	; 192
+ 140:	f0 e0       	ldi	r31, 0x00	; 0
+ 142:	80 81       	ld	r24, Z
+ 144:	88 23       	and	r24, r24
+ 146:	ec f7       	brge	.-6      	; 0x142 <USART_RxChar+0x4>
+	return(UDR0);									/* Get and return received data */
+ 148:	80 91 c6 00 	lds	r24, 0x00C6	; 0x8000c6 <__DATA_REGION_ORIGIN__+0x66>
+}
+ 14c:	08 95       	ret
+
+0000014e <USART_TxChar>:
+
+void USART_TxChar(char data)						/* Data transmitting function */
+{
+	UDR0 = data;										/* Write data to be transmitting in UDR */
+ 14e:	80 93 c6 00 	sts	0x00C6, r24	; 0x8000c6 <__DATA_REGION_ORIGIN__+0x66>
+	while (!(UCSR0A & (1<<UDRE0)));					/* Wait until data transmit and buffer get empty */
+ 152:	e0 ec       	ldi	r30, 0xC0	; 192
+ 154:	f0 e0       	ldi	r31, 0x00	; 0
+ 156:	80 81       	ld	r24, Z
+ 158:	85 ff       	sbrs	r24, 5
+ 15a:	fd cf       	rjmp	.-6      	; 0x156 <USART_TxChar+0x8>
+}
+ 15c:	08 95       	ret
+
+0000015e <USART_ReceiveString>:
+* the function returns.
+* - The array is terminated with ?\0?.
+*/
+
+void USART_ReceiveString(char *str)
+{
+ 15e:	ef 92       	push	r14
+ 160:	ff 92       	push	r15
+ 162:	0f 93       	push	r16
+ 164:	1f 93       	push	r17
+ 166:	cf 93       	push	r28
+ 168:	7c 01       	movw	r14, r24
+	uint8_t t = 0;
+ 16a:	c0 e0       	ldi	r28, 0x00	; 0
+
+	while ((str[t] = USART_RxChar()) != '\n')
+ 16c:	01 c0       	rjmp	.+2      	; 0x170 <USART_ReceiveString+0x12>
+	{
+		t++;
+ 16e:	cf 5f       	subi	r28, 0xFF	; 255
+
+void USART_ReceiveString(char *str)
+{
+	uint8_t t = 0;
+
+	while ((str[t] = USART_RxChar()) != '\n')
+ 170:	87 01       	movw	r16, r14
+ 172:	0c 0f       	add	r16, r28
+ 174:	11 1d       	adc	r17, r1
+ 176:	0e 94 9f 00 	call	0x13e	; 0x13e <USART_RxChar>
+ 17a:	f8 01       	movw	r30, r16
+ 17c:	80 83       	st	Z, r24
+ 17e:	8a 30       	cpi	r24, 0x0A	; 10
+ 180:	b1 f7       	brne	.-20     	; 0x16e <USART_ReceiveString+0x10>
+	{
+		t++;
+	}
+	//str[t++] = '\n';
+	str[t] = '\0';
+ 182:	10 82       	st	Z, r1
+}
+ 184:	cf 91       	pop	r28
+ 186:	1f 91       	pop	r17
+ 188:	0f 91       	pop	r16
+ 18a:	ff 90       	pop	r15
+ 18c:	ef 90       	pop	r14
+ 18e:	08 95       	ret
+
+00000190 <USART_SendString>:
+
+void USART_SendString(char *str)					/* Send string of USART data function */
+{
+ 190:	cf 93       	push	r28
+ 192:	df 93       	push	r29
+ 194:	ec 01       	movw	r28, r24
+	int i=0;
+	while (str[i]!=0)
+ 196:	88 81       	ld	r24, Y
+ 198:	88 23       	and	r24, r24
+ 19a:	31 f0       	breq	.+12     	; 0x1a8 <USART_SendString+0x18>
+ 19c:	21 96       	adiw	r28, 0x01	; 1
+	{
+		USART_TxChar(str[i]);						/* Send each char of string till the NULL */
+ 19e:	0e 94 a7 00 	call	0x14e	; 0x14e <USART_TxChar>
+}
+
+void USART_SendString(char *str)					/* Send string of USART data function */
+{
+	int i=0;
+	while (str[i]!=0)
+ 1a2:	89 91       	ld	r24, Y+
+ 1a4:	81 11       	cpse	r24, r1
+ 1a6:	fb cf       	rjmp	.-10     	; 0x19e <USART_SendString+0xe>
+	{
+		USART_TxChar(str[i]);						/* Send each char of string till the NULL */
+		i++;
+	}
+}
+ 1a8:	df 91       	pop	r29
+ 1aa:	cf 91       	pop	r28
+ 1ac:	08 95       	ret
+
+000001ae <USART_BluetoothChanger>:
+
+void USART_BluetoothChanger(char Data_in[BL_BUFFERSIZE]){			/* When certain values are received the car does something*/
+ 1ae:	ef 92       	push	r14
+ 1b0:	ff 92       	push	r15
+ 1b2:	0f 93       	push	r16
+ 1b4:	1f 93       	push	r17
+ 1b6:	cf 93       	push	r28
+ 1b8:	df 93       	push	r29
+ 1ba:	cd b7       	in	r28, 0x3d	; 61
+ 1bc:	de b7       	in	r29, 0x3e	; 62
+ 1be:	2a 97       	sbiw	r28, 0x0a	; 10
+ 1c0:	0f b6       	in	r0, 0x3f	; 63
+ 1c2:	f8 94       	cli
+ 1c4:	de bf       	out	0x3e, r29	; 62
+ 1c6:	0f be       	out	0x3f, r0	; 63
+ 1c8:	cd bf       	out	0x3d, r28	; 61
+ 1ca:	8c 01       	movw	r16, r24
+	LEDPORT = 0;
+ 1cc:	15 b8       	out	0x05, r1	; 5
+	LEDPORT &= ~(1 << PORTB3);
+	}
+	*/
+	/*	else */
+	
+	if(strcmp(Data_in, /*BL_LED_ON*/"ON") == 0)
+ 1ce:	6e e0       	ldi	r22, 0x0E	; 14
+ 1d0:	71 e0       	ldi	r23, 0x01	; 1
+ 1d2:	0e 94 98 01 	call	0x330	; 0x330 <strcmp>
+ 1d6:	89 2b       	or	r24, r25
+ 1d8:	39 f4       	brne	.+14     	; 0x1e8 <USART_BluetoothChanger+0x3a>
+	{
+		LEDPORT |= (1<<PORTB4);
+ 1da:	2c 9a       	sbi	0x05, 4	; 5
+		LEDPORT |= (1<<PORTB5);						/* Turn ON LED */
+ 1dc:	2d 9a       	sbi	0x05, 5	; 5
+		USART_SendString("LED_ON");					/* send status of LED i.e. LED ON */
+ 1de:	8a e0       	ldi	r24, 0x0A	; 10
+ 1e0:	91 e0       	ldi	r25, 0x01	; 1
+ 1e2:	0e 94 c8 00 	call	0x190	; 0x190 <USART_SendString>
+ 1e6:	31 c0       	rjmp	.+98     	; 0x24a <USART_BluetoothChanger+0x9c>
+		
+	}
+	else if(strcmp(Data_in, /*BL_LED_OFF*/"OFF") == 0)
+ 1e8:	65 e1       	ldi	r22, 0x15	; 21
+ 1ea:	71 e0       	ldi	r23, 0x01	; 1
+ 1ec:	c8 01       	movw	r24, r16
+ 1ee:	0e 94 98 01 	call	0x330	; 0x330 <strcmp>
+ 1f2:	89 2b       	or	r24, r25
+ 1f4:	39 f4       	brne	.+14     	; 0x204 <USART_BluetoothChanger+0x56>
+	{
+		LEDPORT &= ~(1<<PORTB4);
+ 1f6:	2c 98       	cbi	0x05, 4	; 5
+		LEDPORT &= ~(1<<PORTB5);							/* Turn OFF LED */
+ 1f8:	2d 98       	cbi	0x05, 5	; 5
+		USART_SendString("LED_OFF"); 				/* send status of LED i.e. LED OFF */
+ 1fa:	81 e1       	ldi	r24, 0x11	; 17
+ 1fc:	91 e0       	ldi	r25, 0x01	; 1
+ 1fe:	0e 94 c8 00 	call	0x190	; 0x190 <USART_SendString>
+ 202:	23 c0       	rjmp	.+70     	; 0x24a <USART_BluetoothChanger+0x9c>
+	}
+	else{
+		char buffer_tmp[BL_BUFFERSIZE] = "RX:> ";
+ 204:	86 e0       	ldi	r24, 0x06	; 6
+ 206:	e0 e0       	ldi	r30, 0x00	; 0
+ 208:	f1 e0       	ldi	r31, 0x01	; 1
+ 20a:	9e 01       	movw	r18, r28
+ 20c:	2f 5f       	subi	r18, 0xFF	; 255
+ 20e:	3f 4f       	sbci	r19, 0xFF	; 255
+ 210:	79 01       	movw	r14, r18
+ 212:	d9 01       	movw	r26, r18
+ 214:	01 90       	ld	r0, Z+
+ 216:	0d 92       	st	X+, r0
+ 218:	8a 95       	dec	r24
+ 21a:	e1 f7       	brne	.-8      	; 0x214 <USART_BluetoothChanger+0x66>
+ 21c:	fe 01       	movw	r30, r28
+ 21e:	37 96       	adiw	r30, 0x07	; 7
+ 220:	84 e0       	ldi	r24, 0x04	; 4
+ 222:	df 01       	movw	r26, r30
+ 224:	1d 92       	st	X+, r1
+ 226:	8a 95       	dec	r24
+ 228:	e9 f7       	brne	.-6      	; 0x224 <USART_BluetoothChanger+0x76>
+		strcat(buffer_tmp, Data_in);
+ 22a:	b8 01       	movw	r22, r16
+ 22c:	c9 01       	movw	r24, r18
+ 22e:	0e 94 8d 01 	call	0x31a	; 0x31a <strcat>
+		strcat(buffer_tmp, "\n");
+ 232:	f7 01       	movw	r30, r14
+ 234:	01 90       	ld	r0, Z+
+ 236:	00 20       	and	r0, r0
+ 238:	e9 f7       	brne	.-6      	; 0x234 <USART_BluetoothChanger+0x86>
+ 23a:	31 97       	sbiw	r30, 0x01	; 1
+ 23c:	8a e0       	ldi	r24, 0x0A	; 10
+ 23e:	90 e0       	ldi	r25, 0x00	; 0
+ 240:	91 83       	std	Z+1, r25	; 0x01
+ 242:	80 83       	st	Z, r24
+		USART_SendString(buffer_tmp); 				/* send status of LED i.e. LED OFF */
+ 244:	c7 01       	movw	r24, r14
+ 246:	0e 94 c8 00 	call	0x190	; 0x190 <USART_SendString>
+		strcpy(buffer_tmp, "");
+	}
+	
+ 24a:	2a 96       	adiw	r28, 0x0a	; 10
+ 24c:	0f b6       	in	r0, 0x3f	; 63
+ 24e:	f8 94       	cli
+ 250:	de bf       	out	0x3e, r29	; 62
+ 252:	0f be       	out	0x3f, r0	; 63
+ 254:	cd bf       	out	0x3d, r28	; 61
+ 256:	df 91       	pop	r29
+ 258:	cf 91       	pop	r28
+ 25a:	1f 91       	pop	r17
+ 25c:	0f 91       	pop	r16
+ 25e:	ff 90       	pop	r15
+ 260:	ef 90       	pop	r14
+ 262:	08 95       	ret
+
+00000264 <__vector_5>:
+	USART_Init(9600);						/* initialize USART with 9600 baud rate */
+	LEDPORT = 0;
+}
+
+ISR(PCINT2_vect)
+{
+ 264:	1f 92       	push	r1
+ 266:	0f 92       	push	r0
+ 268:	0f b6       	in	r0, 0x3f	; 63
+ 26a:	0f 92       	push	r0
+ 26c:	11 24       	eor	r1, r1
+ 26e:	2f 93       	push	r18
+ 270:	3f 93       	push	r19
+ 272:	4f 93       	push	r20
+ 274:	5f 93       	push	r21
+ 276:	6f 93       	push	r22
+ 278:	7f 93       	push	r23
+ 27a:	8f 93       	push	r24
+ 27c:	9f 93       	push	r25
+ 27e:	af 93       	push	r26
+ 280:	bf 93       	push	r27
+ 282:	ef 93       	push	r30
+ 284:	ff 93       	push	r31
+ 286:	cf 93       	push	r28
+ 288:	df 93       	push	r29
+ 28a:	cd b7       	in	r28, 0x3d	; 61
+ 28c:	de b7       	in	r29, 0x3e	; 62
+ 28e:	2a 97       	sbiw	r28, 0x0a	; 10
+ 290:	de bf       	out	0x3e, r29	; 62
+ 292:	cd bf       	out	0x3d, r28	; 61
+	char receivedStr[BL_BUFFERSIZE];
+	USART_ReceiveString(receivedStr);
+ 294:	ce 01       	movw	r24, r28
+ 296:	01 96       	adiw	r24, 0x01	; 1
+ 298:	0e 94 af 00 	call	0x15e	; 0x15e <USART_ReceiveString>
+	USART_BluetoothChanger(receivedStr);
+ 29c:	ce 01       	movw	r24, r28
+ 29e:	01 96       	adiw	r24, 0x01	; 1
+ 2a0:	0e 94 d7 00 	call	0x1ae	; 0x1ae <USART_BluetoothChanger>
+}
+ 2a4:	2a 96       	adiw	r28, 0x0a	; 10
+ 2a6:	0f b6       	in	r0, 0x3f	; 63
+ 2a8:	f8 94       	cli
+ 2aa:	de bf       	out	0x3e, r29	; 62
+ 2ac:	0f be       	out	0x3f, r0	; 63
+ 2ae:	cd bf       	out	0x3d, r28	; 61
+ 2b0:	df 91       	pop	r29
+ 2b2:	cf 91       	pop	r28
+ 2b4:	ff 91       	pop	r31
+ 2b6:	ef 91       	pop	r30
+ 2b8:	bf 91       	pop	r27
+ 2ba:	af 91       	pop	r26
+ 2bc:	9f 91       	pop	r25
+ 2be:	8f 91       	pop	r24
+ 2c0:	7f 91       	pop	r23
+ 2c2:	6f 91       	pop	r22
+ 2c4:	5f 91       	pop	r21
+ 2c6:	4f 91       	pop	r20
+ 2c8:	3f 91       	pop	r19
+ 2ca:	2f 91       	pop	r18
+ 2cc:	0f 90       	pop	r0
+ 2ce:	0f be       	out	0x3f, r0	; 63
+ 2d0:	0f 90       	pop	r0
+ 2d2:	1f 90       	pop	r1
+ 2d4:	18 95       	reti
+
+000002d6 <__udivmodsi4>:
+ 2d6:	a1 e2       	ldi	r26, 0x21	; 33
+ 2d8:	1a 2e       	mov	r1, r26
+ 2da:	aa 1b       	sub	r26, r26
+ 2dc:	bb 1b       	sub	r27, r27
+ 2de:	fd 01       	movw	r30, r26
+ 2e0:	0d c0       	rjmp	.+26     	; 0x2fc <__udivmodsi4_ep>
+
+000002e2 <__udivmodsi4_loop>:
+ 2e2:	aa 1f       	adc	r26, r26
+ 2e4:	bb 1f       	adc	r27, r27
+ 2e6:	ee 1f       	adc	r30, r30
+ 2e8:	ff 1f       	adc	r31, r31
+ 2ea:	a2 17       	cp	r26, r18
+ 2ec:	b3 07       	cpc	r27, r19
+ 2ee:	e4 07       	cpc	r30, r20
+ 2f0:	f5 07       	cpc	r31, r21
+ 2f2:	20 f0       	brcs	.+8      	; 0x2fc <__udivmodsi4_ep>
+ 2f4:	a2 1b       	sub	r26, r18
+ 2f6:	b3 0b       	sbc	r27, r19
+ 2f8:	e4 0b       	sbc	r30, r20
+ 2fa:	f5 0b       	sbc	r31, r21
+
+000002fc <__udivmodsi4_ep>:
+ 2fc:	66 1f       	adc	r22, r22
+ 2fe:	77 1f       	adc	r23, r23
+ 300:	88 1f       	adc	r24, r24
+ 302:	99 1f       	adc	r25, r25
+ 304:	1a 94       	dec	r1
+ 306:	69 f7       	brne	.-38     	; 0x2e2 <__udivmodsi4_loop>
+ 308:	60 95       	com	r22
+ 30a:	70 95       	com	r23
+ 30c:	80 95       	com	r24
+ 30e:	90 95       	com	r25
+ 310:	9b 01       	movw	r18, r22
+ 312:	ac 01       	movw	r20, r24
+ 314:	bd 01       	movw	r22, r26
+ 316:	cf 01       	movw	r24, r30
+ 318:	08 95       	ret
+
+0000031a <strcat>:
+ 31a:	fb 01       	movw	r30, r22
+ 31c:	dc 01       	movw	r26, r24
+ 31e:	0d 90       	ld	r0, X+
+ 320:	00 20       	and	r0, r0
+ 322:	e9 f7       	brne	.-6      	; 0x31e <strcat+0x4>
+ 324:	11 97       	sbiw	r26, 0x01	; 1
+ 326:	01 90       	ld	r0, Z+
+ 328:	0d 92       	st	X+, r0
+ 32a:	00 20       	and	r0, r0
+ 32c:	e1 f7       	brne	.-8      	; 0x326 <strcat+0xc>
+ 32e:	08 95       	ret
+
+00000330 <strcmp>:
+ 330:	fb 01       	movw	r30, r22
+ 332:	dc 01       	movw	r26, r24
+ 334:	8d 91       	ld	r24, X+
+ 336:	01 90       	ld	r0, Z+
+ 338:	80 19       	sub	r24, r0
+ 33a:	01 10       	cpse	r0, r1
+ 33c:	d9 f3       	breq	.-10     	; 0x334 <strcmp+0x4>
+ 33e:	99 0b       	sbc	r25, r25
+ 340:	08 95       	ret
+
+00000342 <_exit>:
+ 342:	f8 94       	cli
+
+00000344 <__stop_program>:
+ 344:	ff cf       	rjmp	.-2      	; 0x344 <__stop_program>

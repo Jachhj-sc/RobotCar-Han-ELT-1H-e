@@ -13,13 +13,14 @@
 
 #ifndef SCREENCONTROLLER_H_
 #define SCREENCONTROLLER_H_
+#define F_CPU 16000000UL
 
 #include "U8G2/u8g2.h"
 #include "U8G2/u8x8.h"
 #include "U8G2/u8x8_avr.h"
 
 void sys_init(void);
-int8_t * u8g2_setup(int *pSettings, int *pSpeed, int *pDirection, int *pDistance);
+int8_t * u8g2_setup(int *pSettings, int *pSpeed, int *pDirection, int *pDistance, int *pangdeg);
 void screenRoutine(void);
 void choiceAdder(int8_t addValue);
 void pageSel(void);
