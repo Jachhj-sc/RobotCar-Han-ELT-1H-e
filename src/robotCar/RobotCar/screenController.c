@@ -344,9 +344,8 @@ void draw(void){
 //Buttons_____________________________________________________________________________________________________________________________________________
 
 //the routine that gets run when the pin change interrupt gets triggered on portD for the enabled pins
-ISR (BUTTON_PC_VECT)
+ISR (PCINT2_vect)
 {
-
 	if ( (BUTTON_PIN & (1<<DOWN)) == 0 )
 	keyPressed = DOWN;
 	else
@@ -362,7 +361,7 @@ ISR (BUTTON_PC_VECT)
 }
 
 void but_init(void){
-	BUTTON_REG &= ~((1 << DOWN)|(1 << UP)|(1 << SELECT)|(1 << BACK));     
+	BUTTON_REG &= ~((1 << DOWN)|(1 << UP)|(1 << SELECT)|(1 << BACK));     // set pinD 4 5 6 and 7 as an input
 	// is now an input
 	BUTTON_PORT |= (1 << DOWN)|(1 << UP)|(1 << SELECT)|(1 << BACK);    // turn On the Pull-up on all those pins
 	// is now an input with pull-up enabled
@@ -370,7 +369,7 @@ void but_init(void){
 	if (BUTTON_PORT == PORTB){
 		//interrupt setup
 		PCICR |= (1<<PCIE0);
-		PCMSK0 |= (1 << PCINT0)|(1 << PCINT1)|(1 << PCINT3)|(1 << PCINT2);//enable the pin change interrupts on pinD 4,5,6,7
+		PCMSK0 |= (1 << DOWN)|(1 << UP)|(1 << SELECT)|(1 << BACK);//enable the pin change interrupts on pinD 4,5,6,7
 		
 		}else if (BUTTON_PORT == PORTC){
 		//interrupt setup
@@ -387,34 +386,30 @@ void but_init(void){
 }
 
 void updateButtons(void){
-	
 	switch (keyPressed)
 	{
 		case BACK:
 		currentPage = pageHistory(1, 0);
 		reDrawRequired = 1;
-		keyPressed = -1;//reset key pressed
+		keyPressed = 0;//reset key pressed
 		break;
 		
 		case SELECT:
 		pageSel();
 		reDrawRequired = 1;
-		keyPressed = -1;
+		keyPressed = 0;
 		break;
 		
 		case UP:
 		choiceAdder(-1);
 		reDrawRequired = 1;
-		keyPressed = -1;
+		keyPressed = 0;
 		break;
 		
 		case DOWN:
 		choiceAdder(+1);
 		reDrawRequired = 1;
-		keyPressed = -1;
-		break;
-		default:
-		keyPressed = -1;
+		keyPressed = 0;
 		break;
 	}
 }
