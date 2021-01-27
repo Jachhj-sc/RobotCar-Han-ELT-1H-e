@@ -225,9 +225,11 @@ void screenRoutine(void){
 	if (reDrawRequired || reDrawRequiredTime)
 	{
 		reDrawRequired = 1;
+		
 		u8g2_ClearBuffer(&u8g2);
 		draw();
 		u8g2_SendBuffer(&u8g2);
+		
 		reDrawRequiredTime = 0;
 	}
 }

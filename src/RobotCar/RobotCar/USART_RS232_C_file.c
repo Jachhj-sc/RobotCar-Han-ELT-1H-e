@@ -21,7 +21,7 @@ int *Settings;
 
 
 int result;
-void initBluetooth(int *SettingsHold[settings]){
+void initBluetooth(int SettingsHold[settings]){
 	Settings = &SettingsHold[0];
 	
 	PCICR |= (1<<PCIE2);
