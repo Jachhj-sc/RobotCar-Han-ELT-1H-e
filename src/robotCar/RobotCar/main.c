@@ -10,8 +10,13 @@
 #include <avr/io.h>
 #include "screenController.h"
 
+#include "USART_RS232_H_file.h"		/* include USART library */
+
 //#include <math.h>
 #include "distanceSensor.h"
+
+#include "interrupts.h"
+
 
 void soundEchoCycle(void);
 void angleCalculator(void);
@@ -47,6 +52,9 @@ void setup_display(void){
 
 int main()
 {
+	initBluetooth(Settings);
+		
+		
 	setup_display();
 	
 	initDistanceSensor(&distance, &angle_deg);//the default pins are setup in soundsensor.h

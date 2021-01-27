@@ -151,6 +151,12 @@
     <Compile Include="distanceSensor.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="interrupts.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="interrupts.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
@@ -467,6 +473,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="U8G2\u8x8_u8toa.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="USART_RS232_C_file.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="USART_RS232_H_file.h">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>

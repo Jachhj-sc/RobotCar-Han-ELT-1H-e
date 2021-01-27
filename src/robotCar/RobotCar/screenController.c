@@ -345,21 +345,7 @@ void draw(void){
 //Buttons_____________________________________________________________________________________________________________________________________________
 
 //the routine that gets run when the pin change interrupt gets triggered on portD for the enabled pins
-ISR (PCINT2_vect)
-{
-	if ( (BUTTON_PIN & (1<<DOWN)) == 0 )
-	keyPressed = DOWN;
-	else
-	if ( (BUTTON_PIN & (1<<UP)) == 0 )
-	keyPressed = UP;
-	else
-	if ( (BUTTON_PIN & (1<<BACK)) == 0 )
-	keyPressed = BACK;
-	else
-	if ( (BUTTON_PIN & (1<<SELECT)) == 0 )
-	keyPressed = SELECT;
 
-}
 
 void but_init(void){
 	BUTTON_REG &= ~((1 << DOWN)|(1 << UP)|(1 << SELECT)|(1 << BACK));     // set pinD 4 5 6 and 7 as an input
