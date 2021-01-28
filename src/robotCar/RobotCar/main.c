@@ -28,8 +28,8 @@ int distance = 10;
 int angle_deg = 0;
 
 //default settings
-int Settings[5] = {
-	0, //mode
+int Settings[settings] = {
+	2, //mode
 	2, //dummy
 	5, //dummy
 	7, //dummy
@@ -52,8 +52,9 @@ void setup_display(void){
 
 int main()
 {
-	initBluetooth(Settings);
-		
+	
+	
+	initBluetooth(Settings);	
 		
 	setup_display();
 	
@@ -63,6 +64,7 @@ int main()
 
 
 	while(1){
+		
 		screenRoutine();//function for updating the display.
 		
 		

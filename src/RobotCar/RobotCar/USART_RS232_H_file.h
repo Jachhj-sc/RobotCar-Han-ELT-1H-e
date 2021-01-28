@@ -17,6 +17,6 @@ void USART_TxChar(char);					/* Data transmitting function */
 void USART_SendString(char*);				/* Send string of USART data function */
 void USART_BluetoothChanger(char Data_in[BL_BUFFERSIZE]);			/* Makes the micro controller send values */
 void USART_ReceiveString(char *str);
-void initBluetooth(int SettingsHold[settings]);
+void initBluetooth(int *SettingsHold);
 
 #endif

@@ -20,7 +20,7 @@
 #include "U8G2/u8x8_avr.h"
 
 void sys_init(void);
-int8_t * u8g2_setup(int *pSettings, int *pSpeed, int *pDirection, int *pDistance, int *pangdeg);
+int8_t * u8g2_setup(int pSettings[5], int *pSpeed, int *pDirection, int *pDistance, int *pangdeg);
 void screenRoutine(void);
 void choiceAdder(int8_t addValue);
 void pageSel(void);

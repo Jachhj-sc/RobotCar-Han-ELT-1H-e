@@ -68,6 +68,8 @@ c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/..
                               screenController.o (strcat)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strcmp.o)
                               USART_RS232_C_file.o (strcmp)
+c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(itoa.o)
+                              USART_RS232_C_file.o (itoa)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(itoa_ncheck.o)
                               screenController.o (__itoa_ncheck)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(utoa_ncheck.o)
@@ -84,6 +86,7 @@ c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/..
 Allocating common symbols
 Common symbol       size              file
 
+pSettings_BL        0x2               USART_RS232_C_file.o
 maxCharWidth        0x1               screenController.o
 currentChoice       0xf               screenController.o
 settingVal          0x2               screenController.o
@@ -174,12 +177,8 @@ Discarded input sections
  .text          0x00000000        0x0 U8G2/u8g2_buffer.o
  .data          0x00000000        0x0 U8G2/u8g2_buffer.o
  .bss           0x00000000        0x0 U8G2/u8g2_buffer.o
- .text.u8g2_SetBufferCurrTileRow
-                0x00000000       0x28 U8G2/u8g2_buffer.o
- .text.u8g2_FirstPage
-                0x00000000       0x26 U8G2/u8g2_buffer.o
- .text.u8g2_NextPage
-                0x00000000       0x4a U8G2/u8g2_buffer.o
+ .text.u8g2_SendBuffer
+                0x00000000       0x16 U8G2/u8g2_buffer.o
  .text.u8g2_UpdateDisplayArea
                 0x00000000       0x96 U8G2/u8g2_buffer.o
  .text.u8g2_UpdateDisplay
@@ -229,7 +228,7 @@ Discarded input sections
                 0x00000000        0xc U8G2/u8g2_d_memory.o
  .text.u8g2_m_16_8_1
                 0x00000000        0xc U8G2/u8g2_d_memory.o
- .text.u8g2_m_16_8_2
+ .text.u8g2_m_16_8_f
                 0x00000000        0xc U8G2/u8g2_d_memory.o
  .text.u8g2_m_255_2_1
                 0x00000000        0xc U8G2/u8g2_d_memory.o
@@ -627,7 +626,7 @@ Discarded input sections
  .bss.buf.8742  0x00000000      0xff0 U8G2/u8g2_d_memory.o
  .bss.buf.8738  0x00000000      0xff0 U8G2/u8g2_d_memory.o
  .bss.buf.8734  0x00000000      0x7f8 U8G2/u8g2_d_memory.o
- .bss.buf.8726  0x00000000      0x100 U8G2/u8g2_d_memory.o
+ .bss.buf.8730  0x00000000      0x400 U8G2/u8g2_d_memory.o
  .bss.buf.8722  0x00000000       0x80 U8G2/u8g2_d_memory.o
  .bss.buf.8718  0x00000000      0x200 U8G2/u8g2_d_memory.o
  .bss.buf.8714  0x00000000      0x100 U8G2/u8g2_d_memory.o
@@ -713,11 +712,11 @@ Discarded input sections
                 0x00000000       0x56 U8G2/u8g2_d_setup.o
  .text.u8g2_Setup_ssd1306_i2c_128x64_alt0_1
                 0x00000000       0x56 U8G2/u8g2_d_setup.o
- .text.u8g2_Setup_ssd1306_i2c_128x64_noname_2
-                0x00000000       0x56 U8G2/u8g2_d_setup.o
  .text.u8g2_Setup_ssd1306_i2c_128x64_vcomh0_2
                 0x00000000       0x56 U8G2/u8g2_d_setup.o
  .text.u8g2_Setup_ssd1306_i2c_128x64_alt0_2
+                0x00000000       0x56 U8G2/u8g2_d_setup.o
+ .text.u8g2_Setup_ssd1306_i2c_128x64_noname_f
                 0x00000000       0x56 U8G2/u8g2_d_setup.o
  .text.u8g2_Setup_ssd1306_i2c_128x64_vcomh0_f
                 0x00000000       0x56 U8G2/u8g2_d_setup.o
@@ -8134,7 +8133,6 @@ Discarded input sections
  .text          0x00000000        0x0 USART_RS232_C_file.o
  .data          0x00000000        0x0 USART_RS232_C_file.o
  .bss           0x00000000        0x0 USART_RS232_C_file.o
- COMMON         0x00000000        0x2 USART_RS232_C_file.o
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3.o)
@@ -8337,6 +8335,9 @@ Discarded input sections
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strcmp.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strcmp.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strcmp.o)
+ .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(itoa.o)
+ .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(itoa.o)
+ .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(itoa.o)
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(itoa_ncheck.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(itoa_ncheck.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(itoa_ncheck.o)
@@ -8593,7 +8594,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x4b72
+.text           0x00000000     0x4c9e
  *(.vectors)
  .vectors       0x00000000       0x68 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega328p/avr5/crtatmega328p.o
                 0x00000000                __vectors
@@ -8768,377 +8769,387 @@ END GROUP
  .text.draw     0x00002772       0x76 screenController.o
                 0x00002772                draw
  .text.screenRoutine
-                0x000027e8       0x38 screenController.o
+                0x000027e8       0x3c screenController.o
                 0x000027e8                screenRoutine
  .text.i2c_init
-                0x00002820        0xc U8G2/avr-hw-i2c/twimastertimeout.o
-                0x00002820                i2c_init
+                0x00002824        0xc U8G2/avr-hw-i2c/twimastertimeout.o
+                0x00002824                i2c_init
  .text.i2c_start_wait
-                0x0000282c       0x80 U8G2/avr-hw-i2c/twimastertimeout.o
-                0x0000282c                i2c_start_wait
+                0x00002830       0x80 U8G2/avr-hw-i2c/twimastertimeout.o
+                0x00002830                i2c_start_wait
  .text.i2c_stop
-                0x000028ac       0x20 U8G2/avr-hw-i2c/twimastertimeout.o
-                0x000028ac                i2c_stop
+                0x000028b0       0x20 U8G2/avr-hw-i2c/twimastertimeout.o
+                0x000028b0                i2c_stop
  .text.i2c_write
-                0x000028cc       0x42 U8G2/avr-hw-i2c/twimastertimeout.o
-                0x000028cc                i2c_write
+                0x000028d0       0x42 U8G2/avr-hw-i2c/twimastertimeout.o
+                0x000028d0                i2c_write
  .text.u8g2_DrawBox
-                0x0000290e       0x50 U8G2/u8g2_box.o
-                0x0000290e                u8g2_DrawBox
+                0x00002912       0x50 U8G2/u8g2_box.o
+                0x00002912                u8g2_DrawBox
  .text.u8g2_DrawFrame
-                0x0000295e       0x84 U8G2/u8g2_box.o
-                0x0000295e                u8g2_DrawFrame
+                0x00002962       0x84 U8G2/u8g2_box.o
+                0x00002962                u8g2_DrawFrame
  .text.u8g2_DrawRBox
-                0x000029e2       0xe8 U8G2/u8g2_box.o
-                0x000029e2                u8g2_DrawRBox
+                0x000029e6       0xe8 U8G2/u8g2_box.o
+                0x000029e6                u8g2_DrawRBox
  .text.u8g2_DrawRFrame
-                0x00002aca       0xf6 U8G2/u8g2_box.o
-                0x00002aca                u8g2_DrawRFrame
+                0x00002ace       0xf6 U8G2/u8g2_box.o
+                0x00002ace                u8g2_DrawRFrame
  .text.u8g2_send_buffer
-                0x00002bc0       0x98 U8G2/u8g2_buffer.o
+                0x00002bc4       0x98 U8G2/u8g2_buffer.o
  .text.u8g2_ClearBuffer
-                0x00002c58       0x2c U8G2/u8g2_buffer.o
-                0x00002c58                u8g2_ClearBuffer
- .text.u8g2_SendBuffer
-                0x00002c84       0x16 U8G2/u8g2_buffer.o
-                0x00002c84                u8g2_SendBuffer
+                0x00002c5c       0x2c U8G2/u8g2_buffer.o
+                0x00002c5c                u8g2_ClearBuffer
+ .text.u8g2_SetBufferCurrTileRow
+                0x00002c88       0x28 U8G2/u8g2_buffer.o
+                0x00002c88                u8g2_SetBufferCurrTileRow
+ .text.u8g2_FirstPage
+                0x00002cb0       0x26 U8G2/u8g2_buffer.o
+                0x00002cb0                u8g2_FirstPage
+ .text.u8g2_NextPage
+                0x00002cd6       0x4a U8G2/u8g2_buffer.o
+                0x00002cd6                u8g2_NextPage
  .text.u8g2_draw_circle_section
-                0x00002c9a       0xa4 U8G2/u8g2_circle.o
+                0x00002d20       0xa4 U8G2/u8g2_circle.o
  .text.u8g2_draw_disc_section
-                0x00002d3e       0xbc U8G2/u8g2_circle.o
+                0x00002dc4       0xbc U8G2/u8g2_circle.o
  .text.u8g2_DrawCircle
-                0x00002dfa       0xa4 U8G2/u8g2_circle.o
-                0x00002dfa                u8g2_DrawCircle
+                0x00002e80       0xa4 U8G2/u8g2_circle.o
+                0x00002e80                u8g2_DrawCircle
  .text.u8g2_DrawDisc
-                0x00002e9e       0xa4 U8G2/u8g2_circle.o
-                0x00002e9e                u8g2_DrawDisc
- .text.u8g2_m_16_8_f
-                0x00002f42        0xc U8G2/u8g2_d_memory.o
-                0x00002f42                u8g2_m_16_8_f
- .text.u8g2_Setup_ssd1306_i2c_128x64_noname_f
-                0x00002f4e       0x56 U8G2/u8g2_d_setup.o
-                0x00002f4e                u8g2_Setup_ssd1306_i2c_128x64_noname_f
+                0x00002f24       0xa4 U8G2/u8g2_circle.o
+                0x00002f24                u8g2_DrawDisc
+ .text.u8g2_m_16_8_2
+                0x00002fc8        0xc U8G2/u8g2_d_memory.o
+                0x00002fc8                u8g2_m_16_8_2
+ .text.u8g2_Setup_ssd1306_i2c_128x64_noname_2
+                0x00002fd4       0x56 U8G2/u8g2_d_setup.o
+                0x00002fd4                u8g2_Setup_ssd1306_i2c_128x64_noname_2
  .text.u8g2_font_get_word
-                0x00002fa4       0x18 U8G2/u8g2_font.o
+                0x0000302a       0x18 U8G2/u8g2_font.o
  .text.u8g2_font_calc_vref_font
-                0x00002fbc        0x4 U8G2/u8g2_font.o
-                0x00002fbc                u8g2_font_calc_vref_font
+                0x00003042        0x4 U8G2/u8g2_font.o
+                0x00003042                u8g2_font_calc_vref_font
  .text.u8g2_read_font_info
-                0x00002fc0       0xbe U8G2/u8g2_font.o
-                0x00002fc0                u8g2_read_font_info
+                0x00003046       0xbe U8G2/u8g2_font.o
+                0x00003046                u8g2_read_font_info
  .text.u8g2_font_decode_get_unsigned_bits
-                0x0000307e       0x60 U8G2/u8g2_font.o
-                0x0000307e                u8g2_font_decode_get_unsigned_bits
+                0x00003104       0x60 U8G2/u8g2_font.o
+                0x00003104                u8g2_font_decode_get_unsigned_bits
  .text.u8g2_font_setup_decode
-                0x000030de       0x5c U8G2/u8g2_font.o
+                0x00003164       0x5c U8G2/u8g2_font.o
  .text.u8g2_font_decode_get_signed_bits
-                0x0000313a       0x1e U8G2/u8g2_font.o
-                0x0000313a                u8g2_font_decode_get_signed_bits
+                0x000031c0       0x1e U8G2/u8g2_font.o
+                0x000031c0                u8g2_font_decode_get_signed_bits
  .text.u8g2_add_vector_y
-                0x00003158       0x1c U8G2/u8g2_font.o
-                0x00003158                u8g2_add_vector_y
+                0x000031de       0x1c U8G2/u8g2_font.o
+                0x000031de                u8g2_add_vector_y
  .text.u8g2_add_vector_x
-                0x00003174       0x1c U8G2/u8g2_font.o
-                0x00003174                u8g2_add_vector_x
+                0x000031fa       0x1c U8G2/u8g2_font.o
+                0x000031fa                u8g2_add_vector_x
  .text.u8g2_font_decode_len
-                0x00003190      0x124 U8G2/u8g2_font.o
-                0x00003190                u8g2_font_decode_len
+                0x00003216      0x124 U8G2/u8g2_font.o
+                0x00003216                u8g2_font_decode_len
  .text.u8g2_font_decode_glyph
-                0x000032b4      0x172 U8G2/u8g2_font.o
-                0x000032b4                u8g2_font_decode_glyph
+                0x0000333a      0x172 U8G2/u8g2_font.o
+                0x0000333a                u8g2_font_decode_glyph
  .text.u8g2_font_get_glyph_data
-                0x00003426      0x126 U8G2/u8g2_font.o
-                0x00003426                u8g2_font_get_glyph_data
+                0x000034ac      0x126 U8G2/u8g2_font.o
+                0x000034ac                u8g2_font_get_glyph_data
  .text.u8g2_GetGlyphWidth
-                0x0000354c       0x5a U8G2/u8g2_font.o
-                0x0000354c                u8g2_GetGlyphWidth
+                0x000035d2       0x5a U8G2/u8g2_font.o
+                0x000035d2                u8g2_GetGlyphWidth
  .text.u8g2_string_width
-                0x000035a6       0x6e U8G2/u8g2_font.o
+                0x0000362c       0x6e U8G2/u8g2_font.o
  .text.u8g2_DrawGlyph
-                0x00003614       0x84 U8G2/u8g2_font.o
-                0x00003614                u8g2_DrawGlyph
+                0x0000369a       0x84 U8G2/u8g2_font.o
+                0x0000369a                u8g2_DrawGlyph
  .text.u8g2_draw_string
-                0x00003698       0x94 U8G2/u8g2_font.o
+                0x0000371e       0x94 U8G2/u8g2_font.o
  .text.u8g2_DrawStr
-                0x0000372c       0x14 U8G2/u8g2_font.o
-                0x0000372c                u8g2_DrawStr
+                0x000037b2       0x14 U8G2/u8g2_font.o
+                0x000037b2                u8g2_DrawStr
  .text.u8g2_UpdateRefHeight
-                0x00003740       0x86 U8G2/u8g2_font.o
-                0x00003740                u8g2_UpdateRefHeight
+                0x000037c6       0x86 U8G2/u8g2_font.o
+                0x000037c6                u8g2_UpdateRefHeight
  .text.u8g2_SetFontPosBaseline
-                0x000037c6        0xc U8G2/u8g2_font.o
-                0x000037c6                u8g2_SetFontPosBaseline
+                0x0000384c        0xc U8G2/u8g2_font.o
+                0x0000384c                u8g2_SetFontPosBaseline
  .text.u8g2_SetFont
-                0x000037d2       0x2a U8G2/u8g2_font.o
-                0x000037d2                u8g2_SetFont
+                0x00003858       0x2a U8G2/u8g2_font.o
+                0x00003858                u8g2_SetFont
  .text.u8g2_GetStrWidth
-                0x000037fc       0x10 U8G2/u8g2_font.o
-                0x000037fc                u8g2_GetStrWidth
+                0x00003882       0x10 U8G2/u8g2_font.o
+                0x00003882                u8g2_GetStrWidth
  .text.u8g2_SetFontDirection
-                0x0000380c        0xa U8G2/u8g2_font.o
-                0x0000380c                u8g2_SetFontDirection
+                0x00003892        0xa U8G2/u8g2_font.o
+                0x00003892                u8g2_SetFontDirection
  .text.u8g2_draw_hv_line_2dir
-                0x00003816       0x1a U8G2/u8g2_hvline.o
-                0x00003816                u8g2_draw_hv_line_2dir
+                0x0000389c       0x1a U8G2/u8g2_hvline.o
+                0x0000389c                u8g2_draw_hv_line_2dir
  .text.u8g2_DrawHVLine
-                0x00003830       0xde U8G2/u8g2_hvline.o
-                0x00003830                u8g2_DrawHVLine
+                0x000038b6       0xde U8G2/u8g2_hvline.o
+                0x000038b6                u8g2_DrawHVLine
  .text.u8g2_DrawHLine
-                0x0000390e        0xc U8G2/u8g2_hvline.o
-                0x0000390e                u8g2_DrawHLine
+                0x00003994        0xc U8G2/u8g2_hvline.o
+                0x00003994                u8g2_DrawHLine
  .text.u8g2_DrawVLine
-                0x0000391a        0xc U8G2/u8g2_hvline.o
-                0x0000391a                u8g2_DrawVLine
+                0x000039a0        0xc U8G2/u8g2_hvline.o
+                0x000039a0                u8g2_DrawVLine
  .text.u8g2_DrawPixel
-                0x00003926       0x2a U8G2/u8g2_hvline.o
-                0x00003926                u8g2_DrawPixel
+                0x000039ac       0x2a U8G2/u8g2_hvline.o
+                0x000039ac                u8g2_DrawPixel
  .text.u8g2_SetDrawColor
-                0x00003950       0x1a U8G2/u8g2_hvline.o
-                0x00003950                u8g2_SetDrawColor
+                0x000039d6       0x1a U8G2/u8g2_hvline.o
+                0x000039d6                u8g2_SetDrawColor
  .text.u8g2_is_intersection_decision_tree
-                0x0000396a       0x28 U8G2/u8g2_intersection.o
-                0x0000396a                u8g2_is_intersection_decision_tree
+                0x000039f0       0x28 U8G2/u8g2_intersection.o
+                0x000039f0                u8g2_is_intersection_decision_tree
  .text.u8g2_IsIntersection
-                0x00003992       0x36 U8G2/u8g2_intersection.o
-                0x00003992                u8g2_IsIntersection
+                0x00003a18       0x36 U8G2/u8g2_intersection.o
+                0x00003a18                u8g2_IsIntersection
  .text.u8g2_ll_hvline_vertical_top_lsb
-                0x000039c8       0xc6 U8G2/u8g2_ll_hvline.o
-                0x000039c8                u8g2_ll_hvline_vertical_top_lsb
+                0x00003a4e       0xc6 U8G2/u8g2_ll_hvline.o
+                0x00003a4e                u8g2_ll_hvline_vertical_top_lsb
  .text.u8g2_update_dimension_common
-                0x00003a8e       0x76 U8G2/u8g2_setup.o
+                0x00003b14       0x76 U8G2/u8g2_setup.o
  .text.u8g2_update_dimension_r0
-                0x00003b04        0x6 U8G2/u8g2_setup.o
-                0x00003b04                u8g2_update_dimension_r0
+                0x00003b8a        0x6 U8G2/u8g2_setup.o
+                0x00003b8a                u8g2_update_dimension_r0
  .text.u8g2_apply_clip_window
-                0x00003b0a       0x5a U8G2/u8g2_setup.o
+                0x00003b90       0x5a U8G2/u8g2_setup.o
  .text.u8g2_update_page_win_r0
-                0x00003b64       0x18 U8G2/u8g2_setup.o
-                0x00003b64                u8g2_update_page_win_r0
+                0x00003bea       0x18 U8G2/u8g2_setup.o
+                0x00003bea                u8g2_update_page_win_r0
  .text.u8g2_draw_l90_r0
-                0x00003b7c        0xa U8G2/u8g2_setup.o
-                0x00003b7c                u8g2_draw_l90_r0
+                0x00003c02        0xa U8G2/u8g2_setup.o
+                0x00003c02                u8g2_draw_l90_r0
  .text.u8g2_SetMaxClipWindow
-                0x00003b86       0x30 U8G2/u8g2_setup.o
-                0x00003b86                u8g2_SetMaxClipWindow
+                0x00003c0c       0x30 U8G2/u8g2_setup.o
+                0x00003c0c                u8g2_SetMaxClipWindow
  .text.u8g2_SetupBuffer
-                0x00003bb6       0x5a U8G2/u8g2_setup.o
-                0x00003bb6                u8g2_SetupBuffer
+                0x00003c3c       0x5a U8G2/u8g2_setup.o
+                0x00003c3c                u8g2_SetupBuffer
  .text.u8x8_ascii_next
-                0x00003c10       0x1a U8G2/u8x8_8x8.o
-                0x00003c10                u8x8_ascii_next
+                0x00003c96       0x1a U8G2/u8x8_8x8.o
+                0x00003c96                u8x8_ascii_next
  .text.u8x8_utf8_init
-                0x00003c2a        0x6 U8G2/u8x8_8x8.o
-                0x00003c2a                u8x8_utf8_init
+                0x00003cb0        0x6 U8G2/u8x8_8x8.o
+                0x00003cb0                u8x8_utf8_init
  .text.u8x8_byte_avr_hw_i2c
-                0x00003c30       0x76 U8G2/u8x8_avr.o
-                0x00003c30                u8x8_byte_avr_hw_i2c
+                0x00003cb6       0x76 U8G2/u8x8_avr.o
+                0x00003cb6                u8x8_byte_avr_hw_i2c
  .text.u8x8_avr_delay
-                0x00003ca6       0x7a U8G2/u8x8_avr.o
-                0x00003ca6                u8x8_avr_delay
+                0x00003d2c       0x7a U8G2/u8x8_avr.o
+                0x00003d2c                u8x8_avr_delay
  .text.u8x8_byte_SendBytes
-                0x00003d20       0x14 U8G2/u8x8_byte.o
-                0x00003d20                u8x8_byte_SendBytes
+                0x00003da6       0x14 U8G2/u8x8_byte.o
+                0x00003da6                u8x8_byte_SendBytes
  .text.u8x8_byte_SendByte
-                0x00003d34       0x20 U8G2/u8x8_byte.o
-                0x00003d34                u8x8_byte_SendByte
+                0x00003dba       0x20 U8G2/u8x8_byte.o
+                0x00003dba                u8x8_byte_SendByte
  .text.u8x8_byte_StartTransfer
-                0x00003d54       0x16 U8G2/u8x8_byte.o
-                0x00003d54                u8x8_byte_StartTransfer
+                0x00003dda       0x16 U8G2/u8x8_byte.o
+                0x00003dda                u8x8_byte_StartTransfer
  .text.u8x8_byte_EndTransfer
-                0x00003d6a       0x16 U8G2/u8x8_byte.o
-                0x00003d6a                u8x8_byte_EndTransfer
+                0x00003df0       0x16 U8G2/u8x8_byte.o
+                0x00003df0                u8x8_byte_EndTransfer
  .text.u8x8_i2c_data_transfer
-                0x00003d80       0x3c U8G2/u8x8_cad.o
+                0x00003e06       0x3c U8G2/u8x8_cad.o
  .text.u8x8_cad_SendCmd
-                0x00003dbc       0x16 U8G2/u8x8_cad.o
-                0x00003dbc                u8x8_cad_SendCmd
+                0x00003e42       0x16 U8G2/u8x8_cad.o
+                0x00003e42                u8x8_cad_SendCmd
  .text.u8x8_cad_SendArg
-                0x00003dd2       0x16 U8G2/u8x8_cad.o
-                0x00003dd2                u8x8_cad_SendArg
+                0x00003e58       0x16 U8G2/u8x8_cad.o
+                0x00003e58                u8x8_cad_SendArg
  .text.u8x8_cad_SendData
-                0x00003de8       0x14 U8G2/u8x8_cad.o
-                0x00003de8                u8x8_cad_SendData
+                0x00003e6e       0x14 U8G2/u8x8_cad.o
+                0x00003e6e                u8x8_cad_SendData
  .text.u8x8_cad_StartTransfer
-                0x00003dfc       0x16 U8G2/u8x8_cad.o
-                0x00003dfc                u8x8_cad_StartTransfer
+                0x00003e82       0x16 U8G2/u8x8_cad.o
+                0x00003e82                u8x8_cad_StartTransfer
  .text.u8x8_cad_EndTransfer
-                0x00003e12       0x16 U8G2/u8x8_cad.o
-                0x00003e12                u8x8_cad_EndTransfer
+                0x00003e98       0x16 U8G2/u8x8_cad.o
+                0x00003e98                u8x8_cad_EndTransfer
  .text.u8x8_cad_SendSequence
-                0x00003e28       0xa6 U8G2/u8x8_cad.o
-                0x00003e28                u8x8_cad_SendSequence
+                0x00003eae       0xa6 U8G2/u8x8_cad.o
+                0x00003eae                u8x8_cad_SendSequence
  .text.u8x8_cad_ssd13xx_fast_i2c
-                0x00003ece       0xf4 U8G2/u8x8_cad.o
-                0x00003ece                u8x8_cad_ssd13xx_fast_i2c
+                0x00003f54       0xf4 U8G2/u8x8_cad.o
+                0x00003f54                u8x8_cad_ssd13xx_fast_i2c
  .text.u8x8_d_helper_display_setup_memory
-                0x00003fc2       0x10 U8G2/u8x8_display.o
-                0x00003fc2                u8x8_d_helper_display_setup_memory
+                0x00004048       0x10 U8G2/u8x8_display.o
+                0x00004048                u8x8_d_helper_display_setup_memory
  .text.u8x8_d_helper_display_init
-                0x00003fd2       0x72 U8G2/u8x8_display.o
-                0x00003fd2                u8x8_d_helper_display_init
+                0x00004058       0x72 U8G2/u8x8_display.o
+                0x00004058                u8x8_d_helper_display_init
  .text.u8x8_DrawTile
-                0x00004044       0x46 U8G2/u8x8_display.o
-                0x00004044                u8x8_DrawTile
+                0x000040ca       0x46 U8G2/u8x8_display.o
+                0x000040ca                u8x8_DrawTile
  .text.u8x8_SetupMemory
-                0x0000408a       0x16 U8G2/u8x8_display.o
-                0x0000408a                u8x8_SetupMemory
+                0x00004110       0x16 U8G2/u8x8_display.o
+                0x00004110                u8x8_SetupMemory
  .text.u8x8_InitDisplay
-                0x000040a0       0x16 U8G2/u8x8_display.o
-                0x000040a0                u8x8_InitDisplay
+                0x00004126       0x16 U8G2/u8x8_display.o
+                0x00004126                u8x8_InitDisplay
  .text.u8x8_SetPowerSave
-                0x000040b6       0x16 U8G2/u8x8_display.o
-                0x000040b6                u8x8_SetPowerSave
+                0x0000413c       0x16 U8G2/u8x8_display.o
+                0x0000413c                u8x8_SetPowerSave
  .text.u8x8_RefreshDisplay
-                0x000040cc       0x16 U8G2/u8x8_display.o
-                0x000040cc                u8x8_RefreshDisplay
+                0x00004152       0x16 U8G2/u8x8_display.o
+                0x00004152                u8x8_RefreshDisplay
  .text.u8x8_d_ssd1306_sh1106_generic
-                0x000040e2      0x112 U8G2/u8x8_d_ssd1306_128x64_noname.o
+                0x00004168      0x112 U8G2/u8x8_d_ssd1306_128x64_noname.o
  .text.u8x8_d_ssd1306_128x64_noname
-                0x000041f4       0x46 U8G2/u8x8_d_ssd1306_128x64_noname.o
-                0x000041f4                u8x8_d_ssd1306_128x64_noname
+                0x0000427a       0x46 U8G2/u8x8_d_ssd1306_128x64_noname.o
+                0x0000427a                u8x8_d_ssd1306_128x64_noname
  .text.u8x8_gpio_call
-                0x0000423a       0x12 U8G2/u8x8_gpio.o
-                0x0000423a                u8x8_gpio_call
+                0x000042c0       0x12 U8G2/u8x8_gpio.o
+                0x000042c0                u8x8_gpio_call
  .text.u8x8_dummy_cb
-                0x0000424c        0x4 U8G2/u8x8_setup.o
-                0x0000424c                u8x8_dummy_cb
+                0x000042d2        0x4 U8G2/u8x8_setup.o
+                0x000042d2                u8x8_dummy_cb
  .text.u8x8_SetupDefaults
-                0x00004250       0x2e U8G2/u8x8_setup.o
-                0x00004250                u8x8_SetupDefaults
+                0x000042d6       0x2e U8G2/u8x8_setup.o
+                0x000042d6                u8x8_SetupDefaults
  .text.u8x8_Setup
-                0x0000427e       0x4c U8G2/u8x8_setup.o
-                0x0000427e                u8x8_Setup
+                0x00004304       0x4c U8G2/u8x8_setup.o
+                0x00004304                u8x8_Setup
  .text.USART_Init
-                0x000042ca       0x68 USART_RS232_C_file.o
-                0x000042ca                USART_Init
+                0x00004350       0x68 USART_RS232_C_file.o
+                0x00004350                USART_Init
  .text.initBluetooth
-                0x00004332       0x2a USART_RS232_C_file.o
-                0x00004332                initBluetooth
+                0x000043b8       0x2a USART_RS232_C_file.o
+                0x000043b8                initBluetooth
  .text.USART_RxChar
-                0x0000435c       0x10 USART_RS232_C_file.o
-                0x0000435c                USART_RxChar
+                0x000043e2       0x10 USART_RS232_C_file.o
+                0x000043e2                USART_RxChar
  .text.USART_TxChar
-                0x0000436c       0x10 USART_RS232_C_file.o
-                0x0000436c                USART_TxChar
+                0x000043f2       0x10 USART_RS232_C_file.o
+                0x000043f2                USART_TxChar
  .text.USART_ReceiveString
-                0x0000437c       0x32 USART_RS232_C_file.o
-                0x0000437c                USART_ReceiveString
+                0x00004402       0x32 USART_RS232_C_file.o
+                0x00004402                USART_ReceiveString
  .text.USART_SendString
-                0x000043ae       0x1e USART_RS232_C_file.o
-                0x000043ae                USART_SendString
+                0x00004434       0x1e USART_RS232_C_file.o
+                0x00004434                USART_SendString
  .text.USART_BluetoothChanger
-                0x000043cc      0x160 USART_RS232_C_file.o
-                0x000043cc                USART_BluetoothChanger
+                0x00004452      0x1f0 USART_RS232_C_file.o
+                0x00004452                USART_BluetoothChanger
  .text.avr-libc.fplib
-                0x0000452c        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3.o)
-                0x0000452c                __subsf3
-                0x0000452e                __addsf3
+                0x00004642        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3.o)
+                0x00004642                __subsf3
+                0x00004644                __addsf3
  .text.avr-libc.fplib
-                0x0000453a       0xcc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3x.o)
-                0x0000455c                __addsf3x
+                0x00004650       0xcc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(addsf3x.o)
+                0x00004672                __addsf3x
  .text.avr-libc.fplib
-                0x00004606       0x5e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(atan.o)
-                0x00004606                atan
+                0x0000471c       0x5e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(atan.o)
+                0x0000471c                atan
  .text.avr-libc.fplib
-                0x00004664        0xa c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(cmpsf2.o)
-                0x00004664                __eqsf2
-                0x00004664                __lesf2
-                0x00004664                __nesf2
-                0x00004664                __cmpsf2
-                0x00004664                __ltsf2
+                0x0000477a        0xa c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(cmpsf2.o)
+                0x0000477a                __eqsf2
+                0x0000477a                __lesf2
+                0x0000477a                __nesf2
+                0x0000477a                __cmpsf2
+                0x0000477a                __ltsf2
  .text.avr-libc.fplib
-                0x0000466e        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3.o)
-                0x0000466e                __divsf3
+                0x00004784        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3.o)
+                0x00004784                __divsf3
  .text.avr-libc.fplib
-                0x00004676       0xdc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3x.o)
-                0x00004696                __divsf3x
-                0x0000469c                __divsf3_pse
+                0x0000478c       0xdc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(divsf3x.o)
+                0x000047ac                __divsf3x
+                0x000047b2                __divsf3_pse
  .text.avr-libc.fplib
-                0x00004752        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fixsfsi.o)
-                0x00004752                __fixsfsi
+                0x00004868        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fixsfsi.o)
+                0x00004868                __fixsfsi
  .text.avr-libc.fplib
-                0x00004760       0x5e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fixunssfsi.o)
-                0x00004760                __fixunssfsi
+                0x00004876       0x5e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fixunssfsi.o)
+                0x00004876                __fixunssfsi
  .text.avr-libc.fplib
-                0x000047be       0x7a c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(floatsisf.o)
-                0x000047be                __floatunsisf
-                0x000047c2                __floatsisf
+                0x000048d4       0x7a c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(floatsisf.o)
+                0x000048d4                __floatunsisf
+                0x000048d8                __floatsisf
  .text.avr-libc.fplib
-                0x00004838       0x48 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_cmp.o)
-                0x00004838                __fp_cmp
+                0x0000494e       0x48 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_cmp.o)
+                0x0000494e                __fp_cmp
  .text.avr-libc.fplib
-                0x00004880        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_inf.o)
-                0x00004880                __fp_inf
+                0x00004996        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_inf.o)
+                0x00004996                __fp_inf
  .text.avr-libc.fplib
-                0x0000488c        0x6 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_nan.o)
-                0x0000488c                __fp_nan
+                0x000049a2        0x6 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_nan.o)
+                0x000049a2                __fp_nan
  .text.avr-libc.fplib
-                0x00004892       0x4e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_powser.o)
-                0x00004892                __fp_powser
+                0x000049a8       0x4e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_powser.o)
+                0x000049a8                __fp_powser
  .text.avr-libc.fplib
-                0x000048e0        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscA.o)
-                0x000048e0                __fp_pscA
+                0x000049f6        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscA.o)
+                0x000049f6                __fp_pscA
  .text.avr-libc.fplib
-                0x000048ee        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscB.o)
-                0x000048ee                __fp_pscB
+                0x00004a04        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_pscB.o)
+                0x00004a04                __fp_pscB
  .text.avr-libc.fplib
-                0x000048fc       0x22 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_round.o)
-                0x000048fc                __fp_round
+                0x00004a12       0x22 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_round.o)
+                0x00004a12                __fp_round
  .text.avr-libc.fplib
-                0x0000491e       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_split3.o)
-                0x0000491e                __fp_split3
-                0x0000492e                __fp_splitA
+                0x00004a34       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_split3.o)
+                0x00004a34                __fp_split3
+                0x00004a44                __fp_splitA
  .text.avr-libc.fplib
-                0x00004962        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_zero.o)
-                0x00004962                __fp_zero
-                0x00004964                __fp_szero
+                0x00004a78        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(fp_zero.o)
+                0x00004a78                __fp_zero
+                0x00004a7a                __fp_szero
  .text.avr-libc.fplib
-                0x00004970        0xa c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(gesf2.o)
-                0x00004970                __gesf2
-                0x00004970                __gtsf2
+                0x00004a86        0xa c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(gesf2.o)
+                0x00004a86                __gesf2
+                0x00004a86                __gtsf2
  .text.avr-libc.fplib
-                0x0000497a       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(inverse.o)
-                0x0000497a                inverse
+                0x00004a90       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(inverse.o)
+                0x00004a90                inverse
  .text.avr-libc.fplib
-                0x0000498a        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3.o)
-                0x0000498a                __mulsf3
+                0x00004aa0        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3.o)
+                0x00004aa0                __mulsf3
  .text.avr-libc.fplib
-                0x00004992       0xd2 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3x.o)
-                0x000049b0                __mulsf3x
-                0x000049b6                __mulsf3_pse
+                0x00004aa8       0xd2 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(mulsf3x.o)
+                0x00004ac6                __mulsf3x
+                0x00004acc                __mulsf3_pse
  .text.avr-libc.fplib
-                0x00004a64        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(square.o)
-                0x00004a64                square
+                0x00004b7a        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libm.a(square.o)
+                0x00004b7a                square
  .text.libgcc.div
-                0x00004a6c       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
-                0x00004a6c                __udivmodsi4
+                0x00004b82       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_udivmodsi4.o)
+                0x00004b82                __udivmodsi4
  .text.libgcc.mul
-                0x00004ab0       0x1e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
-                0x00004ab0                __umulhisi3
+                0x00004bc6       0x1e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_umulhisi3.o)
+                0x00004bc6                __umulhisi3
  .text.avr-libc
-                0x00004ace        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(memset.o)
-                0x00004ace                memset
+                0x00004be4        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(memset.o)
+                0x00004be4                memset
  .text.avr-libc
-                0x00004adc       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strcat.o)
-                0x00004adc                strcat
+                0x00004bf2       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strcat.o)
+                0x00004bf2                strcat
  .text.avr-libc
-                0x00004af2       0x12 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strcmp.o)
-                0x00004af2                strcmp
+                0x00004c08       0x12 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strcmp.o)
+                0x00004c08                strcmp
  .text.avr-libc
-                0x00004b04       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(itoa_ncheck.o)
-                0x00004b04                __itoa_ncheck
+                0x00004c1a       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(itoa.o)
+                0x00004c1a                itoa
+                0x00004c1a                __itoa
  .text.avr-libc
-                0x00004b1a       0x34 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(utoa_ncheck.o)
-                0x00004b1a                __utoa_ncheck
-                0x00004b1c                __utoa_common
+                0x00004c30       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(itoa_ncheck.o)
+                0x00004c30                __itoa_ncheck
  .text.avr-libc
-                0x00004b4e       0x20 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strrev.o)
-                0x00004b4e                strrev
-                0x00004b6e                . = ALIGN (0x2)
+                0x00004c46       0x34 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(utoa_ncheck.o)
+                0x00004c46                __utoa_ncheck
+                0x00004c48                __utoa_common
+ .text.avr-libc
+                0x00004c7a       0x20 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5\libc.a(strrev.o)
+                0x00004c7a                strrev
+                0x00004c9a                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00004b6e        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
-                0x00004b6e                exit
-                0x00004b6e                _exit
+ .fini9         0x00004c9a        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+                0x00004c9a                exit
+                0x00004c9a                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -9157,11 +9168,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00004b6e        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
+ .fini0         0x00004c9a        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/5.4.0/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x00004b72                _etext = .
+                0x00004c9e                _etext = .
 
-.data           0x00800100      0x25e load address 0x00004b72
+.data           0x00800100      0x27e load address 0x00004c9e
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -9176,7 +9187,7 @@ END GROUP
                 0x0080010c                direction
  .data.speed    0x0080010e        0x2 main.o
                 0x0080010e                speed
- .data.i.9267   0x00800110        0x2 screenController.o
+ .data.i.9269   0x00800110        0x2 screenController.o
  .data.screenDivholder
                 0x00800112        0x4 screenController.o
                 0x00800112                screenDivholder
@@ -9203,9 +9214,9 @@ END GROUP
  .rodata.str1.1
                 0x00800140      0x113 screenController.o
                                 0x114 (size before relaxing)
- .rodata.postFixes.9353
+ .rodata.postFixes.9355
                 0x00800253        0x8 screenController.o
- .rodata.text2.9351
+ .rodata.text2.9353
                 0x0080025b        0x8 screenController.o
  .rodata.u8g2_cb_r0
                 0x00800263        0x6 U8G2/u8g2_setup.o
@@ -9223,109 +9234,112 @@ END GROUP
  .rodata.u8x8_d_ssd1306_128x64_noname_init_seq
                 0x00800299       0x35 U8G2/u8x8_d_ssd1306_128x64_noname.o
  .rodata.str1.1
-                0x008002ce       0x8f USART_RS232_C_file.o
-                                 0x96 (size before relaxing)
+                0x008002ce       0xaf USART_RS232_C_file.o
+                                 0xb6 (size before relaxing)
  *(.gnu.linkonce.r*)
-                0x0080035e                . = ALIGN (0x2)
- *fill*         0x0080035d        0x1 
-                0x0080035e                _edata = .
-                0x0080035e                PROVIDE (__data_end, .)
+                0x0080037e                . = ALIGN (0x2)
+ *fill*         0x0080037d        0x1 
+                0x0080037e                _edata = .
+                0x0080037e                PROVIDE (__data_end, .)
 
-.bss            0x0080035e      0x4fe
-                0x0080035e                PROVIDE (__bss_start, .)
+.bss            0x0080037e      0x202
+                0x0080037e                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
  .bss.runcount1.1737
-                0x0080035e        0x2 distanceSensor.o
+                0x0080037e        0x2 distanceSensor.o
  .bss.runcount2.1736
-                0x00800360        0x2 distanceSensor.o
+                0x00800380        0x2 distanceSensor.o
  .bss.prevDevice.1738
-                0x00800362        0x2 distanceSensor.o
+                0x00800382        0x2 distanceSensor.o
  .bss.device.1739
-                0x00800364        0x2 distanceSensor.o
+                0x00800384        0x2 distanceSensor.o
  .bss.echoHighLevelTimeuS
-                0x00800366        0x2 distanceSensor.o
-                0x00800366                echoHighLevelTimeuS
+                0x00800386        0x2 distanceSensor.o
+                0x00800386                echoHighLevelTimeuS
  .bss.echoHighLevelTimeC
-                0x00800368        0x4 distanceSensor.o
-                0x00800368                echoHighLevelTimeC
+                0x00800388        0x4 distanceSensor.o
+                0x00800388                echoHighLevelTimeC
  .bss.fallingEdgeTimeC
-                0x0080036c        0x2 distanceSensor.o
-                0x0080036c                fallingEdgeTimeC
+                0x0080038c        0x2 distanceSensor.o
+                0x0080038c                fallingEdgeTimeC
  .bss.risingEdgeTimeC
-                0x0080036e        0x2 distanceSensor.o
-                0x0080036e                risingEdgeTimeC
+                0x0080038e        0x2 distanceSensor.o
+                0x0080038e                risingEdgeTimeC
  .bss.count.8814
-                0x00800370        0x2 main.o
- .bss.Time_min  0x00800372        0x2 main.o
-                0x00800372                Time_min
- .bss.Time_ms   0x00800374        0x2 main.o
-                0x00800374                Time_ms
+                0x00800390        0x2 main.o
+ .bss.Time_min  0x00800392        0x2 main.o
+                0x00800392                Time_min
+ .bss.Time_ms   0x00800394        0x2 main.o
+                0x00800394                Time_ms
  .bss.main_currentPage
-                0x00800376        0x2 main.o
-                0x00800376                main_currentPage
+                0x00800396        0x2 main.o
+                0x00800396                main_currentPage
  .bss.angle_deg
-                0x00800378        0x2 main.o
-                0x00800378                angle_deg
- .bss.timeTxt.9347
-                0x0080037a        0x7 screenController.o
- .bss.history.9266
-                0x00800381        0x8 screenController.o
+                0x00800398        0x2 main.o
+                0x00800398                angle_deg
+ .bss.timeTxt.9349
+                0x0080039a        0x7 screenController.o
+ .bss.history.9268
+                0x008003a1        0x8 screenController.o
  .bss.rCount.9238
-                0x00800389        0x2 screenController.o
+                0x008003a9        0x2 screenController.o
  .bss.batteryBars
-                0x0080038b        0x2 screenController.o
-                0x0080038b                batteryBars
+                0x008003ab        0x2 screenController.o
+                0x008003ab                batteryBars
  .bss.currentFrame
-                0x0080038d        0x2 screenController.o
-                0x0080038d                currentFrame
+                0x008003ad        0x2 screenController.o
+                0x008003ad                currentFrame
  .bss.currentPage
-                0x0080038f        0x1 screenController.o
-                0x0080038f                currentPage
+                0x008003af        0x1 screenController.o
+                0x008003af                currentPage
  .bss.reDrawRequiredTime
-                0x00800390        0x1 screenController.o
-                0x00800390                reDrawRequiredTime
- .bss.buf.8730  0x00800391      0x400 U8G2/u8g2_d_memory.o
+                0x008003b0        0x1 screenController.o
+                0x008003b0                reDrawRequiredTime
+ .bss.buf.8726  0x008003b1      0x100 U8G2/u8g2_d_memory.o
  .bss.in_transfer.3298
-                0x00800791        0x1 U8G2/u8x8_cad.o
+                0x008004b1        0x1 U8G2/u8x8_cad.o
  *(COMMON)
- COMMON         0x00800792       0x1c distanceSensor.o
-                0x00800792                pDistance
-                0x00800794                angledegree
-                0x00800798                pAngle_tmp
-                0x0080079a                length
-                0x0080079e                angleradian
-                0x008007a2                differenceLength
-                0x008007a6                echoDistance
- COMMON         0x008007ae        0x2 interrupts.o
-                0x008007ae                keyPressed
- COMMON         0x008007b0       0xac screenController.o
-                0x008007b0                maxCharWidth
-                0x008007b1                currentChoice
-                0x008007c0                settingVal
-                0x008007c2                speedHold
-                0x008007c4                pTime_min
-                0x008007c6                Scroll
-                0x008007d0                pTime_ms
-                0x008007d2                u8g2
-                0x00800837                textHeight
-                0x00800838                selectionsVis
-                0x00800842                distanceHold
-                0x00800844                _Time_min
-                0x00800846                directionHold
-                0x00800848                _Time_ms
-                0x0080084a                selections
-                0x00800859                angleHold
-                0x0080085b                selectEnable
-                0x0080085c                PROVIDE (__bss_end, .)
-                0x00004b72                __data_load_start = LOADADDR (.data)
-                0x00004dd0                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x008004b2       0x1c distanceSensor.o
+                0x008004b2                pDistance
+                0x008004b4                angledegree
+                0x008004b8                pAngle_tmp
+                0x008004ba                length
+                0x008004be                angleradian
+                0x008004c2                differenceLength
+                0x008004c6                echoDistance
+ COMMON         0x008004ce        0x2 interrupts.o
+                0x008004ce                keyPressed
+ COMMON         0x008004d0       0xac screenController.o
+                0x008004d0                maxCharWidth
+                0x008004d1                currentChoice
+                0x008004e0                settingVal
+                0x008004e2                speedHold
+                0x008004e4                pTime_min
+                0x008004e6                Scroll
+                0x008004f0                pTime_ms
+                0x008004f2                u8g2
+                0x00800557                textHeight
+                0x00800558                selectionsVis
+                0x00800562                distanceHold
+                0x00800564                _Time_min
+                0x00800566                directionHold
+                0x00800568                _Time_ms
+                0x0080056a                selections
+                0x00800579                angleHold
+                0x0080057b                selectEnable
+ COMMON         0x0080057c        0x4 USART_RS232_C_file.o
+                0x0080057c                pSettings_BL
+                0x0080057e                result
+                0x00800580                PROVIDE (__bss_end, .)
+                0x00004c9e                __data_load_start = LOADADDR (.data)
+                0x00004f1c                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x0080085c        0x0
+.noinit         0x00800580        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x0080085c                _end = .
+                0x00800580                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -9470,7 +9484,7 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000    0x492dc
+.debug_info     0x00000000    0x4944d
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x5f4 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .debug_info    0x000005f4      0x278 distanceSensor.o
@@ -9497,9 +9511,9 @@ END GROUP
  .debug_info    0x00047840      0xd0f U8G2/u8x8_d_ssd1306_128x64_noname.o
  .debug_info    0x0004854f      0x3c6 U8G2/u8x8_gpio.o
  .debug_info    0x00048915      0x52b U8G2/u8x8_setup.o
- .debug_info    0x00048e40      0x49c USART_RS232_C_file.o
+ .debug_info    0x00048e40      0x60d USART_RS232_C_file.o
 
-.debug_abbrev   0x00000000     0x3213
+.debug_abbrev   0x00000000     0x322b
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x5a2 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .debug_abbrev  0x000005a2       0xf2 distanceSensor.o
@@ -9526,36 +9540,36 @@ END GROUP
  .debug_abbrev  0x00002cc6      0x19f U8G2/u8x8_d_ssd1306_128x64_noname.o
  .debug_abbrev  0x00002e65       0xe9 U8G2/u8x8_gpio.o
  .debug_abbrev  0x00002f4e      0x17a U8G2/u8x8_setup.o
- .debug_abbrev  0x000030c8      0x14b USART_RS232_C_file.o
+ .debug_abbrev  0x000030c8      0x163 USART_RS232_C_file.o
 
-.debug_line     0x00000000     0xd314
+.debug_line     0x00000000     0xd358
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x133 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .debug_line    0x00000133      0x25a distanceSensor.o
  .debug_line    0x0000038d      0x117 interrupts.o
  .debug_line    0x000004a4      0x190 main.o
- .debug_line    0x00000634      0xa13 screenController.o
- .debug_line    0x00001047      0x39a U8G2/avr-hw-i2c/twimastertimeout.o
- .debug_line    0x000013e1      0x262 U8G2/u8g2_box.o
- .debug_line    0x00001643      0x36c U8G2/u8g2_buffer.o
- .debug_line    0x000019af      0x4c2 U8G2/u8g2_circle.o
- .debug_line    0x00001e71     0x1031 U8G2/u8g2_d_memory.o
- .debug_line    0x00002ea2     0x6587 U8G2/u8g2_d_setup.o
- .debug_line    0x00009429      0xd7f U8G2/u8g2_font.o
- .debug_line    0x0000a1a8       0x94 U8G2/u8g2_fonts.o
- .debug_line    0x0000a23c      0x233 U8G2/u8g2_hvline.o
- .debug_line    0x0000a46f      0x10d U8G2/u8g2_intersection.o
- .debug_line    0x0000a57c      0x236 U8G2/u8g2_ll_hvline.o
- .debug_line    0x0000a7b2      0x59f U8G2/u8g2_setup.o
- .debug_line    0x0000ad51      0x6ae U8G2/u8x8_8x8.o
- .debug_line    0x0000b3ff      0x23c U8G2/u8x8_avr.o
- .debug_line    0x0000b63b      0x8bb U8G2/u8x8_byte.o
- .debug_line    0x0000bef6      0x989 U8G2/u8x8_cad.o
- .debug_line    0x0000c87f      0x29c U8G2/u8x8_display.o
- .debug_line    0x0000cb1b      0x391 U8G2/u8x8_d_ssd1306_128x64_noname.o
- .debug_line    0x0000ceac       0xb3 U8G2/u8x8_gpio.o
- .debug_line    0x0000cf5f      0x16b U8G2/u8x8_setup.o
- .debug_line    0x0000d0ca      0x24a USART_RS232_C_file.o
+ .debug_line    0x00000634      0xa1b screenController.o
+ .debug_line    0x0000104f      0x39a U8G2/avr-hw-i2c/twimastertimeout.o
+ .debug_line    0x000013e9      0x262 U8G2/u8g2_box.o
+ .debug_line    0x0000164b      0x36c U8G2/u8g2_buffer.o
+ .debug_line    0x000019b7      0x4c2 U8G2/u8g2_circle.o
+ .debug_line    0x00001e79     0x1031 U8G2/u8g2_d_memory.o
+ .debug_line    0x00002eaa     0x6587 U8G2/u8g2_d_setup.o
+ .debug_line    0x00009431      0xd7f U8G2/u8g2_font.o
+ .debug_line    0x0000a1b0       0x94 U8G2/u8g2_fonts.o
+ .debug_line    0x0000a244      0x233 U8G2/u8g2_hvline.o
+ .debug_line    0x0000a477      0x10d U8G2/u8g2_intersection.o
+ .debug_line    0x0000a584      0x236 U8G2/u8g2_ll_hvline.o
+ .debug_line    0x0000a7ba      0x59f U8G2/u8g2_setup.o
+ .debug_line    0x0000ad59      0x6ae U8G2/u8x8_8x8.o
+ .debug_line    0x0000b407      0x23c U8G2/u8x8_avr.o
+ .debug_line    0x0000b643      0x8bb U8G2/u8x8_byte.o
+ .debug_line    0x0000befe      0x989 U8G2/u8x8_cad.o
+ .debug_line    0x0000c887      0x29c U8G2/u8x8_display.o
+ .debug_line    0x0000cb23      0x391 U8G2/u8x8_d_ssd1306_128x64_noname.o
+ .debug_line    0x0000ceb4       0xb3 U8G2/u8x8_gpio.o
+ .debug_line    0x0000cf67      0x16b U8G2/u8x8_setup.o
+ .debug_line    0x0000d0d2      0x286 USART_RS232_C_file.o
 
 .debug_frame    0x00000000     0xc7e0
  *(.debug_frame)
@@ -9584,7 +9598,7 @@ END GROUP
  .debug_frame   0x0000c688       0x88 U8G2/u8x8_setup.o
  .debug_frame   0x0000c710       0xd0 USART_RS232_C_file.o
 
-.debug_str      0x00000000    0x11047
+.debug_str      0x00000000    0x11054
  *(.debug_str)
  .debug_str     0x00000000      0x208 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.3.300/gcc/dev/atmega328p/avr5/crtatmega328p.o
  .debug_str     0x00000208      0x27e distanceSensor.o
@@ -9593,13 +9607,13 @@ END GROUP
                                 0x1d7 (size before relaxing)
  .debug_str     0x00000535       0xb2 main.o
                                 0x284 (size before relaxing)
- .debug_str     0x000005e7      0xb0b screenController.o
-                                0xd66 (size before relaxing)
- .debug_str     0x000010f2       0x90 U8G2/avr-hw-i2c/twimastertimeout.o
+ .debug_str     0x000005e7      0xb07 screenController.o
+                                0xd62 (size before relaxing)
+ .debug_str     0x000010ee       0x90 U8G2/avr-hw-i2c/twimastertimeout.o
                                 0x204 (size before relaxing)
- .debug_str     0x00001182       0x78 U8G2/u8g2_box.o
+ .debug_str     0x0000117e       0x78 U8G2/u8g2_box.o
                                 0x8dd (size before relaxing)
- .debug_str     0x000011fa      0x1d6 U8G2/u8g2_buffer.o
+ .debug_str     0x000011f6      0x1da U8G2/u8g2_buffer.o
                                 0xa2e (size before relaxing)
  .debug_str     0x000013d0      0x14f U8G2/u8g2_circle.o
                                 0x9c3 (size before relaxing)
@@ -9635,8 +9649,8 @@ END GROUP
                                 0x437 (size before relaxing)
  .debug_str     0x00010f6b       0x5c U8G2/u8x8_setup.o
                                 0x4da (size before relaxing)
- .debug_str     0x00010fc7       0x80 USART_RS232_C_file.o
-                                0x24d (size before relaxing)
+ .debug_str     0x00010fc7       0x8d USART_RS232_C_file.o
+                                0x25b (size before relaxing)
 
 .debug_loc      0x00000000    0x4ed34
  *(.debug_loc)

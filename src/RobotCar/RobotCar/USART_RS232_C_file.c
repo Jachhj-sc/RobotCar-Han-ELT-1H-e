@@ -4,7 +4,6 @@
 #include "USART_RS232_H_file.h"						/* Include USART header file */
 #include <string.h>
 #include <avr/interrupt.h>
-
 #define BL_LED_ON "ON"
 #define BL_LED_OFF "OFF"
 #define BL_FORWARD "FORWARD"
@@ -13,16 +12,18 @@
 #define BL_RIGHT "RIGHT"
 #define BL_ModeDown "MODEDOWN"
 #define BL_ModeUp "MODEUP"
+#define BL_Mode0 "MODE0"
+#define BL_Mode1 "MODE1"
 
 #define settings 5
 
 
-int *Settings;
+int *pSettings_BL;
 
 
 int result;
-void initBluetooth(int SettingsHold[settings]){
-	Settings = &SettingsHold[0];
+void initBluetooth(int *SettingsHold){
+	pSettings_BL = SettingsHold;
 	
 	PCICR |= (1<<PCIE2);
 	PCMSK2 |= (1<<PCINT16);
@@ -87,7 +88,7 @@ void USART_BluetoothChanger(char Data_in[BL_BUFFERSIZE]){			/* When certain valu
 	if(strcmp(Data_in, BL_LED_ON) == 0)
 	{
 		/* Turn ON LED */
-		USART_SendString("LE4D_ON");								/* send status of LED i.e. LED ON */
+		USART_SendString("LED4_ON");								/* send status of LED i.e. LED ON */
 		
 	}
 	else if(strcmp(Data_in, BL_LED_OFF) == 0)
@@ -114,13 +115,31 @@ void USART_BluetoothChanger(char Data_in[BL_BUFFERSIZE]){			/* When certain valu
 	}
 	else if(strcmp(Data_in, BL_ModeUp) == 0)
 	{
-		USART_SendString("Mode Up"); 						/* send status of LED i.e. LED OFF */
-		*(Settings + 0) += 1;
+		*(pSettings_BL+0) += 1;
+		char text[8];
+		USART_SendString("Mode Up:> "); 						/* send status of LED i.e. LED OFF */
+		itoa(*(pSettings_BL+0), text, 10);
+		USART_SendString(text);
+		
 	}
 	else if(strcmp(Data_in, BL_ModeDown) == 0)
 	{
-		USART_SendString("Mode down"); 						/* send status of LED i.e. LED OFF */
-		*(Settings + 0) -= 1;
+		*(pSettings_BL+0) -= 1;
+		char text[8];
+		USART_SendString("Mode down:> "); 						/* send status of LED i.e. LED OFF */
+		itoa(*(pSettings_BL+0), text, 10);
+		USART_SendString(text);
+		
+	}
+	else if(strcmp(Data_in, BL_Mode0) == 0)
+	{
+		USART_SendString("Mode 0"); 						/* send status of LED i.e. LED OFF */
+		*(pSettings_BL+0) = 0;
+	}
+	else if(strcmp(Data_in, BL_Mode1) == 0)
+	{
+		USART_SendString("Mode 1"); 						/* send status of LED i.e. LED OFF */
+		*(pSettings_BL+0) = 1;
 	}
 	else{
 		char buffer_tmp[BL_BUFFERSIZE] = "RX:> ";
