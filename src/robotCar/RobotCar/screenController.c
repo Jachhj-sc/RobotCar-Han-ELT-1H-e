@@ -60,10 +60,10 @@ char *menuStrings[menuChoices] = {
 
 char *settingStrings[settings] = {
 	"Mode:>      ",
-	"Something:> ",
-	"test1:>     ",
-	"test2:>     ",
-	"test3:>     "
+	"Max Speed:> ",
+	"delay:>     ",
+	"Min speed:> " ,
+	"dummy:>     "
 };
 //variable for storing the settings.
 int *settingVal;//mode and something. pointer holder for the settings array in main.c
@@ -621,7 +621,7 @@ void Page_2(void){
 	int maxPrefixWidth = u8g2_GetStrWidth(&u8g2, text2[1]);
 	
 	static char *postFixes[Lines] = {
-		"km/h",
+		"0-255",
 		"deg",
 		"cm",
 		""
