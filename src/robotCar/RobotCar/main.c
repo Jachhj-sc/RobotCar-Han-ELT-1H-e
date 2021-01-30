@@ -9,9 +9,12 @@
 #include <avr/interrupt.h>
 #include <avr/io.h>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
 #include "screenController.h"
 =======
+=======
+>>>>>>> Stashed changes
 #include "screenController.h"
 #include "pwm.h"
 #include "USART_RS232_H_file.h"		/* include USART library */
@@ -25,6 +28,7 @@
 void soundEchoCycle(void);
 void angleCalculator(void);
 void pwmUpdate();
+<<<<<<< Updated upstream
 >>>>>>> Stashed changes
 
 #define MinSpeed 130
@@ -38,9 +42,18 @@ int speed = 0; //value between -255 and 255
 int steer = 0; //value between -255 and 255
 //int direction = 0;
 >>>>>>> Stashed changes
+=======
+
+#define MinSpeed 130
+//all data variables.
+int speed = 0; //value between -255 and 255
+int steer = 0; //value between -255 and 255
+//int direction = 0;
+>>>>>>> Stashed changes
 int distance = 10;
 
 //default settings
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 int Settings[5] = {
 	0, //mode
@@ -48,11 +61,16 @@ int Settings[5] = {
 	5, //dummy
 	7, //dummy
 =======
+=======
+>>>>>>> Stashed changes
 int Settings[settings] = {
 	0, //mode
 	255, //speed from 0 - 255
 	50, //counter delay auto mode
 	120, //Minspeed
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 	8  //dummy
 	};
@@ -65,7 +83,11 @@ unsigned int Time_min = 0;//accurate
 void setup_display(void){
 	//screen initialization
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	main_currentPage = u8g2_setup(Settings, &speed, &direction, &distance); //save the address of the currentPage
+=======
+	main_currentPage = u8g2_setup(Settings, &Settings[1], &steer, &distance, &angle_deg); //save the address of the currentPage
+>>>>>>> Stashed changes
 =======
 	main_currentPage = u8g2_setup(Settings, &Settings[1], &steer, &distance, &angle_deg); //save the address of the currentPage
 >>>>>>> Stashed changes
@@ -86,11 +108,19 @@ int main()
 	
 	initBluetooth(Settings, &speed, &steer);
 	
+<<<<<<< Updated upstream
+=======
+	initBluetooth(Settings, &speed, &steer);
+	
+>>>>>>> Stashed changes
 	setup_display();
 	
 	initDistanceSensor(&distance, &angle_deg);//the default pins are setup in soundsensor.h
 	
 	initPWM();
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 	sei();
 
@@ -183,6 +213,7 @@ void pwmUpdate(){
 		if (rightwheelSpeed > 10 && rightwheelSpeed < Settings[3]){
 			rightwheelSpeed = Settings[3];
 		}
+<<<<<<< Updated upstream
 		
 		}else{//drive backwards
 		SetDriveBackward();
@@ -190,6 +221,15 @@ void pwmUpdate(){
 		//change speed to a positive variable again.
 		//speed *= -1;
 		
+=======
+		
+		}else{//drive backwards
+		SetDriveBackward();
+		
+		//change speed to a positive variable again.
+		//speed *= -1;
+		
+>>>>>>> Stashed changes
 		leftwheelSpeed = -speed + steer;
 		rightwheelSpeed = -speed - steer;
 		
