@@ -19,6 +19,7 @@ ISR(PCINT2_vect)
 
 int main(void)
 {
+	//enable pin change interrupt on rc pin
 	PCICR |= (1<<PCIE2);
 	PCMSK2 |= (1<<PCINT16);
 	sei();
